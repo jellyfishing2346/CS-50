@@ -17,13 +17,13 @@ int main(void)
         // Display the number of spaces
         for (space = 0; space < height - row - 1; space++)
         {
-           printf(" ");
+            printf(" ");
         }
         // Display the number of #s with the columns
         for (column = 0; column <= row; column++)
         {
-           printf("#");
+            printf("#");
         }
-           printf("\n");
+        printf("\n");
     }
 }
