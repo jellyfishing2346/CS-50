@@ -10,7 +10,7 @@ int main(void)
     string text = get_string("Text: ");
     int index;
     int letters = 0;
-    int words = 0;
+    int words = 1;
     int sentences = 0; 
     
     // Going through the structure of the user's string
