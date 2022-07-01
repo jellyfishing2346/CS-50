@@ -3,48 +3,97 @@
 #include <cs50.h>
 #include <math.h>
 
-int main(void)
+// Function prototypes
+int get_cents(void);
+int calculate_quarters(int cents);
+int calculate_dimes(int cents);
+int calculate_nickels(int cents);
+int calculate_pennies(int cents);
+
+// Ask the user for the amount of change they owe
+int get_cents(void)
 {
-    float dollar;
+    int cents;
     do
     {
-        // Prompt the user to enter the amount of change they owe
-        dollar = get_float("Change owed: ");
+        cents = get_int("Change owed: ");
     }
-    // This occurs is dollars is less than or equal to 0
-    while (dollar <= 0);
-    
-    int cents = round(dollar*100);
-    int coins = 0;
-    
-    // Subtract the number of cents if the user enters 25 cents or greater
+    while (cents < 0);
+    return cents;
+}
+
+// Calculate the change on quarters
+int calculate_quarters(int cents)
+{
+    int quarters = 0;
     while (cents >= 25)
     {
-        cents -= 25; 
-        coins++;
+        cents = cents - 25;
+        quarters++;
     }
-    
-    // Subtract the number of cents if the user enters 10 cents or greater
+    return quarters; 
+}
+
+// Calculate the change on dimes
+int calculate_dimes(int cents)
+{
+    int dimes = 0;
     while (cents >= 10)
     {
-        cents -= 10;
-        coins++;
+        cents = cents - 10;
+        dimes++;
     }
-    
-    // Subtract the number of cents if the user enters 5 cents or greater
+    return dimes;
+}
+
+// Calculate the change on nickels
+int calculate_nickels(int cents)
+{
+    int nickels = 0;
     while (cents >= 5)
     {
-        cents -= 5;
-        coins++;
+        cents = cents - 5; 
+        nickels++;
     }
-    
-    // Subtract the number of cents if the user enters 1 cent or greater
+    return nickels;
+}
+
+// Calculate the change on pennies
+int calculate_pennies(int cents)
+{
+    int pennies = 0;
     while (cents >= 1)
     {
-        cents -= 1;
-        coins++;
+        cents = cents - 1;
+        pennies++;
     }
+    return pennies; 
+}
+
+int main(void)
+{
+    // Telling the user the amount of change they owe
+    int cents = get_cents();
     
-    // Tell the user how much coins they need to pay
-    printf("You will need at least %i coins", coins);
+    // How many quarters to give to the customer
+    int quarters = calculate_quarters(cents);
+    cents = cents - quarters * 25;
+    
+    // How many dimes to give to the customer
+    int dimes = calculate_dimes(cents);
+    cents = cents - dimes * 10;
+    
+    // How many nickels to give to the customer
+    int nickels = calculate_nickels(cents);
+    cents = cents - nickels * 5;
+    
+    // How many pennies to give to the customer
+    int pennies = calculate_pennies(cents);
+    cents = cents - pennies * 1;
+    
+    // The total sum of coins
+    int coins = quarters + dimes + nickels + pennies;
+    
+    // Print the total sum of coins
+    printf("%i\n", coins);
 }
