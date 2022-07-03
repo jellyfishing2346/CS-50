@@ -45,7 +45,7 @@ bool only_digits(string s)
     int length = strlen(s);
     for (int index = 0; index < length; index++)
     {
-        if isdigit(s[index])
+        if (!isdigit(s[index]))
         {
             return false; 
         }
