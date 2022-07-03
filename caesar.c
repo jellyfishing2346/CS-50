@@ -14,7 +14,7 @@ int main(int argc, string argv[])
     int key, index, length; 
     string plaintext;
     
-    if (argc != 2)
+    if (argc != 2 || !only_digits(argv[1]))
     {
         printf("Usage: ./caesar key\n");
         return 1;
