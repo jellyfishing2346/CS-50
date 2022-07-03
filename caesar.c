@@ -11,41 +11,41 @@ char rotate(char p, int k);
 
 int main(int argc, string argv[]) 
 {
-    int key, index, length; 
-    string plaintext;
+    int key, index;
+    int length = 0;
+    string plaintext; 
     
     if (argc != 2 || !only_digits(argv[1]))
     {
         printf("Usage: ./caesar key\n");
         return 1;
     }
+    
+    else
+    {
+        return 0;
+    }
    
-    // Design a key for ./caesar and determine length for ciphertext
     key = atoi(argv[1]);
     plaintext = get_string("plaintext: ");
-    length = strlen(plaintext);
     char cypher[length + 1];
-    
-    // Rotate the ciphertext data
     for (index = 0; index < length; index++)
     {
         cypher[index] = rotate(plaintext[index], key);
     }
-    
-    // Null terminator
     cypher[index] = '\0';
     
-    // Display ciphertext
-    printf("ciphertext: %s", cypher);
+    
+    printf("ciphertext: %s\n", cypher);
 }
 
-// Evaluate input caesar key based on the number of digits
 bool only_digits(string s)
 {
+    int index;
     int length = strlen(s);
-    for (int index = 0; index < length; index++)
+    for (index = 0; index < length; length++)
     {
-        if (!isdigit(s[index]))
+        if(!isdigit(index))
         {
             return false; 
         }
@@ -53,28 +53,23 @@ bool only_digits(string s)
     return true; 
 }
 
-// Takes input for char and int as it falls between a to z and Z to A
 char rotate(char p, int k)
 {
     char c; 
-    
-    // If input is in range of A-Z
     if (isupper(p))
     {
-        c = (p - 'A' + k)% 26 + 'A';
+        c = (p - 'A' + k) % 26 + 'A';
     }
     
-    // If the input is in range of a-z
     else if (islower(p))
     {
-        c = (p - 'a' + k)% 26 + 'a';
+        c = (p - 'a' + k) % 26 + 'a';
     }
     
-    // Print the default statement
     else
     {
-        c = p;
+        c = p; 
     }
     
     return c; 
-}
+}    
