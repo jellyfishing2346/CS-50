@@ -5,71 +5,68 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-// Function prototypes
-bool only_digits(string s);
-char rotate(char p, int k);
+// Function prototype
+int checkTheKey(int argc, string k);
 
-int main(int argc, string argv[]) 
+int main(int argc, string argv[])
 {
-    int key, index;
-    int length = 0;
-    string plaintext; 
+    string n = argv[1];
+    int m = argc;
+    int key = checkTheKey(m, n);
     
-    if (argc != 2 || !only_digits(argv[1]))
+    if (key == 0)
     {
-        printf("Usage: ./caesar key\n");
-        return 1;
+        printf("This key is invalid!\n");
+        return 1; 
     }
     
     else
+    {
+        string plaintext = get_string("plaintext: ");
+        int index, length;
+        printf("ciphertext: ");
+        for (index = 0, length = strlen(plaintext); index < length; index++)
+        {
+            if (islower(plaintext[index]))
+            {
+                printf("%c", (plaintext[index] - 97 + key) % 26 + 97);
+            }
+            
+            else if (isupper(plaintext[index]))
+            {
+                printf("%c", (plaintext[index] - 65 + key) % 26 + 65);
+            }
+        
+            else
+            {
+                printf("%c", plaintext[index]);
+            }
+        }
+        printf("\n");
+        return 0; 
+    }
+}
+    
+int checkTheKey(int argc, string k)
+{
+    int digit = argc; 
+    string key = k;
+    
+    if (argc != 2)
     {
         return 0;
     }
-   
-    key = atoi(argv[1]);
-    plaintext = get_string("plaintext: ");
-    char cypher[length + 1];
-    for (index = 0; index < length; index++)
-    {
-        cypher[index] = rotate(plaintext[index], key);
-    }
-    cypher[index] = '\0';
-    
-    
-    printf("ciphertext: %s\n", cypher);
-}
-
-bool only_digits(string s)
-{
-    int index;
-    int length = strlen(s);
-    for (index = 0; index < length; index++)
-    {
-        if(!isdigit(index))
-        {
-            return false; 
-        }
-    }
-    return true; 
-}
-
-char rotate(char p, int k)
-{
-    char c; 
-    if (isupper(p))
-    {
-        c = (p - 'A' + k) % 26 + 'A';
-    }
-    
-    else if (islower(p))
-    {
-        c = (p - 'a' + k) % 26 + 'a';
-    }
     
     else
     {
-        c = p; 
+        int digitalkey = atoi(key);
+        if (digitalkey > 0)
+        {
+            return digitalkey;
+        }
+        else
+        {
+            return 0; 
+        }
     }
-    
-    return c; 
-}    
+}
