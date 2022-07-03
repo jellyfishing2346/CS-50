@@ -6,51 +6,51 @@
 
 int main(int argc, string argv[]) 
 {
-    int index;
-    // Check if there is a command-line argument
+    int index, count; 
     if (argc != 2)
     {
+        // Error message for ./caesar key
         printf("Usage: ./caesar key\n");
+        return 1; 
     }
-    else printf("Success!\n");
     
-    // Design a key
-    string key = argv[1];
-    
-    // Checking if the input is a digit
     for (index = 0; index < strlen(argv[1]); index++)
     {
+        // If the ./caesar key uses a digit 
         if (!isdigit(argv[1][index]))
         {
-        printf("Usage: ./caesar key\n");
-        return 1;
+            printf("Usage: ./caesar key\n");
+            return 1;
         }
     }
-    printf("Success\n%s\n", key);
     
-    // Retrieve plaintext from the user
-    string plaintext = get_string("plaintext: ");
+    // Design a key for ./caesar
+    int key = atoi(argv[index]);
     
-    // Convert the key to an integer
-    int integer_key = atoi(key);
-    printf("ciphertext: ");
+    // Display ciphertext after input from plaintext
+    string plaintext = get_string("Plaintext: ");
+    printf("Ciphertext: ");
     
-    // Retrieve the ciphertext
-    for (int count = 0; count < strlen(plaintext); count++)
+    // Determine the condition for plaintext 
+    for (count = 0; count < strlen(plaintext); count++)
     {
-        if (isupper(plaintext[index]))
+    
+        // If plaintext is uppercase print this condition   
+        if (isupper(plaintext[count]))
         {
-            printf("%c", (((plaintext[index] - 65) + integer_key) %26 ) + 65);
+            printf("%c", (plaintext[count] - 65 + key) % 26 + 65);
         }
-        
-        else if (islower(plaintext[index]))
+    
+        // Otherwise if plaintext is lowercase print this condition instead      
+        else if (islower(plaintext[count]))
         {
-            printf("%c", (((plaintext[index] - 97) + k) %26 ) + 97);
+            printf("%c", (plaintext[count] - 97 + key) % 26 + 97);
         }
-        
-        else 
+    
+        // If both cases fail print this default case instead     
+        else
         {
-            printf("%c", plaintext[index]);
+            printf("%c", plaintext[count]);
         }
     }
     printf("\n");
