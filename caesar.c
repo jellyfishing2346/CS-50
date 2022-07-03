@@ -57,10 +57,10 @@ int main(int argc, char** argv)
 }
 
 // Creating a key containing an int and a string
-int checkTheKey(int argc, char* k)
+int checkTheKey(int argc, char *k)
 {
     int digit = argc; 
-    char* key = k;
+    char *key = k;
     
     if (argc != 2)
     {
@@ -71,23 +71,23 @@ int checkTheKey(int argc, char* k)
     {
         for (int i = 0; i < strlen(key); i++)
         {
-          if (!isdigit(key[i]))
+            if (!isdigit(key[i]))
             {
-              return 0; 
-			}
+                return 0; 
+            }    
         }
-        // Design a digital key
-        int digitalkey = atoi(key);
-         
-        printf("%d\n", digitalkey);
-        if (digitalkey > 0)
-        {
-            return digitalkey;
-        }
-        else
-        {
-            return 0; 
-        }
-    
     }
+    // Design a digital key
+    int digitalkey = atoi(key);
+         
+    printf("%d\n", digitalkey);
+    if (digitalkey > 0)
+    {
+        return digitalkey;
+    }
+    else
+    {
+        return 0; 
+    }
+    
 }
