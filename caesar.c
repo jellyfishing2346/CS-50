@@ -22,7 +22,7 @@ int main(int argc, string argv[])
    
     // Design a key for ./caesar and determine length for ciphertext
     key = atoi(argv[1]);
-    plaintext = get_string("Ciphertext: ");
+    plaintext = get_string("plaintext: ");
     length = strlen(plaintext);
     char cypher[length + 1];
     
@@ -61,13 +61,13 @@ char rotate(char p, int k)
     // If input is in range of A-Z
     if (isupper(p))
     {
-        c = (p - 'A' + k) % 26 + 'A';
+        c = (p - 'A' + k)% 26 + 'A';
     }
     
     // If the input is in range of a-z
     else if (islower(p))
     {
-        c = (p - 'a' + k) % 26 + 'a';
+        c = (p - 'a' + k)% 26 + 'a';
     }
     
     // Print the default statement
