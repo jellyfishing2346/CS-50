@@ -1,57 +1,80 @@
+// Include libraries
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
 
+// Function prototypes
+bool only_digits(string s);
+char rotate(char p, int k);
+
 int main(int argc, string argv[]) 
 {
-    int index, count; 
+    int key, index, length; 
+    string plaintext;
+    
     if (argc != 2)
     {
-        // Error message for ./caesar key
         printf("Usage: ./caesar key\n");
-        return 1; 
+        return 1;
     }
+   
+    // Design a key for ./caesar and determine length for ciphertext
+    key = atoi(argv[1]);
+    plaintext = get_string("Ciphertext: ");
+    length = strlen(plaintext);
+    char cypher[length + 1];
     
-    for (index = 0; index < strlen(argv[1]); index++)
+    // Rotate the ciphertext data
+    for (index = 0; index < length; index++)
     {
-        // If the ./caesar key uses a digit 
-        if (!isdigit(argv[1][index]))
-        {
-            printf("Usage: ./caesar key\n");
-            return 1;
-        }
+        cypher[index] = rotate(plaintext[index], key);
     }
     
-    // Design a key for ./caesar
-    int key = atoi(argv[index]);
+    // Null terminator
+    cypher[index] = '\0';
     
-    // Display ciphertext after input from plaintext
-    string plaintext = get_string("Plaintext: ");
-    printf("Ciphertext: ");
-    
-    // Determine the condition for plaintext 
-    for (count = 0; count < strlen(plaintext); count++)
+    // Display ciphertext
+    printf("ciphertext: %s", cypher);
+}
+
+// Evaluate input caesar key based on the number of digits
+bool only_digits(string s)
+{
+    int length = strlen(s);
+    for (int index = 0; index < length; index++)
     {
-    
-        // If plaintext is uppercase print this condition   
-        if (isupper(plaintext[count]))
+        if isdigit(s[index])
         {
-            printf("%c", (plaintext[count] - 65 + key) % 26 + 65);
-        }
-    
-        // Otherwise if plaintext is lowercase print this condition instead      
-        else if (islower(plaintext[count]))
-        {
-            printf("%c", (plaintext[count] - 97 + key) % 26 + 97);
-        }
-    
-        // If both cases fail print this default case instead     
-        else
-        {
-            printf("%c", plaintext[count]);
+            return false; 
         }
     }
-    printf("\n");
+    return true; 
+}
+
+// Takes input for char and int as it falls between a to z and Z to A
+char rotate(char p, int k)
+{
+    char c; 
+    
+    // If input is in range of A-Z
+    if (isupper(p))
+    {
+        c = (p - 'A' + k) % 26 + 'A';
+    }
+    
+    // If the input is in range of a-z
+    else if (islower(p))
+    {
+        c = (p - 'a' + k) % 26 + 'a';
+    }
+    
+    // Print the default statement
+    else
+    {
+        c = p;
+    }
+    
+    return c; 
 }
