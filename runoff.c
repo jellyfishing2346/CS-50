@@ -151,11 +151,12 @@ void tabulate(void)
         // Count the number of votes that were received by candidates
         for (int count = 0; count < candidate_count; count++)
         {
+            int candidate_index = preferences[index][count];
             // If the following candidates aren't eliminated increment the voter count
-            if (candidates[preferences[index][count]].eliminated == false)
+            if (candidates[candidate_index].eliminated == false)
             {
                 // Increment the preferred candidate and their count of votes
-                candidates[preferences[index][count]].votes += 1;
+                candidates[candidate_index].votes ++;
                 break; 
             }
         }
