@@ -178,7 +178,7 @@ bool print_winner(void)
         {
             // Display the winning candidate's name
             printf("%s\n", candidates[index].name);
-            return ; 
+            return true; 
         }
     }
     return false;
