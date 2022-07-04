@@ -167,13 +167,13 @@ void tabulate(void)
 bool print_winner(void)
 {
     // Calculate the maximum number of voters
-    int max = (voter_count / 2) + 1;
+    float max = (float)voter_count / 2 + 1;
     
     // Count the number of votes from the votes
     for (int index = 0; index < candidate_count; index++)
     {
         // If number of candidate votes greater than half of voter count
-        if (candidates[index].votes > voter_count/2)
+        if (candidates[index].votes > max)
         {
             // Display the winning candidate's name
             printf("%s\n", candidates[index].name);
@@ -186,7 +186,7 @@ bool print_winner(void)
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
-    int min = MAX_CANDIDATES;
+    int min = MAX_VOTERS;
     
     // Count the number of candidate votes
     for (int index = 0; index < candidate_count; index++)
@@ -204,32 +204,16 @@ int find_min(void)
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    int eliminate = 0;
-    int counter = 0;
-    int index;
-    
     // Count the number of candidate votes
-    for (index = 0; index < candidate_count; index++)
+    for (int index = 0; index < candidate_count; index++)
     {
-        // If the selected candidates aren't eliminated please eliminate
-        if (!candidates[index].eliminated)
-        {
-            eliminate += 1;
-        }
-        
-        // If candidate votes are the minimum number increment voter count
-        if (candidates[index].votes == min)
-        {
-            counter += 1; 
-        }
+       // If the 
+       if (candidates[index].eliminated == false && candidates[index].votes != min)
+       {
+           return false; 
+       }
     }
-    
-    // If the eliminations and counter voters are equal return true
-    if (eliminate == counter)
-    {
-       return true;
-    }
-    return false;
+    return true;
 }
 
 // Eliminate the candidate (or candidates) in last place
@@ -239,7 +223,7 @@ void eliminate(int min)
     for (int index = 0; index < candidate_count; index++)
     {
         // If the candidate votes are the minimum amount
-        if (!candidates[index].eliminated && candidates[index] == min)
+        if (candidates[index].eliminated  == min)
         {
             // Then the number of candidates eliminated is true
             candidates[index].eliminated = true;
