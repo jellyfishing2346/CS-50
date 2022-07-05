@@ -220,7 +220,7 @@ void eliminate(int min)
     for (int index = 0; index < candidate_count; index++)
     {
         // If the candidate votes are the minimum amount
-        if (candidates[index].eliminated  == min)
+        if (candidates[index].votes == min)
         {
             // Then the number of candidates eliminated is true
             candidates[index].eliminated = true;
