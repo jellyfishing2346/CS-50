@@ -166,14 +166,11 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    // Calculate the maximum number of voters
-    float max = (float)voter_count / 2 + 1;
-    
     // Count the number of votes from the votes
     for (int index = 0; index < candidate_count; index++)
     {
         // If number of candidate votes greater than half of voter count
-        if (candidates[index].votes > max)
+        if (candidates[index].votes > (voter_count / 2))
         {
             // Display the winning candidate's name
             printf("%s\n", candidates[index].name);
