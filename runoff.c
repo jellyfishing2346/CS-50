@@ -156,7 +156,7 @@ void tabulate(void)
             if (candidates[candidate_index].eliminated == false)
             {
                 // Increment the preferred candidate and their count of votes
-                candidates[candidate_index].votes ++;
+                candidates[candidate_index].votes++;
                 break; 
             }
         }
@@ -207,11 +207,11 @@ bool is_tie(int min)
     // Count the number of candidate votes
     for (int index = 0; index < candidate_count; index++)
     {
-       // If the 
-       if (candidates[index].eliminated == false && candidates[index].votes != min)
-       {
-           return false; 
-       }
+        // If the candidate is not eliminated and doesn't have the minimum voting number
+        if (candidates[index].eliminated == false && candidates[index].votes != min)
+        {
+            return false; 
+        }
     }
     return true;
 }
