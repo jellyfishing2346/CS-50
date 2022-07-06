@@ -4,32 +4,32 @@ modify = file.lower()
 
 # If the file name ends with .pdf, image/gif
 if ".gif" in modify:
-    print("image/gif")
+    print("image/gif", end = "")
 
 # If the file name ends with .jpg, image/jpg
 elif ".jpg" in modify:
-    print("image/jpg")
+    print("image/jpg", end = "")
 
 # If the file name ends with .jpeg, image/jpeg
 elif ".jpeg" in modify:
-    print("image/jpeg")
+    print("image/jpeg", end = "")
 
 # If the file name ends with .png, image/png
 elif ".png" in modify:
-    print("image/png")
+    print("image/png", end = "")
 
 # If the file name ends with .pdf, image/pdf
 elif ".pdf" in modify:
-    print("application/pdf")
+    print("application/pdf", end = "")
 
 # If the file name ends with .txt, image/txt
 elif ".txt" in modify:
-    print("text/plain")
+    print("text/plain", end = "")
 
 # If the file name ends with .zip, image/zip
 elif ".zip" in modify:
-    print("application/zip")
+    print("application/zip", end = "")
 
 # Otherwise print the default case
 else:
-    print("application/octet-stream")
+	print("application/octet-stream", end = "")	
