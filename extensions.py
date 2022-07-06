@@ -11,7 +11,7 @@ elif ".jpg" in file:
 
 # If the file name ends with .jpeg, image/jpeg
 elif ".jpeg" in file:
-    print("image/jepg")
+    print("image/jpeg")
 
 # If the file name ends with .png, image/png
 elif ".png" in file:
