@@ -1,5 +1,5 @@
 # Prompt the user to enter a greeting
-response = input("Greeting: " )
+response = input("Greeting: " ).lower(check50 cs50/problems/2022/python/bank)
 
 # If the user enters Hello, print $0
 if response == "Hello":
