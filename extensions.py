@@ -8,7 +8,7 @@ if ".gif" in modify:
 
 # If the file name ends with .jpg, image/jpg
 elif ".jpg" in modify:
-    print("image/jpg", end = "")
+    print("image/jpeg", end = "")
 
 # If the file name ends with .jpeg, image/jpeg
 elif ".jpeg" in modify:
@@ -32,4 +32,4 @@ elif ".zip" in modify:
 
 # Otherwise print the default case
 else:
-	print("application/octet-stream", end = "")	
+	print("application/octet-stream", end = "")
