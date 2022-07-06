@@ -16,3 +16,7 @@ elif response == "How you doing?":
 # If the user enter What's happening?, print $100
 elif response == "What's happening?":
     print("$100")
+
+# If the user enters other case by default print $100
+else:
+    print("$100")
