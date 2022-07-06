@@ -1,5 +1,5 @@
 # Prompt the user to enter a greeting
-response = input("Greeting: " ).isspace()
+response = input("Greeting: " )
 
 # If the user enters Hello, print $0
 if response == "Hello":
