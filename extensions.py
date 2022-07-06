@@ -19,7 +19,7 @@ elif ".png" in file:
 
 # If the file name ends with .pdf, image/pdf
 elif ".pdf" in file:
-    print("image/pdf")
+    print("application/pdf")
 
 # If the file name ends with .txt, image/txt
 elif ".txt" in file:
@@ -27,7 +27,7 @@ elif ".txt" in file:
 
 # If the file name ends with .zip, image/zip
 elif ".zip" in file:
-    print("image/zip")
+    print("application/zip")
 
 # Otherwise print the default case
 print("application/octet-stream")
