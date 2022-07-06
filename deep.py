@@ -6,7 +6,7 @@ if response == "42":
     print("Yes")
 elif response == "Forty Two":
     print("Yes")
-elif response == "Forty-Two":
+elif response == "forty-two":
     print("Yes")
 # Otherwise the default case will print no
 else:
