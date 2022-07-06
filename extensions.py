@@ -23,7 +23,7 @@ elif ".pdf" in file:
 
 # If the file name ends with .txt, image/txt
 elif ".txt" in file:
-    print("image/txt")
+    print("text/plain")
 
 # If the file name ends with .zip, image/zip
 elif ".zip" in file:
