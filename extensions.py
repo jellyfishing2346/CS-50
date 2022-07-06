@@ -31,4 +31,5 @@ elif ".zip" in modify:
     print("application/zip")
 
 # Otherwise print the default case
-print("application/octet-stream")
+else:
+    print("application/octet-stream")
