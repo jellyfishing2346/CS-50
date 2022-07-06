@@ -1,5 +1,5 @@
 # Prompt the user to answer the following question
-response = input("What is the Answer to the Great Question of Life, the Universe, and Everything? ")
+response = input("What is the Answer to the Great Question of Life, the Universe, and Everything? ").strip().lower()
 
 # If the response is 42, Forty Two, or Forty-Two then print yes
 if response == "42":
