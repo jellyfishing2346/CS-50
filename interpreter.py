@@ -9,7 +9,13 @@ num1 = double(x)
 num2 = double(z)
 
 if y == "+":
-    result = num1 + num2;
+    result = num1 + num2
 elif y == "-"
-    result = num1 - num2;
+    result = num1 - num2
+elif y == "*"
+    result = num1 * num2
+elif y == "/"
+    result = num1 / num2
+else:
+    result = 0
 
