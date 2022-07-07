@@ -21,9 +21,6 @@ elif expression == "4 / 3":
 elif expression == "50 / 5":
     print("10.0")
 
-# If the user enters 3 / 2, print 1.5
-elif expression == "3 / 2"
-    print("1.5")
 # Otherwise print nothing
 else:
     print(" ")
