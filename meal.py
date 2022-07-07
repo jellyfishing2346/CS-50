@@ -8,17 +8,14 @@ def convert(time):
      minutes = float(minutes)
      timeNumber = hours +  (minutes / 60)
 # If time is between 7 and 8, print breakfast time
-     if "7.0" <= time <= "8.0":
+     if 7.0 <= time <= 8.0:
         print("breakfast time")
 # If time is between 12 and 13 , print lunch time
-     elif "12.0" <= time <= "13.0":
+     elif 12.0 <= time <= 13.0:
         print("lunch time")
 # If time is between 18 and 19, print dinner time
-     elif "18.0" <= time <= "19.0":
+     elif 18.0 <= time <= 19.0:
         print("dinner time")
-# Otherwise print the default case
-     else:
-      print(" ")
 
 if __name__ == "__main__":
     main()
