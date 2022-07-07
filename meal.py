@@ -3,7 +3,6 @@ def main():
     time = input("What time is it? ")
     convert(time)
 def convert(time):
-     answer = time
      hours, minutes = time.split(":")
 # If time is between 7 and 8, print breakfast time
      if "7.0" <= time <= "8.0":
@@ -19,8 +18,7 @@ def convert(time):
         return float(hours) + float(minutes) / 60
 # Otherwise print the default case
      else:
-      print(" ")
-	  return 0;
+       print(" ")
 
 if __name__ == "__main__":
     main()
