@@ -1,26 +1,15 @@
 # Prompt the user to enter an expression
 expression = input("Expression: ")
 
-# If the user enters 1 + 1, print 2.0
-if expression == "1 + 1":
-    print("2.0")
+# Convert variables
+x, y, z = expression.split()
 
-# If the user enters 2 - 3, print -1.0
-elif expression == "2 - 3":
-    print("-1.0")
+# x and z are num1 and num2
+num1 = double(x)
+num2 = double(z)
 
-# If the user enters 2 * 2, print 4.0
-elif expression == "2 * 2":
-    print("4.0")
+if y == "+":
+    result = num1 + num2;
+elif y == "-"
+    result = num1 - num2;
 
-# If the user enters 4 / 3, print 1.3
-elif expression == "4 / 3":
-    print("1.3")
-
-# If the user enters 50 / 5, print 10
-elif expression == "50 / 5":
-    print("10.0")
-
-# Otherwise print nothing
-else:
-    print(" ")
