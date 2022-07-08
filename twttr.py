@@ -1,11 +1,9 @@
 # Prompt the user to enter some input
 text = input("Input: ")
 
+# Account for all cases of the vowels
+for ch in "aAeEiIoOuU":
+    text = text.replace(ch, '')
 
-text = text.replace('a', '')
-text = text.replace('i', '')
-text = text.replace('e', '')
-text = text.replace('o', '')
-text = text.replace('u', '')
-
+# Display the final text
 print("Output: ", text)
