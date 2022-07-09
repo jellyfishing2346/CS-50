@@ -14,8 +14,10 @@ def is_valid(s):
     if len(s) < 2 or len(s) > 6:
       return False
     # Vanity plates must start with at least two letters
-    if s[0].isalpha() == False or s[1].isalpha() == False:
+    elif s[0].isalpha() == False or s[1].isalpha() == False:
         return False
+    else:
+        return True
 
 # Create a variable called index to compare the length of characters
 index = 0
