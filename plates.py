@@ -25,7 +25,7 @@ while index < len(s):
             return False
         else:
             break
-    index = index + 1
+    index += 1
 
 # Reject any periods, spaces, or punctuation
 for ch in s:
