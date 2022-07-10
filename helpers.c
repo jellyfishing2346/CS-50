@@ -1,4 +1,5 @@
 #include "helpers.h"
+#include <stdio.h>
 #include <math.h>
 
 
@@ -44,7 +45,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
     BYTE temp[3];
     RGBTRIPLE original_image[height][width];
-  	    // Evaluate each row by the height
+  	// Evaluate each row by the height
     for (int index = 0; index < height; index++)
     {
         // Evaluate each column by the width
@@ -52,11 +53,11 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
         {
             temp[0] = image[index][count].rgbtBlue;
             temp[1] = image[index][count].rgbtGreen;
-            temp[2]= image[index][count].rgbtRed;
+            temp[2] = image[index][count].rgbtRed;
           
             image[index][count].rgbtBlue = image[index][width-count-1].rgbtBlue;
-          	image[index][count].rgbtBlue = image[index][width-count-1].rgbtGreen;
-          	image[index][count].rgbtBlue = image[index][width-count-1].rgbtRed;
+          	image[index][count].rgbtGreen = image[index][width-count-1].rgbtGreen;
+          	image[index][count].rgbtRed = image[index][width-count-1].rgbtRed;
           
           	image[index][width-count-1].rgbtBlue = temp[0];
           	image[index][width-count-1].rgbtGreen = temp[1];
@@ -102,13 +103,16 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     {
                         totalRed += original_image[i][c].rgbtRed;
                         totalGreen += original_image[i][c].rgbtGreen;
-                        totalBlue += original_image[i][c].rgbtBlue;
+                        totalBlue += original_image[i][c].rgbtBlue;             
+          				printf("Red: %d", image[index][count].rgbtRed);
+          				printf("Green: %d", image[index][count].rgbtGreen);
+          				printf("Blue: %d", image[index][count].rgbtBlue);
                     }
                 }
             }
-            image[index][count].rgbtRed = round(totalRed / count);
-            image[index][count].rgbtGreen = round(totalGreen / count);
-            image[index][count].rgbtBlue = round(totalBlue / count);
+          	image[index][count].rgbtRed = round(totalRed / count);
+         	image[index][count].rgbtGreen = round(totalGreen / count);
+          	image[index][count].rgbtBlue = round(totalBlue / count);
             int total = 0;
         }
     }
