@@ -29,11 +29,11 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
         for (int count = 0; count < width; count++)
         {
             sepiaRed = round(.393 * image[index][count].rgbtRed + .769 * image[index][count].rgbtGreen + .189 * image[index][count].rgbtBlue);		
-         	sepiaGreen = round(.349 * image[index][count].rgbtRed + .686 * image[index][count].rgbtGreen + .168 * image[index][count].rgbtBlue);
-			sepiaBlue = round(.272 * image[index][count].rgbtRed + .534 * image[index][count].rgbtGreen + .131 * image[index][count].rgbtBlue);
-            image[index][count].rgbtRed = sepiaRed > 255 ? 255: sepiaRed;
-            image[index][count].rgbtGreen = sepiaGreen > 255 ? 255: sepiaGreen;
-            image[index][count].rgbtBlue = sepiaBlue > 255 ? 255: sepiaBlue;
+            sepiaGreen = round(.349 * image[index][count].rgbtRed + .686 * image[index][count].rgbtGreen + .168 * image[index][count].rgbtBlue);
+            sepiaBlue = round(.272 * image[index][count].rgbtRed + .534 * image[index][count].rgbtGreen + .131 * image[index][count].rgbtBlue);
+            image[index][count].rgbtRed = sepiaRed > 255 ? 255 : sepiaRed;
+            image[index][count].rgbtGreen = sepiaGreen > 255 ? 255 : sepiaGreen;
+            image[index][count].rgbtBlue = sepiaBlue > 255 ? 255 : sepiaBlue;
         }
     }
     return;
@@ -42,8 +42,8 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
-     RGBTRIPLE original_image[height][width];
-     // Evaluate each row by the height
+    RGBTRIPLE original_image[height][width];
+    // Evaluate each row by the height
     for (int index = 0; index < height; index++)
     {
         // Evaluate each column by the width
@@ -53,7 +53,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
         }
     }
     
-     // Evaluate each row by the height
+    // Evaluate each row by the height
     for (int index = 0; index < height; index++)
     {
         // Evaluate each column by the width
@@ -97,9 +97,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 {
                     if (c < width && index < height && c >= 0 && index >= 0)
                     {
-                    totalRed += original_image[i][c].rgbtRed;
-                    totalGreen += original_image[i][c].rgbtGreen;
-                    totalBlue += original_image[i][c].rgbtBlue;
+                        totalRed += original_image[i][c].rgbtRed;
+                        totalGreen += original_image[i][c].rgbtGreen;
+                        totalBlue += original_image[i][c].rgbtBlue;
                     }
                 }
             }
