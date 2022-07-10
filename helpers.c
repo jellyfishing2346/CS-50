@@ -51,7 +51,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
         for (int count = 0; count < width / 2; count++)
         {
             temp[0] = image[index][count].rgbtBlue;
-            temp[1] image[index][count].rgbtGreen;
+            temp[1] = image[index][count].rgbtGreen;
             temp[2]= image[index][count].rgbtRed;
           
             image[index][count].rgbtBlue = image[index][width-count-1].rgbtBlue;
