@@ -1,25 +1,18 @@
 #include "helpers.h"
 #include <math.h>
 
+
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
-    // Evaluate the height through each row
+    // Evaluate each row by the height
     for (int index = 0; index < height; index++)
     {
-        // Evaluate the width through each column
+        // Evaluate each column by the width
         for (int count = 0; count < width; count++)
         {
-            // Conversion to pixels to floats
-            float Red = image[index][count].rgbtRed;
-            float Green = image[index][count].rgbtGreen;
-            float Blue = image[index][count].rgbtBlue;
-            
-            // Determine the average
-            int avg_value = round((Red + Green + Blue) / 3);
-            avg_value = image[index][count].rgbtRed
-            = image[index][count].rgbtBlue = image[index][count].rgbtGreen;
-            
+            int total = round((image[index][count].rgbtRed + image[index][count].rgbtGreen + image[index][count].rgbtBlue) / 3.0);
+            image[index][count].rgbtRed = image[index][count].rgbtGreen = image[index][count].rgbtBlue = total;
         }
     }
     return;
@@ -28,45 +21,19 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
 // Convert image to sepia
 void sepia(int height, int width, RGBTRIPLE image[height][width])
 {
-    // Evaluate the height through each row
+    int sepiaRed, sepiaBlue, sepiaGreen;
+    // Evaluate each row by the height
     for (int index = 0; index < height; index++)
     {
-        // Evaluate the width through each column
+        // Evaluate each column by the width
         for (int count = 0; count < width; count++)
         {
-            // Conversion to pixels to floats
-            float originalRed = image[index][count].rgbtRed;
-            float originalBlue = image[index][count].rgbtBlue;
-            float originalGreen = image[index][count].rgbtGreen;
-            
-            // Retrieve the update pixel value
-            int sepiaRed = round((0.39) * originalRed + 0.769 * originalGreen
-            + 0.189 * originalBlue);
-            int sepiaBlue = round((0.39) * originalRed + 0.769 * originalGreen
-            + 0.189 * originalBlue);
-            int sepiaGreen = round((0.39) * originalRed + 0.769 * originalGreen
-            + 0.189 * originalBlue);
-            
-            // Change the pixel value if sepiaRed, sepiaBlue, sepiaGreen is greater than 255
-            if (sepiaRed > 255)
-            {
-                sepiaRed = 255;
-            }
-            
-            if (sepiaBlue > 255)
-            {
-                sepiaBlue = 255;
-            }
-            
-            if (sepiaGreen > 255)
-            {
-                sepiaGreen = 255; 
-            }
-            
-            // Update the final pixel values
-            image[index][count].rgbtRed = sepiaRed;
-            image[index][count].rgbtBlue = sepiaBlue;
-            image[index][count].rgbtGreen = sepiaGreen;
+            sepiaRed = round(0.393 * image[index][count].rgbtRed + 0.769 * image[index][count].rgbtBlue + 0.189 * image[index][count].rgbtGreen);
+            sepiaBlue = round(0.393 * image[index][count].rgbtRed + 0.769 * image[index][count].rgbtBlue + 0.189 * image[index][count].rgbtGreen);
+            sepiaGreen = round(0.393 * image[index][count].rgbtRed + 0.769 * image[index][count].rgbtBlue + 0.189 * image[index][count].rgbtGreen);
+            image[index][count].rgbtRed = sepiaRed > 255 ? 255: sepiaRed;
+            image[index][count].rgbtGreen = sepiaGreen > 255 ? 255: sepiaGreen;
+            image[index][count].rgbtBlue = sepiaBlue > 255 ? 255: sepiaBlue;
         }
     }
     return;
@@ -75,15 +42,25 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
-    // Go through each row in terms of height
+     RGBTRIPLE original_image[height][width];
+     // Evaluate each row by the height
     for (int index = 0; index < height; index++)
     {
-        // Go through each row in terms of width
-        for (int count = 0; count < width / 2; count++)
+        // Evaluate each column by the width
+        for (int count = 0; count < width; count++)
         {
-            RGBTRIPLE temporary = image[index][count];
-            image[index][count] = image[index][width - (count + 1)];
-            image[index]width - (count + 1) = temporary; 
+            original_image[index][count] = image[index][count];
+        }
+    }
+    return;
+    
+     // Evaluate each row by the height
+    for (int index = 0; index < height; index++)
+    {
+        // Evaluate each column by the width
+        for (int count = 0; count < width; count++)
+        {
+            image[index][count] = image[index][count];
         }
     }
     return;
@@ -92,13 +69,45 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
+    RGBTRIPLE original_image[height][width];
+    
+    // Evaluate each row by the height
     for (int index = 0; index < height; index++)
     {
+        // Evaluate each column by the width
         for (int count = 0; count < width; count++)
         {
-            image[index][count].rgbtRed = temp[index][count].rgbtRed;
-            image[index][count].rgbtGreen = temp[index][count].rgbtGreen;
-            image[index][count].rgbtBlue = temp[index][count].rgbtBlue;
+            original_image[index][count] = image[index][count];
+        }
+    }
+    
+    int totalRed, totalGreen, totalBlue; 
+    totalRed = totalGreen = totalBlue = 0;
+    
+    // Evaluate each row by the height
+    for (int index = 0; index < height; index++)
+    {
+        // Evaluate each column by the width
+        for (int count = 0; count < width; count++)
+        {
+            // Count the rows
+            for (int i = index - 1; i <= index + 1; i++)
+            {
+                // Count the columns
+                for (int c = count - 1; c <= count + 1; c++)
+                {
+                    if (c < width && index < height && c >= 0 && index >= 0)
+                    {
+                    totalRed += original_image[i][c].rgbtRed;
+                    totalGreen += original_image[i][c].rgbtGreen;
+                    totalBlue += original_image[i][c].rgbtBlue;
+                    }
+                }
+            }
+            image[index][count].rgbtRed = round(totalRed / count);
+            image[index][count].rgbtGreen = round(totalGreen / count);
+            image[index][count].rgbtBlue = round(totalBlue / count);
+            int total = 0;
         }
     }
     return;
