@@ -52,7 +52,6 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
             original_image[index][count] = image[index][count];
         }
     }
-    return;
     
      // Evaluate each row by the height
     for (int index = 0; index < height; index++)
