@@ -94,20 +94,18 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         for (int count = 0; count < width; count++)
         {
             // Count the rows
-            for (int i = index - 1; i <= index + 1; i++)
+            for (int i = index; i <= index; i++)
             {
                 // Count the columns
-                for (int c = count - 1; c <= count + 1; c++)
+                for (int c = count; c <= count; c++)
                 {
-                    if (c < width && index < height && c >= 0 && index >= 0)
-                    {
-                        totalRed += original_image[i][c].rgbtRed;
-                        totalGreen += original_image[i][c].rgbtGreen;
-                        totalBlue += original_image[i][c].rgbtBlue;             
-          				printf("Red: %d", image[index][count].rgbtRed);
-          				printf("Green: %d", image[index][count].rgbtGreen);
-          				printf("Blue: %d", image[index][count].rgbtBlue);
-                    }
+                    totalRed += original_image[i][c].rgbtRed;
+                    totalGreen += original_image[i][c].rgbtGreen;
+                    totalBlue += original_image[i][c].rgbtBlue;             
+          			printf("Red: %d", totalRed);
+          			printf("Green: %d", totalGreen);
+          			printf("Blue: %d", totalBlue);
+                	printf("\n");
                 }
             }
           	image[index][count].rgbtRed = round(totalRed / count);
