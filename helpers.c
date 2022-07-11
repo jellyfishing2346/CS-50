@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <math.h>
 
-
+int main()
+{
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
@@ -69,3 +70,79 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
    return;
 }
 
+// Blur image
+void blur(int height, int width, RGBTRIPLE image[height][width])
+{
+    RGBTRIPLE original_image[height][width];
+    
+    // Evaluate each row by the height
+    for (int index = 0; index < height; index++)
+    {
+        // Evaluate each column by the width
+        for (int count = 0; count < width; count++)
+        {
+            original_image[index][count] = image[index][count];
+        }
+    }
+    
+    int totalRed, totalGreen, totalBlue; 
+    totalRed = totalGreen = totalBlue = 0;
+  	int starti, startc, endi, endc; 
+    
+    // Evaluate each row by the height
+    for (int j = 0; j < height; j++)
+    {
+        // Evaluate each column by the width
+        for (int k = 0; k < width; k++)
+        {
+          	if (j - 1 < 0)
+              {
+                starti = 0; 
+              } else {
+                starti = j - 1;
+              }
+          	if (k - 1 < 0)
+              {
+			  	startc = 0;
+              } else {
+                startc = k; 
+              }
+          	if (j + 1 == height)
+              {
+                endi = height;
+              } else {
+                endi = j + 1; 
+              }
+             if (k + 1 == width)
+               {
+				 endc = width;
+               } else {
+                 endc = k + 1; 
+               }
+                // Count the rows
+            	for (int i = starti; i < endi; i++)
+            	{	
+                	// Count the columns
+                	for (int c = startc; c < endc; c++)
+                	{
+                    totalRed += original_image[i][c].rgbtRed;
+                    totalGreen += original_image[i][c].rgbtGreen;
+                    totalBlue += original_image[i][c].rgbtBlue;             
+          			    
+                	}
+            	}
+          			image[j][k].rgbtRed = round(totalRed / count);
+         			image[j][k].rgbtGreen = round(totalGreen / count);
+          			image[j][k].rgbtBlue = round(totalBlue / count);
+          			printf("%d ", image[j][k].rgbtRed);
+          			printf("%d ", image[j][k].rgbtGreen);
+          			printf("%d", image[j][k].rgbtBlue);
+                    printf("\n");
+
+            int total = 0;
+        	}
+    }
+              }
+            
+    return;
+}
