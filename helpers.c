@@ -92,94 +92,92 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             float calculations;
             blue = green = red = calculations = 0; 
             
-         // This pixel is for the bottom right
-         if (index >= 0 && count >= 0)
-         {
-             red += temporary_image[index][count].rgbtRed;
-             green += temporary_image[index][count].rgbtGreen;
-             blue += temporary_image[index][count].rgbtBlue;
-             calculations++; 
-         }
+            // This pixel is for the bottom right
+            if (index >= 0 && count >= 0)
+            {
+                red += temporary_image[index][count].rgbtRed;
+                green += temporary_image[index][count].rgbtGreen;
+                blue += temporary_image[index][count].rgbtBlue;
+                calculations++; 
+            }
          
-         // This pixel is for the bottom left
-         if (index >= 0 && count - 1 >= 0)
-         {
-             red += temporary_image[index][count - 1].rgbtRed;
-             green += temporary_image[index][count - 1].rgbtGreen;
-             blue += temporary_image[index][count - 1].rgbtBlue;
-             calculations++; 
-         }
+            // This pixel is for the bottom left
+            if (index >= 0 && count - 1 >= 0)
+            {
+                red += temporary_image[index][count - 1].rgbtRed;
+                green += temporary_image[index][count - 1].rgbtGreen;
+                blue += temporary_image[index][count - 1].rgbtBlue;
+                calculations++; 
+            }
         
-         // This pixel is for the top left
-         if (index - 1 >= 0 && count >= 0)
-         {
-             red += temporary_image[index - 1][count].rgbtRed;
-             green += temporary_image[index - 1][count].rgbtGreen;
-             blue += temporary_image[index - 1][count].rgbtBlue;
-             calculations++; 
-         }
+            // This pixel is for the top left
+            if (index - 1 >= 0 && count >= 0)
+            {
+                red += temporary_image[index - 1][count].rgbtRed;
+                green += temporary_image[index - 1][count].rgbtGreen;
+               blue += temporary_image[index - 1][count].rgbtBlue;
+               calculations++; 
+            }
          
-         // This pixel is for the top right
-         if (index - 1 >= 0 && count - 1 >= 0)
-         {
-             red += temporary_image[index - 1][count - 1].rgbtRed;
-             green += temporary_image[index - 1][count - 1].rgbtGreen;
-             blue += temporary_image[index - 1][count - 1].rgbtBlue;
-             calculations++;
-         }
+           // This pixel is for the top right
+           if (index - 1 >= 0 && count - 1 >= 0)
+           {
+              red += temporary_image[index - 1][count - 1].rgbtRed;
+              green += temporary_image[index - 1][count - 1].rgbtGreen;
+              blue += temporary_image[index - 1][count - 1].rgbtBlue;
+              calculations++;
+           }
          
-         // The pixels for the bottom edge
-         if ((index >= 0 && count + 1 >= 0) && (index >= 0 && count + 1 < width))
-         {
-             red += temporary_image[index][count + 1].rgbtRed;
-             green += temporary_image[index][count + 1].rgbtGreen;
-             blue += temporary_image[index][count + 1].rgbtBlue;
-             calculations++;
-         }
+          // The pixels for the bottom edge
+          if ((index >= 0 && count + 1 >= 0) && (index >= 0 && count + 1 < width))
+          {
+              red += temporary_image[index][count + 1].rgbtRed;
+              green += temporary_image[index][count + 1].rgbtGreen;
+              blue += temporary_image[index][count + 1].rgbtBlue;
+              calculations++;
+          }
          
-         // The pixels for the top edge
-         if ((index - 1 >= 0 &&  count + 1 >= 0) && (index - 1 >= 0 && count + 1 < width))
-         {
-             red += temporary_image[index - 1][count + 1].rgbtRed;
-             green += temporary_image[index - 1][count + 1].rgbtGreen;
-             blue += temporary_image[index - 1][count + 1].rgbtBlue;
-             calculations++;
-         }
+          // The pixels for the top edge
+          if ((index - 1 >= 0 &&  count + 1 >= 0) && (index - 1 >= 0 && count + 1 < width))
+          {
+              red += temporary_image[index - 1][count + 1].rgbtRed;
+              green += temporary_image[index - 1][count + 1].rgbtGreen;
+              blue += temporary_image[index - 1][count + 1].rgbtBlue;
+              calculations++;
+          }
          
-         // The pixels for the left edge
-         if ((index + 1 >= 0 && count >= 0) && (index + 1 < height && count >= 0))
-         {
-             red += temporary_image[index + 1][count].rgbtRed;
-             green += temporary_image[index + 1][count].rgbtGreen;
-             blue += temporary_image[index + 1][count].rgbtBlue;
-             calculations++;
-         }
+          // The pixels for the left edge
+          if ((index + 1 >= 0 && count >= 0) && (index + 1 < height && count >= 0))
+          {
+              red += temporary_image[index + 1][count].rgbtRed;
+              green += temporary_image[index + 1][count].rgbtGreen;
+              blue += temporary_image[index + 1][count].rgbtBlue;
+              calculations++;
+          }
          
-         // The pixels for the right edge
-         if ((index + 1 >= 0 && count - 1 >= 0) && (index + 1 < height && count - 1 >= 0))
-         {
-             red += temporary_image[index + 1][count - 1].rgbtRed;
-             green += temporary_image[index + 1][count - 1].rgbtGreen;
-             blue += temporary_image[index + 1][count - 1].rgbtBlue;
-             calculations++;
-         }
+          // The pixels for the right edge
+          if ((index + 1 >= 0 && count - 1 >= 0) && (index + 1 < height && count - 1 >= 0))
+          {
+              red += temporary_image[index + 1][count - 1].rgbtRed;
+              green += temporary_image[index + 1][count - 1].rgbtGreen;
+              blue += temporary_image[index + 1][count - 1].rgbtBlue;
+              calculations++;
+          }
          
-         // The middle pixels
-         if ((index + 1 >= 0 && count + 1 >= 0) && (index + 1 < height && count + 1 < width))
-         {
-             red += temporary_image[index + 1][count + 1].rgbtRed;
-             green += temporary_image[index + 1][count + 1].rgbtGreen;
-             blue += temporary_image[index + 1][count + 1].rgbtBlue;
-             calculations++;
-         }
+          // The middle pixels
+          if ((index + 1 >= 0 && count + 1 >= 0) && (index + 1 < height && count + 1 < width))
+          {
+              red += temporary_image[index + 1][count + 1].rgbtRed;
+              green += temporary_image[index + 1][count + 1].rgbtGreen;
+              blue += temporary_image[index + 1][count + 1].rgbtBlue;
+              calculations++;
+          }
          
-         // The average amount for colors
-         image[index][count].rgbtRed = round(red / calculations);
-         image[index][count].rgbtGreen = round(green / calculations);
-         image[index][count].rgbtBlue = round(blue / calculations);
+           // The average amount for colors
+            image[index][count].rgbtRed = round(red / calculations);
+            image[index][count].rgbtGreen = round(green / calculations);
+            image[index][count].rgbtBlue = round(blue / calculations);
         }
-    
-    
-    return;
+        return;
 }
 }
