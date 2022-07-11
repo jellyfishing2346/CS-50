@@ -102,10 +102,10 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     totalRed += original_image[i][c].rgbtRed;
                     totalGreen += original_image[i][c].rgbtGreen;
                     totalBlue += original_image[i][c].rgbtBlue;             
-          			printf("Red: %d", totalRed);
-          			printf("Green: %d", totalGreen);
-          			printf("Blue: %d", totalBlue);
-                	printf("\n");
+          			    printf("%d ", totalRed);
+          				printf("%d ", totalGreen);
+          				printf("%d", totalBlue);
+                      	printf("\n");
                 }
             }
           	image[index][count].rgbtRed = round(totalRed / count);
