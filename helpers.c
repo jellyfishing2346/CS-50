@@ -156,7 +156,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
           }
          
           // The pixels for the right edge
-          if ((index + 1 >= 0 && count - 1 >= 0) && (index + 1 < height && count - 1 >= 0))
+         if ((index + 1 >= 0 && count - 1 >= 0) && (index + 1 < height && count - 1 >= 0))
           {
               red += temporary_image[index + 1][count - 1].rgbtRed;
               green += temporary_image[index + 1][count - 1].rgbtGreen;
