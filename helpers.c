@@ -44,7 +44,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
     BYTE temp[3];
     RGBTRIPLE original_image[height][width];
-  	// Evaluate each row by the height
+    // Evaluate each row by the height
     for (int index = 0; index < height; index++)
     {
         // Evaluate each column by the width
@@ -54,24 +54,33 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
             temp[1] = image[index][count].rgbtGreen;
             temp[2] = image[index][count].rgbtRed;
           
-            image[index][count].rgbtBlue = image[index][width-count-1].rgbtBlue;
-          	image[index][count].rgbtGreen = image[index][width-count-1].rgbtGreen;
-          	image[index][count].rgbtRed = image[index][width-count-1].rgbtRed;
+            image[index][count].rgbtBlue = image[index][width - count - 1].rgbtBlue;
+            image[index][count].rgbtGreen = image[index][width - count - 1].rgbtGreen;
+            image[index][count].rgbtRed = image[index][width - count - 1].rgbtRed;
           
-          	image[index][width-count-1].rgbtBlue = temp[0];
-          	image[index][width-count-1].rgbtGreen = temp[1];
-          	image[index][width-count-1].rgbtRed = temp[2];
+            image[index][width - count - 1].rgbtBlue = temp[0];
+            image[index][width - count - 1].rgbtGreen = temp[1];
+            image[index][width - count - 1].rgbtRed = temp[2];
           
         }
     }
   
-   return;
+    return;
 }
 
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    RGBTRIPLE original_image[height][width];
+    RGBTRIPLE temporary_image[height][width];
+    // Evaluate each row by the height
+    for (int index = 0; index < height; index++)
+    {
+        // Evaluate each column by the width
+        for (int count = 0; count < width; count++)
+        {
+            temporary_image[index][count] = image[index][count];
+        }
+    }
     
     // Evaluate each row by the height
     for (int index = 0; index < height; index++)
@@ -79,66 +88,97 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         // Evaluate each column by the width
         for (int count = 0; count < width; count++)
         {
-            original_image[index][count] = image[index][count];
+            int blue, green, red;
+            float calculations;
+            blue = green = red = calculations = 0; 
+            
+         // This pixel is for the bottom right
+         if (index >= 0 && count >= 0)
+         {
+             red += temporary_image[index][count].rgbtRed;
+             green += temporary_image[index][count].rgbtGreen;
+             blue += temporary_image[index][count].rgbtBlue;
+             calculations++; 
+         }
+         
+         // This pixel is for the bottom left
+         if (index >= 0 && count - 1 >= 0)
+         {
+             red += temporary_image[index][count - 1].rgbtRed;
+             green += temporary_image[index][count - 1].rgbtGreen;
+             blue += temporary_image[index][count - 1].rgbtBlue;
+             calculations++; 
+         }
+        
+         // This pixel is for the top left
+         if (index - 1 >= 0 && count >= 0)
+         {
+             red += temporary_image[index - 1][count].rgbtRed;
+             green += temporary_image[index - 1][count].rgbtGreen;
+             blue += temporary_image[index - 1][count].rgbtBlue;
+             calculations++; 
+         }
+         
+         // This pixel is for the top right
+         if (index - 1 >= 0 && count - 1 >= 0)
+         {
+             red += temporary_image[index - 1][count - 1].rgbtRed;
+             green += temporary_image[index - 1][count - 1].rgbtGreen;
+             blue += temporary_image[index - 1][count - 1].rgbtBlue;
+             calculations++;
+         }
+         
+         // The pixels for the bottom edge
+         if ((index >= 0 && count + 1 >= 0) && (index >= 0 && count + 1 < width))
+         {
+             red += temporary_image[index][count + 1].rgbtRed;
+             green += temporary_image[index][count + 1].rgbtGreen;
+             blue += temporary_image[index][count + 1].rgbtBlue;
+             calculations++;
+         }
+         
+         // The pixels for the top edge
+         if ((index - 1 >= 0 &&  count + 1 >= 0) && (index - 1 >= 0 && count + 1 < width))
+         {
+             red += temporary_image[index - 1][count + 1].rgbtRed;
+             green += temporary_image[index - 1][count + 1].rgbtGreen;
+             blue += temporary_image[index - 1][count + 1].rgbtBlue;
+             calculations++;
+         }
+         
+         // The pixels for the left edge
+         if ((index + 1 >= 0 && count >= 0) && (index + 1 < height && count >= 0))
+         {
+             red += temporary_image[index + 1][count].rgbtRed;
+             green += temporary_image[index + 1][count].rgbtGreen;
+             blue += temporary_image[index + 1][count].rgbtBlue;
+             calculations++;
+         }
+         
+         // The pixels for the right edge
+         if ((index + 1 >= 0 && count - 1 >= 0) && (index + 1 < height && count - 1 >= 0))
+         {
+             red += temporary_image[index + 1][count - 1].rgbtRed;
+             green += temporary_image[index + 1][count - 1].rgbtGreen;
+             blue += temporary_image[index + 1][count - 1].rgbtBlue;
+             calculations++;
+         }
+         
+         // The middle pixels
+         if ((index + 1 >= 0 && count + 1 >= 0) && (index + 1 < height && count + 1 < width))
+         {
+             red += temporary_image[index + 1][count + 1].rgbtRed;
+             green += temporary_image[index + 1][count + 1].rgbtGreen;
+             blue += temporary_image[index + 1][count + 1].rgbtBlue;
+             calculations++;
+         }
+         
+         // The average amount for colors
+         image[index][count].rgbtRed = round(red / calculations);
+         image[index][count].rgbtGreen = round(green / calculations);
+         image[index][count].rgbtBlue = round(blue / calculations);
         }
-    }
     
-    int totalRed, totalGreen, totalBlue; 
-    totalRed = totalGreen = totalBlue = 0;
-  	int starti, startc, endi, endc; 
     
-    // Evaluate each row by the height
-    for (int j = 0; j < height; j++)
-    {
-        // Evaluate each column by the width
-        for (int k = 0; k < width; k++)
-        {
-          	if (j - 1 < 0)
-              {
-                starti = 0; 
-              } else {
-                starti = j - 1;
-              }
-          	if (k - 1 < 0)
-              {
-			  	startc = 0;
-              } else {
-                startc = k; 
-              }
-          	if (j + 1 == height)
-              {
-                endi = height;
-              } else {
-                endi = j + 1; 
-              }
-             if (k + 1 == width)
-               {
-				 endc = width;
-               } else {
-                 endc = k + 1; 
-               }
-                // Count the rows
-            	for (int i = starti; i < endi; i++)
-            	{	
-                	// Count the columns
-                	for (int c = startc; c < endc; c++)
-                	{
-                    totalRed += original_image[i][c].rgbtRed;
-                    totalGreen += original_image[i][c].rgbtGreen;
-                    totalBlue += original_image[i][c].rgbtBlue;             
-          			    
-                	}
-            	}
-          			image[j][k].rgbtRed = round(totalRed / 3.0);
-         			image[j][k].rgbtGreen = round(totalGreen / 3.0);
-          			image[j][k].rgbtBlue = round(totalBlue / 3.0);
-          			printf("%d ", image[j][k].rgbtRed);
-          			printf("%d ", image[j][k].rgbtGreen);
-          			printf("%d", image[j][k].rgbtBlue);
-                    printf("\n");
-
-            int total = 0;
-        	}
-    }
     return;
 }
