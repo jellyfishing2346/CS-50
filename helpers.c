@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <math.h>
 
-int main()
-{
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
@@ -131,9 +129,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
           			    
                 	}
             	}
-          			image[j][k].rgbtRed = round(totalRed / count);
-         			image[j][k].rgbtGreen = round(totalGreen / count);
-          			image[j][k].rgbtBlue = round(totalBlue / count);
+          			image[j][k].rgbtRed = round(totalRed / 3.0);
+         			image[j][k].rgbtGreen = round(totalGreen / 3.0);
+          			image[j][k].rgbtBlue = round(totalBlue / 3.0);
           			printf("%d ", image[j][k].rgbtRed);
           			printf("%d ", image[j][k].rgbtGreen);
           			printf("%d", image[j][k].rgbtBlue);
@@ -142,7 +140,5 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             int total = 0;
         	}
     }
-              }
-            
     return;
 }
