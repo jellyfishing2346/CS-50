@@ -125,7 +125,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             if (h +1 < height && w <= 0)
             {
                 red += temporary_image[h+1][w].rgbtRed;
-                green += temporary_image[h+!][w].rgbtGreen;
+                green += temporary_image[h+1][w].rgbtGreen;
                 blue += temporary_image[h+1][w].rgbtBlue;
                 calculations++;
             }  
