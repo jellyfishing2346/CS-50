@@ -73,47 +73,48 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 {
   
     RGBTRIPLE temporary[height][width];
+    int index, count;
 
-    for (int h = 0; h < height; h++)
+    for (index = 0; index < height; index++)
     {
-        for (int w = 0; w < width; w++)
+        for (count = 0; count < width; count++)
         {
-            temporary[h][w] = image[h][w];
+            temporary[index][count] = image[index][count];
         }
     }
 
-    for (int y = 0; y < height; y++)
+    for (int i = 0; i < height; i++)
     {
-        for (int x = 0; x < width; x++)
+        for (int c = 0; c < width; c++)
         {
-            int count = 0;
+            int calculations = 0;
             float red = 0;
             float green = 0;
-            float blueaddup = 0;
-            for (int r = -1; r < 2; r++)
+            float blue = 0;
+            for (int rows = -1; rows < 2; rows++)
             {
-                for (int s = -1; s < 2; s++)
+                for (int columns = -1; columns < 2; columns++)
                 {
-                    if((y + r > height || y + r < 0) || (x + s > width || x + s < 0))
+                    if((i + columns > height || i + columns < 0) || (c + rows > width || c + rows < 0))
                     {
 
                     }
                     else
                     {
-                        red += copy[y+r][x+s].rgbtRed;
-                        green += copy[y+r][x+s].rgbtGreen;
-                        blue += copy[y+r][x+s].rgbtBlue;
+                        red += temporary[i+rows][c+columns].rgbtRed;
+                        green += temporary[c+rows][columns+i].rgbtGreen;
+                        blue += temporary[i+rows][c+columns].rgbtBlue;
                         count++;
                     }
                 }
             }
-            image[y][x].rgbtRed = round(redaddup / count);
-            image[y][x].rgbtGreen = round(greenaddup / count);
-            image[y][x].rgbtBlue = round(blueaddup / count);
+            image[c][i].rgbtRed = round(red/ calculations);
+            image[c][i].rgbtGreen = round(green / calculations);
+            image[c][i].rgbtBlue = round(blue / calculations);
 
-            image[y][x].rgbtRed = image[y][x].rgbtRed % 256;
-            image[y][x].rgbtBlue = image[y][x].rgbtBlue % 256;
-            image[y][x].rgbtGreen = image[y][x].rgbtGreen % 256;
+            image[c][i].rgbtRed = image[c][i].rgbtRed % 256;
+            image[c][i].rgbtBlue = image[c][i].rgbtBlue % 256;
+            image[c][i].rgbtGreen = image[c][i].rgbtGreen % 256;
         }
     }
     return;
