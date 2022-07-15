@@ -102,7 +102,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             }
          
             // This pixel is for the bottom left
-            else if (index >= 0 && count - 1 >= 0)
+            if (index >= 0 && count - 1 >= 0)
             {
                 red += temporary_image[index][count - 1].rgbtRed;
                 green += temporary_image[index][count - 1].rgbtGreen;
@@ -111,7 +111,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             }
         
             // This pixel is for the top left
-            else if (index - 1 >= 0 && count >= 0)
+            if (index - 1 >= 0 && count >= 0)
             {
                 red += temporary_image[index - 1][count].rgbtRed;
                 green += temporary_image[index - 1][count].rgbtGreen;
@@ -120,7 +120,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             }
          
             // This pixel is for the top right
-            else if (index - 1 >= 0 && count - 1 >= 0)
+            if (index - 1 >= 0 && count - 1 >= 0)
             {
                 red += temporary_image[index - 1][count - 1].rgbtRed;
                 green += temporary_image[index - 1][count - 1].rgbtGreen;
@@ -129,7 +129,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             }
          
             // The pixels for the bottom edge
-            else if ((index >= 0 && count + 1 >= 0) && (index >= 0 && count + 1 < width))
+            if ((index >= 0 && count + 1 >= 0) && (index >= 0 && count + 1 < width))
             {
                 red += temporary_image[index][count + 1].rgbtRed;
                 green += temporary_image[index][count + 1].rgbtGreen;
@@ -138,7 +138,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             }
          
             // The pixels for the top edge
-            else if ((index - 1 >= 0 &&  count + 1 >= 0) && (index - 1 >= 0 && count + 1 < width))
+            if ((index - 1 >= 0 &&  count + 1 >= 0) && (index - 1 >= 0 && count + 1 < width))
             {
                 red += temporary_image[index - 1][count + 1].rgbtRed;
                 green += temporary_image[index - 1][count + 1].rgbtGreen;
@@ -147,7 +147,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             }
          
             // The pixels for the left edge
-            else if ((index + 1 >= 0 && count >= 0) && (index + 1 < height && count >= 0))
+            if ((index + 1 >= 0 && count >= 0) && (index + 1 < height && count >= 0))
             {
                 red += temporary_image[index + 1][count].rgbtRed;
                 green += temporary_image[index + 1][count].rgbtGreen;
@@ -156,7 +156,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             }
          
             // The pixels for the right edge
-            else if ((index + 1 >= 0 && count - 1 >= 0) && (index + 1 < height && count - 1 >= 0))
+            if ((index + 1 >= 0 && count - 1 >= 0) && (index + 1 < height && count - 1 >= 0))
             {
                 red += temporary_image[index + 1][count - 1].rgbtRed;
                 green += temporary_image[index + 1][count - 1].rgbtGreen;
@@ -165,7 +165,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             }
          
             // The middle pixels
-            else if ((index + 1 >= 0 && count + 1 >= 0) && (index + 1 < height && count + 1 < width))
+            if ((index + 1 >= 0 && count + 1 >= 0) && (index + 1 < height && count + 1 < width))
             {
                 red += temporary_image[index + 1][count + 1].rgbtRed;
                 green += temporary_image[index + 1][count + 1].rgbtGreen;
