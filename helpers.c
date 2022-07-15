@@ -68,12 +68,6 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
     return;
 }
 
-// This function is in charge of calculation 
-float getBlur(int height, int width, RGBTRIPLE image[height][width])
-{
-  	RBGTRIPLE average[height][width];
-}
-
 
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
