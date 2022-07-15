@@ -122,6 +122,15 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             }
          
             // The pixels for the bottom edge
+            if (h +1 < height && w <= 0)
+            {
+                red += temporary_image[h+1][w].rgbtRed;
+                green += temporary_image[h+!][w].rgbtGreen;
+                blue += temporary_image[h+1][w].rgbtBlue;
+                calculations++;
+            }  
+            
+            // The pixels for the bottom edge
             if (h >= 0 && w + 1 < width)
             {
                 red += temporary_image[h][w + 1].rgbtRed;
