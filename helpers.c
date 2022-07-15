@@ -71,111 +71,50 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    RGBTRIPLE temporary_image[height][width];
-    // Evaluate each row by the height
-    for (int index = 0; index < height; index++)
-    {
-        // Evaluate each column by the width
-        for (int count = 0; count < width; count++)
-        {
-            temporary_image[index][count] = image[index][count];
-        }
-    }
-    
-    // Evaluate each row by the height
+  
+    RGBTRIPLE temporary[height][width];
+
     for (int h = 0; h < height; h++)
     {
-        // Evaluate each column by the width
         for (int w = 0; w < width; w++)
         {
-            int blue, green, red;
-            float calculations;
-            blue = green = red = calculations = 0; 
-            
-
-         
-            // This pixel is for the upper left corner
-            if (h > 0 && w > 0)
-            {
-                red += temporary_image[h - 1][w - 1].rgbtRed;
-                green += temporary_image[h - 1][w - 1].rgbtGreen;
-                blue += temporary_image[h - 1][w - 1].rgbtBlue;
-                calculations++; 
-            }
-        
-            // This pixel is for the top left
-            if (h > 0 && w >= 0)
-            {
-                red += temporary_image[h - 1][w].rgbtRed;
-                green += temporary_image[h - 1][w].rgbtGreen;
-                blue += temporary_image[h - 1][w].rgbtBlue;
-                calculations++; 
-            }
-         
-            // This pixel is for the top right
-            if (h >= 0 && w > 0)
-            {
-                red += temporary_image[h][w - 1].rgbtRed;
-                green += temporary_image[h][w - 1].rgbtGreen;
-                blue += temporary_image[h][w - 1].rgbtBlue;
-                calculations++;
-            }
-         
-            // The pixels for the bottom edge
-            if (h +1 < height && w <= 0)
-            {
-                red += temporary_image[h+1][w].rgbtRed;
-                green += temporary_image[h+1][w].rgbtGreen;
-                blue += temporary_image[h+1][w].rgbtBlue;
-                calculations++;
-            }  
-            
-            // The pixels for the bottom edge
-            if (h >= 0 && w + 1 < width)
-            {
-                red += temporary_image[h][w + 1].rgbtRed;
-                green += temporary_image[h][w + 1].rgbtGreen;
-                blue += temporary_image[h][w + 1].rgbtBlue;
-                calculations++;
-            }
-         
-            // The pixels for the top edge
-            if (h - 1 >= 0 && w + 1 < width)
-            {
-                red += temporary_image[h - 1][w + 1].rgbtRed;
-                green += temporary_image[h - 1][w + 1].rgbtGreen;
-                blue += temporary_image[h - 1][w + 1].rgbtBlue;
-                calculations++;
-            }
-
-            // The pixels for the right edge
-            if (h + 1 < height && w - 1 < width)
-            {
-                red += temporary_image[h + 1][w - 1].rgbtRed;
-                green += temporary_image[h + 1][w - 1].rgbtGreen;
-                blue += temporary_image[h + 1][w - 1].rgbtBlue;
-                calculations++;
-            }
-         
-            // The middle pixels
-            if (h + 1 < height && w + 1 < width)
-            {
-                red += temporary_image[h + 1][w + 1].rgbtRed;
-                green += temporary_image[h + 1][w + 1].rgbtGreen;
-                blue += temporary_image[h + 1][w + 1].rgbtBlue;
-                calculations++;
-            }
-            // This pixel is for the bottom right
-            red += temporary_image[h][w].rgbtRed;
-            green += temporary_image[h][w].rgbtGreen;
-            blue += temporary_image[h][w].rgbtBlue;
-            calculations++; 
-                
-            // The average amount for colors
-            image[h][w].rgbtRed = round(red / calculations);
-            image[h][w].rgbtGreen = round(green / calculations);
-            image[h][w].rgbtBlue = round(blue / calculations);
+            temporary[h][w] = image[h][w];
         }
-        return;
     }
+
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            int count = 0;
+            float red = 0;
+            float green = 0;
+            float blueaddup = 0;
+            for (int r = -1; r < 2; r++)
+            {
+                for (int s = -1; s < 2; s++)
+                {
+                    if((y + r > height || y + r < 0) || (x + s > width || x + s < 0))
+                    {
+
+                    }
+                    else
+                    {
+                        red += copy[y+r][x+s].rgbtRed;
+                        green += copy[y+r][x+s].rgbtGreen;
+                        blue += copy[y+r][x+s].rgbtBlue;
+                        count++;
+                    }
+                }
+            }
+            image[y][x].rgbtRed = round(redaddup / count);
+            image[y][x].rgbtGreen = round(greenaddup / count);
+            image[y][x].rgbtBlue = round(blueaddup / count);
+
+            image[y][x].rgbtRed = image[y][x].rgbtRed % 256;
+            image[y][x].rgbtBlue = image[y][x].rgbtBlue % 256;
+            image[y][x].rgbtGreen = image[y][x].rgbtGreen % 256;
+        }
+    }
+    return;
 }
