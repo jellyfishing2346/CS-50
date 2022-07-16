@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     // Declare the following variables
     typedef uint8_t BYTE;
-    BYTE buffer[512];
+    unsigned buffer[512];
     FILE *imgptr = NULL;
     char file[8];
     int BLOCK_SIZE = 1;
