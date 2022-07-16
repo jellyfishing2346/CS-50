@@ -57,8 +57,6 @@ int main(int argc, char *argv[])
             {
                 fwrite(&buffer, sizeof(char), 512, imgptr);
             }
-        }
-        free(input);
         fclose(inptr);
         fclose(imgptr);
     }
