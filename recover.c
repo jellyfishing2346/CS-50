@@ -34,7 +34,8 @@ int main(int argc, char *argv[])
         }
         
         // Running the file unitl it reaches the end
-        while (fread(buffer, 1, BLOCK_SIZE, inptr) == BLOCK_SIZE)
+        //while (fread(buffer, 1, BLOCK_SIZE, inptr) == BLOCK_SIZE)
+       while(true)
        {
            if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && buffer[3] == 0xf0 < 0xe0)
            {
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
                 
                 // The file process
                 sprintf(file, "%03i.jpg", count);
-                imgptr = fopen(file, "w");
+                //imgptr = fopen(file, "w");
                 count++; 
            }
            
@@ -56,7 +57,7 @@ int main(int argc, char *argv[])
            }
        }
        fclose(inptr);
-       fclose(imgptr);
+       //fclose(imgptr);
    }
    return 0; 
 }
