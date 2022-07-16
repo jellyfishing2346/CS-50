@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
              return 2; 
         }
         
-        cout << *input << endl;
+        printf("%s\n", input);
         
        /* // Running the file unitl it reaches the end
        while (fread(buffer, 1, BLOCK_SIZE, inptr) == BLOCK_SIZE)
