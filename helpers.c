@@ -109,7 +109,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     }   
                     // Calculate the color values
                     red += temporary[i + rows][c + columns].rgbtRed;
-                    green += temporary[c + rows][columns + i].rgbtGreen;
+                    green += temporary[i + rows][c + columns].rgbtGreen;
                     blue += temporary[i + rows][c + columns].rgbtBlue;
                     calculations++;
                 }
