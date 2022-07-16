@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         // Execute if the input pointer is NULL
         if (inptr == NULL)
         {
-            printf("Error: File not open %s\n", input);
+            printf("Error: File not open \n");
             return 2; 
         }
         
