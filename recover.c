@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     else 
     {
         // Open the file named card.raw
-        char *input = malloc (8 * sizeof(char));
+        char *input = malloc(8 * sizeof(char));
         FILE *inptr = fopen(argv[1], "r");
         
         // Execute if the input pointer is NULL
@@ -35,31 +35,32 @@ int main(int argc, char *argv[])
         
         printf("%s\n", input);
         
-        	if (input == NULL) {
-          	printf("Error");
-          	return 2;
+        if (input == NULL) 
+        {
+            printf("Error");
+            return 2;
         }
         
-       // Running the file unitl it reaches the end
-       while (fread(buffer, sizeof(char), 512, inptr) == BLOCK_SIZE)
-       {
-           if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && buffer[3] == 0xf0 < 0xe0)
-           {
+        // Running the file unitl it reaches the end
+        while (fread(buffer, sizeof(char), 512, inptr) == BLOCK_SIZE)
+        {
+            if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
+            {
                 // The file process
                 sprintf(file, "%03i.jpg", count);
                 imgptr = fopen(input, "w");
                 count++; 
-           }
+            }
            
            
-           if (imgptr != NULL)
-           {
+            if (imgptr != NULL)
+            {
                 fwrite(&buffer, sizeof(char), 512, imgptr);
-           }
-       }
-       free(input);
-       fclose(inptr);
-       fclose(imgptr);
-   }
-   return 0; 
+            }
+        }
+        free(input);
+        fclose(inptr);
+        fclose(imgptr);
+    }
+    return 0; 
 }
