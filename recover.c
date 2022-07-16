@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     // Declare the following variables
-    typedef uint8_t BYTE;
+    //typedef uint8_t BYTE;
     unsigned buffer[512];
     FILE *imgptr = NULL;
     char file[8];
@@ -61,4 +61,5 @@ int main(int argc, char *argv[])
         fclose(imgptr);
     }
     return 0; 
+    }
 }
