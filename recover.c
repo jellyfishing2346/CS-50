@@ -45,19 +45,14 @@ int main(int argc, char *argv[])
        {
            if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && buffer[3] == 0xf0 < 0xe0)
            {
-                if (count != 0)
-                {
-                     fclose(imgptr);
-                }
-                
                 // The file process
                 sprintf(file, "%03i.jpg", count);
-                imgptr = fopen(file, "w");
+                imgptr = fopen(input, "w");
                 count++; 
            }
            
            
-           if (count != 0)
+           if (imgptr != NULL)
            {
                 fwrite(&buffer, sizeof(char), 512, imgptr);
            }
