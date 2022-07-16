@@ -96,23 +96,31 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             {
                 for (int columns = -1; columns < 2; columns++)
                 {
-                    if((i + columns >= height || i + columns < 0) || (c + rows >= width || c + rows < 0))
+                    // Continue if the following conditions are true
+                    if (i + columns >= height - 1 || i + columns < 0) 
                     {
-
+                        continue; 
                     }
-                    else
+                    
+                    if (c + rows >= width - 1 || c + rows < 0))
                     {
-                        red += temporary[i+rows][c+columns].rgbtRed;
-                        green += temporary[c+rows][columns+i].rgbtGreen;
-                        blue += temporary[i+rows][c+columns].rgbtBlue;
-                        calculations++;
-                    }
+                        continue;
+                        
+                    }   
+                    // Calculate the color values
+                    red += temporary[i + rows][c + columns].rgbtRed;
+                    green += temporary[c + rows][columns + i].rgbtGreen;
+                    blue += temporary[i + rows][c + columns].rgbtBlue;
+                    calculations++;
                 }
             }
-            image[i][c].rgbtRed = round(red/ calculations);
+            
+            // The color images' calculations
+            image[i][c].rgbtRed = round(red / calculations);
             image[i][c].rgbtGreen = round(green / calculations);
             image[i][c].rgbtBlue = round(blue / calculations);
 
+            // The final values of image colors
             image[i][c].rgbtRed = image[i][c].rgbtRed % 256;
             image[i][c].rgbtBlue = image[i][c].rgbtBlue % 256;
             image[i][c].rgbtGreen = image[i][c].rgbtGreen % 256;
