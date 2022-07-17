@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     }
   
     
-    while (fread(buffer, BLOCK_SIZE, sizeof(char), , file))
+    while (fread(buffer, BLOCK_SIZE, sizeof(char), file))
     {
         if (buffer[0] == 0xff && buffer[1] == 0xff && buffer[2] == 0xf0 && (buffer[3] & 0xf0) == 0xe0)
         {
