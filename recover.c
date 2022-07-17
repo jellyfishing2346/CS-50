@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
         // If the number of images found is not 0
         else if (count != 0)
         {
-            fwrite(buffer, sizeof(char), BLOCK_SIZE, 1, image);
+            fwrite(buffer, sizeof(char), BLOCK_SIZE, image);
         }
         
         // Otherwise continue
