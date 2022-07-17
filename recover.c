@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     if (file != NULL)
     {
         printf("The file is not opened!\n");
-        return 2;
+        return 0;
     }
   
     
