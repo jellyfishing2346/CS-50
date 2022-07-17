@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     // Declare the following variables
     int count = 0;
     const int BLOCK_SIZE = 512;
-    char *fileInfo = NULL;
+    char *fileInfo = malloc(8 * sizeof(char));
     typedef unsigned char BYTE;
     FILE *image = NULL;
     BYTE buffer[BLOCK_SIZE];
@@ -28,9 +28,7 @@ int main(int argc, char *argv[])
         printf("The file is not opened!\n");
         return 2;
     }
-    
-    printf("%hhu",buffer[0]);
-  	printf("%hhu",buffer[1]);
+  
     /*
     while (fread(buffer, BLOCK_SIZE, 1, file) == BLOCK_SIZE)
     {
