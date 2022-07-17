@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
         return 1; 
     }
    
+    // Open the memory card.raw
     FILE *file = fopen(argv[1], "r");
     
     // Determine if file pointer is NULL
@@ -28,16 +29,22 @@ int main(int argc, char *argv[])
         return 2;
     }
     
-    while(fread(buffer,BLOCK_SIZE,1,file) == BLOCK_SIZE)
+    printf("%hhu",buffer[0]);
+  	printf("%hhu",buffer[1]);
+    /*
+    while (fread(buffer, BLOCK_SIZE, 1, file) == BLOCK_SIZE)
     {
         if (buffer[0] == 0xff && buffer[1] == 0xff && buffer[2] == 0xf0 && (buffer[3] & 0xf0) == 0xe0)
         {
+            // If the number of images found is 0
             if (count == 0)
             {
                 sprintf(fileInfo, "%03i.jpg", count);
                 image = fopen(fileInfo, "w");
                 count++;
             }
+            
+            // Otherwise print default statement
             else
             {
                 fclose(image);
@@ -46,11 +53,14 @@ int main(int argc, char *argv[])
                 count++;
             }
         }
+        
+        // If the number of images found is not 0
         else if (count != 0)
         {
-            fwrite(buffer,BLOCK_SIZE,1,image);
+            fwrite(buffer, BLOCK_SIZE, 1, image);
         }
         
+        // Otherwise continue
         else
         {
             continue;
@@ -58,5 +68,6 @@ int main(int argc, char *argv[])
     }
     fclose(file);
     fclose(image);
+    */
     return 0; 
 }
