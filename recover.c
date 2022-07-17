@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         return 2;
     }
   
-    /*
+    
     while (fread(buffer, BLOCK_SIZE, 1, file) == BLOCK_SIZE)
     {
         if (buffer[0] == 0xff && buffer[1] == 0xff && buffer[2] == 0xf0 && (buffer[3] & 0xf0) == 0xe0)
@@ -66,6 +66,6 @@ int main(int argc, char *argv[])
     }
     fclose(file);
     fclose(image);
-    */
+    
     return 0; 
 }
