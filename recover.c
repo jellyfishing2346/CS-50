@@ -64,6 +64,7 @@ int main(int argc, char *argv[])
             continue;
         }
     }
+    free(fileInfo);
     fclose(file);
     fclose(image);
     
