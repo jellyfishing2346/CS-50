@@ -24,10 +24,10 @@ int main(int argc, char *argv[])
     {
         // Open the file named card.raw
         char *input = malloc(8 * sizeof(uint8_t));
-        FILE *inptr = fopen(argv[1], "r");
+        FILE *FILE = fopen(argv[1], "r");
         
         // Execute if the input pointer is NULL
-        if (inptr == NULL)
+        if (FILE == NULL)
         {
             printf("Error: File not open \n");
             return 2; 
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
         }
         
         // Running the file unitl it reaches the end
-        while (fread(buffer, sizeof(char), 512, inptr))
+        while (fread(buffer, sizeof(char), 512, FILE))
         {
             if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
             {
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
             {
                 fwrite(&buffer, sizeof(char), 512, imgptr);
             }
-        fclose(inptr);
+        fclose(FILE);
         fclose(imgptr);
     }
     return 0; 
