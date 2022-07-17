@@ -2,16 +2,15 @@
 #include <stdlib.h>
 #include <stdint.h>
 
- 
 int main(int argc, char *argv[])
 {
     // Declare the following variables
-    //typedef uint8_t BYTE;
-    unsigned buffer[512];
-    FILE *imgptr = NULL;
-    char file[8];
-    int BLOCK_SIZE = 1;
     int count = 0;
+    const int BLOCK_SIZE = 512;
+    char *fileInfo = NULL;
+    typedef unsigned char BYTE;
+    FILE *image = NULL;
+    BYTE buffer[BLOCK_SIZE];
   
     // If the argument character is not 2, execute the following statement
     if (argc != 2)
@@ -20,46 +19,44 @@ int main(int argc, char *argv[])
         return 1; 
     }
    
-    else 
+    FILE *file = fopen(argv[1], "r");
+    
+    // Determine if file pointer is NULL
+    if (file == NULL)
     {
-        // Open the file named card.raw
-        char *input = malloc(8 * sizeof(uint8_t));
-        FILE *FILE = fopen(argv[1], "r");
-        
-        // Execute if the input pointer is NULL
-        if (FILE == NULL)
-        {
-            printf("Error: File not open \n");
-            return 2; 
-        }
-        
-        printf("%s\n", input);
-        
-        if (input == NULL) 
-        {
-            printf("Error");
-            return 2;
-        }
-        
-        // Running the file unitl it reaches the end
-        while (fread(buffer, sizeof(char), 512, FILE))
-        {
-            if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
-            {
-                // The file process
-                sprintf(file, "%03i.jpg", count);
-                imgptr = fopen(input, "w");
-                count++; 
-            }
-           
-           
-            if (imgptr != NULL)
-            {
-                fwrite(&buffer, sizeof(char), 512, imgptr);
-            }
-        fclose(FILE);
-        fclose(imgptr);
+        printf("The file is not opened!\n");
+        return 2;
     }
+    
+    while(fread(buffer,BLOCK_SIZE,1,file))
+    {
+        if (buffer[0] == 0xff && buffer[1] == 0xff && buffer[2] == 0xf0 && (buffer[3] & 0xf0) == 0xe0)
+        {
+            if (count == 0)
+            {
+                sprintf(fileInfo, "%03i.jpg", count);
+                image = fopen(fileInfo, "w");
+                count++;
+            }
+            else
+            {
+                fclose(image);
+                sprintf(fileInfo, "%03i.jpg", count);
+                image = fopen(fileInfo, "w");
+                count++;
+            }
+        }
+        else if (count != 0)
+        {
+            fwrite(buffer,BLOCK_SIZE,1,image);
+        }
+        
+        else
+        {
+            continue;
+        }
+    }
+    fclose(file);
+    fclose(image);
     return 0; 
-    }
 }
