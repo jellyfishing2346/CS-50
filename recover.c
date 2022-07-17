@@ -68,5 +68,5 @@ int main(int argc, char *argv[])
     fclose(file);
     fclose(image);
     
-    return 0; 
+    return BLOCK_SIZE; 
 }
