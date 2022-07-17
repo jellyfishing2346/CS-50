@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     else 
     {
         // Open the file named card.raw
-        char *input = malloc(8 * sizeof(uint8_));
+        char *input = malloc(8 * sizeof(uint8_t));
         FILE *inptr = fopen(argv[1], "r");
         
         // Execute if the input pointer is NULL
