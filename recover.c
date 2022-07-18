@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
             {
                 fclose(imgptr);
             }
-            sprintf(fileInfo, "%03d.jpg", count++);
+            sprintf(fileInfo, "%03i.jpg", count++);
             
             // Open via the new image pointer
             imgptr = fopen(fileInfo, "w");
