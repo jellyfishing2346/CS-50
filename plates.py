@@ -23,4 +23,6 @@ def is_valid(s):
         if character in ['.', ' ', '!', '?']:
             return False
 
+    return True
+
 main()
