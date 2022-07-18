@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
         }
         
         // Close the file
-        fclose(inptr);
+        fclose(file);
     }
     
     return 0; 
