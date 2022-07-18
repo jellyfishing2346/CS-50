@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     // If the character argument is not 2, execute this statement
     if (argc != 2)
     {
-        fprintf(stderr, "Usage: ./recover IMAGE\n");
+        printf(stderr, "Usage: ./recover IMAGE\n");
         return 1;
     }
     
@@ -18,8 +18,8 @@ int main(int argc, char *argv[])
     FILE *file = fopen(argv[1], "r");
     if (file == NULL)
     {
-        fprintf(stderr, "This file is not opening %s.\n", argv[1]);
-        return 2; 
+        printf("This file is not opening %s.\n", argv[1]);
+        return 1; 
     }
     
     // Set image pointer to NULL
@@ -35,36 +35,39 @@ int main(int argc, char *argv[])
     char fileInfo = malloc(8 * sizeof(char));
     
     // This function reads the memory card
-    while(fread(buffer, sizeof(BYTE) * 512, 1, file) == 1)
+    while(fread(buffer, sizeof(BYTE),  512, file) == 1)
     {
         // Determine if jpeg exists
         if (buffer[0] == 0xFF && buffer[1] == 0xD8 && buffer[2] == 0xFF && (buffer[3] & 0xF0) == 0xE0)
         {
             // If the image pointer is not null
-            if (imgptr != NULL)
+            if (count != 0)
             {
                 fclose(imgptr);
             }
-            sprintf(fileInfo, "%03d.jpg", count++);
+            else
+            {
+            sprintf(fileInfo, "%03i.jpg", count);
             
             // Open via the new image pointer
             imgptr = fopen(fileInfo, "w");
+            
+            // The number of pictures
+            count++;
         }
         
-        // Write the file if the file doesn't already exist
-        if (imgptr != NULL)
+           // Write the file if the file doesn't already exist
+           fwrite(buffer, sizeof(BYTE), 512, imgptr);
+           }
+        else
         {
-            fwrite(buffer, sizeof(BYTE) * 512, 1, imgptr);
+            fwrite(buffer, sizeof(BYTE), 512, imgptr);
         }
         
-        // Close the image pointer
-        if (imgptr != NULL)
-        {
-            fclose(imgptr);
-        }
-        
-        // Close the file
         fclose(file);
+        fclose(imgptr);
+        free(count);
+        free(buffer);
     }
     
     return 0; 
