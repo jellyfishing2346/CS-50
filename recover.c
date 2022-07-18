@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     // If the character argument is not 2, execute this statement
     if (argc != 2)
     {
-        printf("Usage: ./recover IMAGE\n");
+        fprintf(stderr, "Usage: ./recover IMAGE\n");
         return 1;
     }
     
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     FILE *file = fopen(argv[1], "r");
     if (file == NULL)
     {
-        printf("This file is not opening %s.\n", argv[1]);
+        fprintf(stderr, "This file is not opening %s.\n", argv[1]);
         return 2; 
     }
     
