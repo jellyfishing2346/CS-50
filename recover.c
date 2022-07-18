@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     FILE *file = fopen(argv[1], "r");
     if (file == NULL)
     {
-        printf("This file is not opening %s.\n", argv[1]);
+        printf("This file is not opening %s.\n", file);
         return 1; 
     }
     
