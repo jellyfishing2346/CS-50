@@ -53,6 +53,12 @@ int main(int argc, char *argv[])
         // Write the file if the file doesn't already exist
         if (imgptr != NULL)
         {
+            fwrite(buffer, sizeof(BYTE) * 512, 1, imgptr);
+        }
+        
+        // Close the image pointer
+        if (imgptr != NULL)
+        {
             fclose(imgptr);
         }
         
