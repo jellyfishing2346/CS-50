@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
     if (file == NULL)
     {
         printf("This file is not opening %s.\n", argv[1]);
+        return 2; 
     }
     
     // Set image pointer to NULL
