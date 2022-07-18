@@ -38,14 +38,14 @@ int main(int argc, char *argv[])
     while(fread(buffer, sizeof(BYTE) * 512, 1, file) == 1)
     {
         // Determine if jpeg exists
-        if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
+        if (buffer[0] == 0xFF && buffer[1] == 0xD8 && buffer[2] == 0xFF && (buffer[3] & 0xF0) == 0xE0)
         {
             // If the image pointer is not null
             if (imgptr != NULL)
             {
                 fclose(imgptr);
             }
-            sprintf(fileInfo, "%03i.jpg", count++);
+            sprintf(fileInfo, "%03d.jpg", count++);
             
             // Open via the new image pointer
             imgptr = fopen(fileInfo, "w");
