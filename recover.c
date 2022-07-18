@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     FILE *file = fopen(argv[1], "r");
     
     // Determine if file pointer is NULL
-    if (file != NULL)
+    if (file == NULL)
     {
         printf("The file is not opened!\n");
         return 0;
@@ -57,12 +57,7 @@ int main(int argc, char *argv[])
         {
             fwrite(buffer, BLOCK_SIZE, 1, image);
         }
-        
-        // Otherwise break
-        else
-        {
-            continue;
-        }
+    
     }
     free(fileInfo);
     fclose(file);
