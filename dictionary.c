@@ -71,7 +71,6 @@ bool load(const char *dictionary)
     // Create a variable called word and track with count
     char word[LENGTH + 1];
     
-    
     // Scan the dictionary for each possible word
     while (fscanf(memory, "%s", word) != EOF)
     {
