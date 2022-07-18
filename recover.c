@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     }
   
     
-    while (fread(buffer, BLOCK_SIZE, 1, file))
+    while (fread(buffer, BLOCK_SIZE, sizeof(char), file))
     {
         if (buffer[0] == 0xff && buffer[1] == 0xff && buffer[2] == 0xf0 && (buffer[3] & 0xf0) == 0xe0)
         {
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
         // If the number of images found is not 0
         else if (count != 0)
         {
-            fwrite(buffer, BLOCK_SIZE, 1, image);
+            fwrite(buffer, BLOCK_SIZE, sizeof(char), image);
         }
     
     }
