@@ -1,74 +1,77 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <cs50.h>
+#define BLOCK_SIZE 512
+#define FILE_INFO 8
 
+// The following variables
+typedef uint8_t BYTE;
+
+// The following functions
+bool newImages(BYTE buffer[]);
+
+// Main test driver
 int main(int argc, char *argv[])
 {
-    // Declare the following variables
-    typedef uint8_t BYTE;
-    
-    // If the character argument is not 2, execute this statement
+    // If the argument character is not 2, execute the following statement
     if (argc != 2)
     {
-        printf(stderr, "Usage: ./recover IMAGE\n");
-        return 1;
+        printf("Usage: ./recover IMAGE\n");
+        return 1; 
     }
     
     // Open the file
     FILE *file = fopen(argv[1], "r");
+    
+    // If the file pointer is NULL
     if (file == NULL)
     {
-        printf("This file is not opening %s.\n", file);
-        return 1; 
+        printf("The file is non-existent!\n");
+        return 1;
     }
     
-    // Set image pointer to NULL
+    // The byte buffer
+    BYTE buffer[BLOCK_SIZE];
     FILE *imgptr = NULL;
+    int index = 0;
     
-    // Memory card
-    BYTE buffer[512];
-    
-    // Count the number of images that have been retrieved
-    int count = 0;
-    
-    // Hold the filename via string
-    char fileInfo = malloc(8 * sizeof(char));
-    
-    // This function reads the memory card
-    while(fread(buffer, sizeof(BYTE),  512, file) == 1)
+    bool image = false;
+    while (fread(buffer, BLOCK_SIZE, 1, file))
     {
-        // Determine if jpeg exists
-        if (buffer[0] == 0xFF && buffer[1] == 0xD8 && buffer[2] == 0xFF && (buffer[3] & 0xF0) == 0xE0)
+        if (newImages(buffer))
         {
-            // If the image pointer is not null
-            if (count != 0)
+            if (!image)
+            {
+                image = true;
+            }
+            else 
             {
                 fclose(imgptr);
             }
-            else
+            
+            char fileData[FILE_INFO];
+            sprintf(fileData, "%03i.jpg", index++);
+            imgptr = fopen(fileData, "w");
+            if (imgptr == NULL)
             {
-            sprintf(fileInfo, "%03i.jpg", count);
-            
-            // Open via the new image pointer
-            imgptr = fopen(fileInfo, "w");
-            
-            // The number of pictures
-            count++;
+                return 1; 
+            }
+            fwrite(buffer, BLOCK_SIZE, 1, imgptr);
         }
         
-           // Write the file if the file doesn't already exist
-           fwrite(buffer, sizeof(BYTE), 512, imgptr);
-           }
-        else
+        else if (image)
         {
-            fwrite(buffer, sizeof(BYTE), 512, imgptr);
+            // Write the file if it hasn't been written already
+            fwrite(buffer, BLOCK_SIZE, 1, imgptr);
         }
-        
-        fclose(file);
-        fclose(imgptr);
-        free(count);
-        free(buffer);
     }
-    
+    fclose(imgptr);
+    fclose(file);
     return 0; 
+}
+
+bool newImages(BYTE buffer[])
+{
+    return (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0);
 }
