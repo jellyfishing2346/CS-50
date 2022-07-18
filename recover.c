@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     int count = 0;
     
     // Hold the filename via string
-    char fileInfo[8] = {0};
+    char fileInfo[8] = malloc(8 * sizeof(char));
     
     // This function reads the memory card
     while(fread(buffer, sizeof(BYTE) * 512, 1, file) == 1)
