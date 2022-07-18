@@ -131,7 +131,7 @@ bool unload(void)
         }
         
         // If the locate node is Null, execute this statement
-        if (locate == NULL && index = N - 1)
+        if (locate == NULL && index == N - 1)
         {
             return true;
         }
