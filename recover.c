@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
             // If the image pointer is not null
             if (imgptr != NULL)
             {
-                fclose(file);
+                fclose(imgptr);
             }
             sprintf(fileInfo, "w", count++);
             
