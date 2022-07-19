@@ -10,5 +10,5 @@ for index in (0, height, 1):
         if (index + count < height - 1):
             print(" ", end="")
         else:
-            print("#", end="")
+            print("#\n", end="")
         print()
