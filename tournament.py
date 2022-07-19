@@ -19,7 +19,7 @@ def main():
     fileInfo = sys.argv[1]
 
     with open(fileInfo) as file:
-        read = cvs.DictRead(file)
+        read = csv.DictRead(file)
         for team in read:
             print(team)
             team["rating"] = int(team["rating"])
@@ -29,10 +29,10 @@ def main():
     # TODO: Simulate N tournaments and keep track of win counts
     for index in range(N):
         winner = simulate_tournament(teams)
-        if winner in calculations:
-            calculations[winner] += 1
+        if winner in counts:
+            counts[winner] += 1
         else:
-            calculations[winner] = 1
+            counts[winner] = 1
     # Print each team's chances of winning, according to simulation
     for team in sorted(counts, key=lambda team: counts[team], reverse=True):
         print(f"{team}: {counts[team] * 100 / N:.1f}% chance of winning")
