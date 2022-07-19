@@ -5,8 +5,8 @@ while True:
     if height > 0 and height < 9:
         break
 # Account index for rows and count for columns
-for index in (0, height, 1):
-    for count in (0, height, 1):
+for index in range (0, height, 1):
+    for count in range (0, height, 1):
         if (index + count < height - 1):
             print(" ", end="")
         else:
