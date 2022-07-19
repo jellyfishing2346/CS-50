@@ -23,4 +23,4 @@ while cents >= 1:
     cents = cents - 1
     track += 1
 # Print the total number of coins
-print("The total amount of coins: ", coins)
+print("The total amount of coins: ", track)
