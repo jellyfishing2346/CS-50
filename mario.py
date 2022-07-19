@@ -5,7 +5,7 @@ while True:
        height = int(input("Height: "))
        if height >= 1 and height <= 8:
         break
-       else:
+       except:
         print("", end="")
 # The number of spaces accounted
 spaces = 1
