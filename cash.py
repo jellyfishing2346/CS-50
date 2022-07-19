@@ -1,7 +1,7 @@
 # Prompt the user to change
-from cs50 import get_int
+from cs50 import get_float
 while True:
-    cents = get_int("Change owed: ")
+    cents = get_float("Change owed: ")
     if (cents > 0):
         break
 cents = round(cents * 100)
