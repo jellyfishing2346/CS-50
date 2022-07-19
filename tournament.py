@@ -19,8 +19,9 @@ def main():
     fileInfo = sys.argv[1]
 
     with open(fileInfo) as file:
-        read = cvs.DictRead(fileInfo)
+        read = csv.DictRead(fileInfo)
         for team in read:
+            print(team)
             team["rating"] = int(team["rating"])
             teams.append(team)
 
