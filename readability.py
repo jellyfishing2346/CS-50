@@ -23,5 +23,5 @@ if finalResult < 1:
 elif finalResult >= 16:
     print("Grade 16+")
 else:
-    print("Grade {finalResult}")
+    print("Grade ", finalResult)
 
