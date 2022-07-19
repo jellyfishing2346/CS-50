@@ -12,4 +12,4 @@ for index in range (0, height, 1):
         else:
             print("#", end="")
         print()
-int main()
+
