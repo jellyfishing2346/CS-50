@@ -8,7 +8,7 @@ while True:
 for index in (0, height, 1):
     for count in (0, height, 1):
         if (index + count < height - 1):
-            print(" ")
+            print(" ", end="")
         else:
-            print("#")
+            print("#", end="")
         print()
