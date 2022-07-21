@@ -15,15 +15,15 @@ def main():
         sequence = file.read()
     # TODO: Find the longest match of each STR in DNA sequence
     match = {}
-    for index in range(1, len(DNAbase)):
-        match[index] = longest_match(sequence, index)
+    for index in DNAbase[0]:
+        match[index] = (longest_match(sequence, index))
     # TODO: Check database for matching profiles
     suspect = 'No Match'
     counter = 1
     for index in range(1, len(DNAbase)):
         for count in match:
             # Convert the string letters to numbers
-            if str(match[count]) == int(DNAbase[index][count]):
+            if str(match[count]) == DNAbase[index][count]:
                 counter += 1
             if counter == len(match):
                 # A suspect has been identified
