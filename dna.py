@@ -55,7 +55,7 @@ def main():
                     if samples == individual[pairs[count]]:
                         print(pairs[count])
                         sys.exit(0)
-                        print("There is no match for the DNA sequence")
+                        print("No match")
     return
 
 
