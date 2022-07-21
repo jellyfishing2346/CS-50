@@ -1,61 +1,37 @@
-import sys
 import csv
-
+from sys import argv
 
 def main():
-    if len(sys.argv) != 3:
+    # TODO: Check for the command-line usage
+    if len(argv) != 3:
         print("Usage: python dna.py data.csv sequence.txt")
         exit(1)
-    # Declare the following variables
-    bases = sys.argv[1]
-    sequences = sys.argv[2]
-    individual = {}
-    repeats = []
-    pairs = []
-    # Find the repeats in the DNA sequences
-    with open(bases, "r") as DNA:
-        reader = csv.reader(DNA)
-    for index in reader:
-        repeats = index[1:]
-        break
-    # Contain the data for people and their genetic pairs
-    for index in reader:
-        individual[index[0]] = [int(count) for count in index[1:]]
-        pairs.append(index[0])
-    # Open the data base to view the person's DNA sequence
-    with open(sequences, "r") as DNA:
-        genes = DNA.read()
-    # Analyze the samples that have repeated pairs
-    samples = []
-    track = 0
-    # Determine the number of repeated pairs for an individual
-    for numbers in repeats:
-        initial = 0
-        maximum = 0
-        current = 0
-        numLength = numbers(len)
-        # If the repeated pairs are in the current DNA sequence
-        while initial <= len(genes) - numLength:
-            geneCount = genes[initial:initial + numLength]
-            if current != 0:
-                if geneCount != numbers:
-                    current = 0
-                if geneCount == numbers:
-                    current += 1
-                    initial += numLength
-                else:
-                    initial += 1
-                if current > maximum:
-                    maxmium = current
-                samples.append(maximum)
-                count += 1
-            # Compare the DNA repeated pairs to a person's DNA sequence with repeated pairs
-            for count in range(len(pairs)):
-                for score in range(len(repeats)):
-                    if samples == individual[pairs[count]]:
-                        print(pairs[count])
-                        sys.exit(0)
-                        print("No match")
+    # TODO: Read database file into a variable
+    with open(argv[1]) as read:
+        reader = csv.reader(read)
+        DNAbase = list(reader)
+    # TODO: Read DNA sequence file into a variable
+    with open(argv[2]) as file:
+        sequence = file.read()
+    # TODO: Find the longest match of each STR in DNA sequence
+    match = []
+    for index in range(1, len(DNAbase)):
+        match.append(longest_match(sequence, DNAbase[0][index]))
+    # TODO: Check database for matching profiles
+    suspect = 'No Match'
+    counter = 0
+    for index in range(1, len(DNAbase)):
+        for count in range(1,len(match)):
+            # Convert the string letters to numbers
+            if match[count] == int(DNAbase[index][count + 1]):
+                counter += 1
+            if counter == len(match):
+                # A suspect has been identified
+                suspect = DNAbase[index][0]
+                break
+            else:
+                counter = 0
+            print(suspect)
     return
 
 
