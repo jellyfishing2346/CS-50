@@ -1,5 +1,5 @@
-import csv
-from sys import argv
+from csv import reader, DictReader
+from sys import argv, exit
 
 
 def main():
