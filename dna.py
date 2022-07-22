@@ -1,37 +1,49 @@
 import csv
 from sys import argv
 
+
 def main():
-    # TODO: Check for the command-line usage
+    # Check for the command-line usage
     if len(argv) != 3:
         print("Usage: python dna.py data.csv sequence.txt")
         exit(1)
-    # TODO: Read database file into a variable
-    with open(argv[1]) as read:
-        reader = csv.reader(read)
-        DNAbase = list(reader)
-    # TODO: Read DNA sequence file into a variable
-    with open(argv[2]) as file:
-        sequence = file.read()
-    # TODO: Find the longest match of each STR in DNA sequence
-    match = {}
-    for index in DNAbase[0]:
-        match[index] = (longest_match(sequence, index))
-    # TODO: Check database for matching profiles
-    suspect = 'No Match'
-    counter = 1
-    for index in range(1, len(DNAbase)):
-        for count in match:
-            # Convert the string letters to numbers
-            if str(match[count]) == DNAbase[index][count]:
-                counter += 1
-            if counter == len(match):
-                # A suspect has been identified
-                suspect = DNAbase[index]['name']
-                break
-            else:
-                counter = 1
-            print(suspect)
+    # Open the CSV file and convert to dictionary
+    with open(DNA_bases, "r") as csvFile:
+        reader = DictReader(csvFile)
+        dictList = list(reader)
+    # Create a bunch of variables
+        DNA_bases = argv[1]
+        sequences = argv[2]
+    # Open the sequence file to be converted to a list
+    with open(sequences, "r") as file:
+        sequences = file.read()
+    # Count the number of STR's
+    maximum = []
+    for index in range(1, len(reader.names)):
+        samples = reader.names[index]
+        maximum.append(0)
+    # Loop through each sequence individually for STR
+    for count in range(len(sequences)):
+        samples = 0
+    # If a match is found, repeat count for STR
+    if sequences[count:(count + len(samples))] == samples:
+        total = 0
+        while sequence[(count + total):(count + total + len(samples))] == samples:
+            samples += 1
+            total += len(samples)
+    # Update max count, if there is a new maximum number of repeats
+    if samples > max[index - 1]:
+        max[index - 1] = samples
+    # Compare the data to determine the suspect's name
+    for index in range(len(dictList)):
+        match = 0
+        for count in range(1, len(reader.names)):
+            if int(maximum[count - 1]) == int(dictList[index][reader.names[count]]):
+                match += 1
+            if match == (len(reader.names) - 1):
+                print(dictList[index]['name'])
+                exit(0)
+            print("No match")
     return
 
 
