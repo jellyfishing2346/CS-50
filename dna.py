@@ -41,10 +41,10 @@ def main():
         for count in range(1, len(reader.fieldnames)):
             if int(maximum[count - 1]) == int(dictList[index][reader.fieldnames[count]]):
                 match += 1
-            if match == (len(reader.fieldnames) - 1):
-                print(dictList[index]['name'])
-                exit(0)
-            print("No match")
+                if match == (len(reader.fieldnames) - 1):
+                    print(dictList[index]['name'])
+                    exit(0)
+                print("No match")
     return
 
 
