@@ -57,12 +57,6 @@ def main():
                                                 break
                                             if not verification:
                                                 print("No Match")
-
-
-
-
-
-    #
     return
 
 
