@@ -1,50 +1,68 @@
-from csv import reader, DictReader
-from sys import argv, exit
+import csv
+import sys
 
 
 def main():
     # Check for the command-line usage
-    if len(argv) != 3:
-        print("Usage: python dna.py data.csv sequence.txt")
-        exit(1)
+    if len(sys.argv) != 3:
+        sys.exit("Usage: python dna.py data.csv sequence.txt")
    # Create a bunch of variables
-    DNA_bases = argv[1]
-    sequences = argv[2]
-    # Open the CSV file and convert to dictionary
-    with open(DNA_bases, "r") as csvFile:
-        reader = DictReader(csvFile)
-        dictList = list(reader)
+    verification = True
+    STRList = []
+    person = []
+    # Copy each potential suspect to the database
+    with open(sys.argv[1], "r") as STR:
+        analyzeSTR = csv.reader(STR)
+        for index in analyzeSTR:
+            if verification:
+                STRList.append(index)
+                verification = False
+            else:
+                person.append(index)
+                Samples = STRList[0]
+                Samples.remove("name")
+                print(person)
+                print(Samples)
+                # Duplicate the DNA sequence
+                with open(sys.argv[2], "r") as txt:
+                    readtxt = csv.reader(txt)
+                    for count in readtxt:
+                        sequences = count
+                        txt = sequences[0]
+                        print(txt)
+                        # Dictionary for STR count
+                        dictionary = {}
+                        for character in range(len(person)):
+                            for STR in Samples:
+                                total = 0
+                                maximum = 0
+                                while total < len(txt):
+                                    repeats = 0
+                                    while STR == txt[total:total+len(STR)]:
+                                        repeats += 1
+                                        total += len(STR)
+                                    if repeats > maximum:
+                                        maximum = repeats
+                                        total += 1
+                                        dictionary[STR] = maximum
+                                        print(STR, maximum)
+                                        for individual in range(len(txt)):
+                                            if str(dictionary[STR]) == str(person[individual][STR + 1]):
+                                                verification = True
+                                            else:
+                                                verification = False
+                                                break
+                                            if verification:
+                                                print(person[individual][0])
+                                                break
+                                            if not verification:
+                                                print("No Match")
 
-    # Open the sequence file to be converted to a list
-    with open(sequences, "r") as file:
-        sequences = file.read()
-    # Count the number of STR's
-    maximum = []
-    for index in range(1, len(reader.fieldnames)):
-        samples = reader.fieldnames[index]
-        maximum.append(0)
-    # Loop through each sequence individually for STR
-    for count in range(len(sequences)):
-        counting = 0
-    # If a match is found, repeat count for STR
-    if sequences[count:(count + len(samples))] == samples:
-        total = 0
-        while sequence[(count + total):(count + total + len(samples))] == samples:
-            counting += 1
-            total += len(samples)
-    # Update max count, if there is a new maximum number of repeats
-    if counting > maximum[index - 1]:
-        maximum[index - 1] = samples
-    # Compare the data to determine the suspect's name
-    for index in range(len(dictList)):
-        match = 0
-        for count in range(1, len(reader.fieldnames)):
-            if int(maximum[count - 1]) == int(dictList[index][reader.fieldnames[count]]):
-                match += 1
-            elif match == (len(reader.fieldnames) - 1):
-                print(dictList[index]['name'])
-                exit(0)
-            print("No match")
+
+
+
+
+    #
     return
 
 
@@ -70,7 +88,6 @@ def longest_match(sequence, subsequence):
             # Adjust substring start and end
             start = i + count * subsequence_length
             end = start + subsequence_length
-
             # If there is a match in the substring
             if sequence[start:end] == subsequence:
                 count += 1
