@@ -3,61 +3,29 @@ import sys
 
 
 def main():
-    # Check for the command-line usage
-    if len(sys.argv) != 3:
-        sys.exit("Usage: python dna.py data.csv sequence.txt")
-   # Create a bunch of variables
-    verification = True
-    STRList = []
-    person = []
-    # Copy each potential suspect to the database
-    with open(sys.argv[1], "r") as STR:
-        analyzeSTR = csv.reader(STR)
-        for index in analyzeSTR:
-            if verification:
-                STRList.append(index)
-                verification = False
-            else:
-                person.append(index)
-                Samples = STRList[0]
-                Samples.remove("name")
-                print(person)
-                print(Samples)
-                # Duplicate the DNA sequence
-                with open(sys.argv[2], "r") as txt:
-                    readtxt = csv.reader(txt)
-                    for count in readtxt:
-                        sequences = count
-                        txt = sequences[0]
-                        print(txt)
-                        # Dictionary for STR count
-                        dictionary = {}
-                        for character in range(len(person)):
-                            for STR in Samples:
-                                total = 0
-                                maximum = 0
-                                while total < len(txt):
-                                    repeats = 0
-                                    while STR == txt[total:total+len(STR)]:
-                                        repeats += 1
-                                        total += len(STR)
-                                    if repeats > maximum:
-                                        maximum = repeats
-                                        total += 1
-                                        dictionary[STR] = maximum
-                                        print(STR, maximum)
-                                        for individual in range(len(txt)):
-                                            if str(dictionary[STR]) == str(person[individual][STR + 1]):
-                                                verification = True
-                                            else:
-                                                verification = False
-                                                break
-                                            if verification:
-                                                print(person[individual][0])
-                                                break
-                                            if not verification:
-                                                print("No Match")
-    return
+    # Check for command line usage
+    if len(argv) != 3:
+        print("python dna.py data.csv sequence.txt")
+        exit(0)
+
+
+# Read database file into a variable
+fileInfo = sys.argv[1]
+with open(fileInfo, "r") as csvfile:
+    csvread = csv.DictReader(csvfile)
+    dictionaryList = dict(list(csvread)[0])
+    STRInfo = list(dictionaryList.keys())
+    STRInfo.pop(0)
+# Read DNA sequence file into a variable
+readInfo = open(sys.argv[2], 'r')
+DNA = readInfo.read()
+# Find the longest match of each STR in the DNA sequence
+for index in range(len(STRInfo)):
+    track = longest_match(DNA, STRInfo(index))
+    STRInfo[index] = track
+# Check database for matching profiles
+for match in csvfile:
+    print(match)
 
 
 def longest_match(sequence, subsequence):
