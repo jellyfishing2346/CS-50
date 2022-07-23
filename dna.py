@@ -44,7 +44,6 @@ def main():
             elif match == (len(reader.fieldnames) - 1):
                 print(dictList[index]['name'])
                 exit(0)
-            else:
             print("No match")
     return
 
