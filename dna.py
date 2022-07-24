@@ -4,28 +4,34 @@ import sys
 
 def main():
     # Check for command line usage
-    if len(argv) != 3:
+    n = len(sys.argv)
+    if n != 3:
         print("python dna.py data.csv sequence.txt")
         exit(0)
 
 
 # Read database file into a variable
-fileInfo = sys.argv[1]
-with open(fileInfo, "r") as csvfile:
-    csvread = csv.DictReader(csvfile)
-    dictionaryList = dict(list(csvread)[0])
-    STRInfo = list(dictionaryList.keys())
-    STRInfo.pop(0)
+with open(sys.argv[1], 'r') as csvfile:
+    dataInfo = csv.reader(csvfile)
+    data = [row for row in dataInfo]
+
 # Read DNA sequence file into a variable
-readInfo = open(sys.argv[2], 'r')
-DNA = readInfo.read()
+with open(sys.argv[2], 'r') as sequences:
+    DNA = sequences.read()
+repeats = []
 # Find the longest match of each STR in the DNA sequence
-for index in range(len(STRInfo)):
-    track = longest_match(DNA, STRInfo(index))
-    STRInfo[index] = track
+for index in range(1, len(data[0])):
+    counting = 1
+    string = data[0][index]
+    while string * counting in DNA:
+        counting += 1
+    repeats.append(str(counting - 1))
 # Check database for matching profiles
-for match in csvfile:
-    print(match)
+for calculate in range(1, len(data)):
+    if data[calculate][1:len(data[0])] == repeats:
+        print(data[calculate][0])
+        exit(0)
+print('No Match')
 
 
 def longest_match(sequence, subsequence):
@@ -66,3 +72,4 @@ def longest_match(sequence, subsequence):
 
 
 main()
+
