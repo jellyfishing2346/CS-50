@@ -8,5 +8,5 @@ where artistId = (
     FROM
         artists
     WHERE
-        artistName == "Drake"
+        name == "Drake"
 )
