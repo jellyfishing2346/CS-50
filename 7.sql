@@ -1,5 +1,5 @@
 SELECT
-    name
+    avg(energy)
 FROM
     songs
 where artist_id = (
