@@ -3,4 +3,4 @@ SELECT
 FROM
     songs
 WHERE
-    artistName like %feat.%
+    name LIKE %feat.%
