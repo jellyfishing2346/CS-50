@@ -1,5 +1,5 @@
 SELECT
-    avg(energy)
+    name
 FROM
     songs
 where
