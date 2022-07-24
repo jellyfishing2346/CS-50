@@ -3,7 +3,7 @@ SELECT
 FROM
     songs
 where
-    danceability > 0.75
-    AND energy > 0.75
-    AND valence > 0.75
-    
+    danceability > 1
+    AND energy > 1
+    AND valence > 1
+
