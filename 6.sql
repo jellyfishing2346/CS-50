@@ -2,7 +2,7 @@ SELECT
     name
 FROM
     songs
-where artistId = (
+where artist_id = (
     SELECT
         Identification
     FROM
