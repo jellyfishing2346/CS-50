@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // TODO: Add code to check answers to questions
+			function showCorrect(buttonid){
+		      document.getElementById(buttonid).style.background='green';
+			}
+
+			function showIncorrect(buttonid){
+			  document.getElementById(buttonid).style.background='red';
+			}
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- TODO: Add multiple choice question here -->
+                <h3> Who is the Golden State Killer?</h3>
+                <button onClick="showCorrect('b1');" id="b1">Joseph James DeAngelo</button>
+                <button onClick="showIncorrect('b2');" id="b2">Ted Bundy</button>
+                <button onClick="showIncorrect('b3');" id="b3">Jeffrey Dahmer</button>
+                <button onClick="showIncorrect('b4');" id="b4">Dennis Rader</button>
+                <button onClick="showIncorrect('b5');" id="b5">John Wick</button>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- TODO: Add free response question here -->
+                <h3>Who is Spiderman underneath the mask?</h3>
+                <input type="text" id="user">
+                <button id="click" onClick="">Check Answer</button>
+
+              	 <script>
+            // Check free response submission
+            document.querySelector('#click').addEventListener('click',function()
+            {
+                let user = document.querySelector('#user');
+                if (user.value === 'Peter Parker')
+                {
+                   showCorrect('user');
+                }
+                else
+                {
+                   showIncorrect('user');
+                }
+            })
+            </script>
+            </div>
+        </div>
+    </body>
+</html>
+
