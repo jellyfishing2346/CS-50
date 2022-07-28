@@ -1,0 +1,50 @@
+.button
+{
+  	font-family: Times;
+    font-size: 25px;
+    text-emphasis: underline;
+    color: lightgreen;
+    opacity: 0.5;
+}
+
+#headingOne
+{
+  font-family: Times;
+  font-size: 20px;
+  color: darkred;
+}
+
+#headingTwo
+{
+  font-family: Times;
+    font-size: 20px;
+    color: darkblue;
+}
+
+#headingThree
+{
+    font-familY: Times;
+    font-size: 20px;
+    color: darkgreen;
+}
+
+#collapseOne
+{
+  	font-family: Times;
+    font-size: 20px
+    color: lightblue;
+}
+
+#collapseTwo
+{
+  	font-family: Times;
+    font-size: 20px
+    color: lightgreen;
+}
+
+#accordionExample
+{
+  font-family: Times;
+  font-size: 15px;
+  color: black;
+}
