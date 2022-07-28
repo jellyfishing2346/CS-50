@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <link href="styles.css" rel="stylesheet" />
+    <title>Top 3 Ivy League Schools</title>
+  </head>
+  <body>
+    <!-- this is a navbar from bootstrap -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light border">
+      <ul class="navbar -nav mr-auto mt-2">
+        <li class="nav">
+          <a class="nav-link" href="index.html"> Home </a>
+        </li>
+
+        <li class="nav">
+          <a class="nav-link" href="harvard.html"> Harvard </a>
+        </li>
+
+        <li class="nav">
+          <a class="nav-link" href="yale.html"> Yale </a>
+        </li>
+
+        <li class="nav">
+          <a class="nav-link" href="darmouth.html"> Darmouth </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="container-p5">
+      <h1>This is page for top schools</h1>
+      <h3>Let's talk about these colleges</h3>
+      <img src="darmouth.jpg"/>
+
+      <h4 class="about" Some interesting facts about Harvard></h4>
+      <table>
+        <tr>
+        </tr>
+      </table>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button"
+              type="button"
+              id="headingOne"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              History
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              Dartmouth's root system weaves through many pivotal moments in the history of the United States.
+              Founded in 1769, the College has shaped the education landscape and prepared generations of leaders to
+              advance industries, societies, and cultures.
+              Dartmouth's founder, Eleazar Wheelock, a Congregational minister from Connecticut,
+              established the College "for the education and instruction of youth of the Indian tribes in this land...
+              English Youth, and any others." Samson Occom, a Mohegan Indian and one of Wheelock's first students,
+              was instrumental in raising the funds necessary to found the College.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              id="headingTwo"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              Social Impact
+            </button>
+          </h2>
+          <div
+            id="collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+                The Dartmouth Center for Social Impact is the College's first stop for all service-related activities.
+                With a number of available off-campus internships, any free term can be used to embark on a life-changing experience.
+                And since the Center provides funding for students to initiate projects on their own, the possibilities are limitless.
+                In the local area, they offer six different pre-existing programs, giving students the invaluable
+                opportunity to work with schools and community organizations within the region.
+                For those who are interested in social-sector careers, the Center offers conferences with alumni and
+                distinguished panelists to build connections and pass on knowledge to new generations.
+                But that isn't all; the Center for Social Impact is adding new programs and activities based on student interest,
+                so stay tuned.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              id="headingThree"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseThree"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              The Onion
+            </button>
+          </h2>
+          <div
+            id="collapseThree"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              A student by the name of Adrian Chimboza recommends this place.
+              Adrian: "As a passionate gamer, I didn’t know how I was going to survive at Dartmouth for four years without
+               getting intimate with a game controller. After finishing a week’s worth of classes, I needed something
+               to take my mind off school. I had to look everywhere on campus for a place where I could just chill and
+               play video games and that’s how I found The Onion. After going there numerous times to hang out with some friends,
+               it became my happy place. So, if you’re a gamer by any chance, with an unmatchable love for video games,
+               just know that Dartmouth has you covered".
+               Definitely worth checking out.
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+     <div class="alert alert-dark" id="nameBox" role="alert"></div>
+    </body>
+    <script>
+      let name = prompt("Hello! please tell us your name:");
+      let nameBox = document.getElementById("nameBox");
+      nameBox.innerHTML += `Welcome ${name} , Thank you for visiting our site.`;
+    </script>
+</html>
+
+
