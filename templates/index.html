@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="/static/styles.css" rel="stylesheet">
+    <title>Birthdays</title>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1>Birthdays</h1>
+    </div>
+    <div class="container">
+        <div class="section">
+            </div>
+            <h2>Add a Birthday</h2>
+            <form action="/" method="post">
+                <input type="text" name="name" placeholder="Name" id="name">
+                <input type="number" name="month" placeholder="Month" id="month" >
+                <input type="text" name="day" placeholder="Day" id="day">
+                <button type="button" onclick="addToTable();">Add Birthday</button>
+            </form>
+        </div>
+
+        <div class="section">
+
+            <h2>All Birthdays</h2>
+				<table id="tableData" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Birthday</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <!-- Loop through the database entries to display them on a table -->
+                   <tr>
+                      <td {{birthday.name}} ></td>
+                       <td   {{birthday.month}} / {{birthday.day}}></td>
+                       <!-- This is the delete button-->
+                       <td><form action="/deregister" method="post">
+                                <input name="id" type="hidden" value="{{birthday.id}}">
+                                <button type="button" onclick="deletetoTable();">Delete</button>
+                            </form>
+                        </td { % endfor % }>
+                     </tr>
+                </tbody>
+                </table>
+        </div>
+        <script>
+			function addToTable(){
+             	var table = document.getElementById('tableData');
+                var tr = document.createElement('tr');
+				var rowCount = table.rows.length;
+				var cellCount = table.rows[0].cells.length;
+				var row = table.insertRow(rowCount);
+				var td1 = document.createElement('td');
+                var name = document.getElementById('name').value;
+      			td1.appendChild(document.createTextNode(name));
+      			tr.appendChild(td1);
+                var month = document.getElementById('month').value;
+                var day = document.getElementById('day').value;
+                var td2 = document.createElement('td');
+			    td2.appendChild(document.createTextNode(month+"/"+day));
+      			tr.appendChild(td2);
+                var td3 = document.createElement('td');
+      			tr.appendChild(td3);
+                table.appendChild(tr);
+                }
+        </script>
+        <script>
+            function deletetoTable()
+            {
+               var table = document.getElementById('tableData');
+               var row = table.rows[2];
+               document.getElementById('name').value = '';
+               document.getElementById('month').value = '';
+               document.getElementById('day').value = '';
+               row.parentElement.removeChild(row);
+            }
+        </script>
+    </body>
+</html>
