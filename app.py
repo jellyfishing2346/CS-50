@@ -86,9 +86,9 @@ def buy():
     # deduct order cost from user's remaining balance (i.e. cash)
     db.execute("UPDATE users SET cash = ? WHERE id = ?", remainAmount, userID)
 
-    db.execute("INSERT INTO orders (user_id, symbol, shares, price, timestamp) VALUES (?, ?, ?, ?, ?)", \ userID, dollarSymbol, numShares, stockPrice, timeNow())
+   # db.execute("INSERT INTO orders (user_id, symbol, shares, price, timestamp) VALUES (?, ?, ?, ?, ?)", \ userID, dollarSymbol, numShares, stockPrice, timeNow())
 
-    return redirect("e")
+    return redirect("/")
 
 
 @app.route("/history")
