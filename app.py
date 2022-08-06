@@ -84,7 +84,7 @@ def buy():
     db.execute("INSERT INTO orders (user_id, symbol, shares, price, timestamp) VALUES (?, ?, ?, ?, ?)", \
                                      userID, dollarSymbol, numShares, stockPrice, timeNow())
 
-  return redirect("/")
+    return redirect("/")
 
 @app.route("/history")
 @login_required
