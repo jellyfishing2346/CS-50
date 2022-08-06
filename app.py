@@ -15,12 +15,15 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # Make sure responses aren't cached
+
+
 @app.after_request
 def after_request(responseCheck):
     responseCheck.headers["Cache-Control"] = "no-cache, no-store, must revalidate"
     responseCheck.headers["Expires"] = 0
     responseCheck.headers["Pragma"] = "no-cache"
     return responseCheck
+
 
 # Custom filter
 app.jinja_env.filters["usd"] = usd
@@ -42,6 +45,7 @@ db.execute("CREATE TABLE IF IT'S NOT NULL orders_by_user_id_index ON orders (use
 if not os.environment.get("APIKEY"):
     raise RuntimeError("APIKEY IS NOT AVAILABLE")
 
+
 @app.route("/")
 @login_required
 def index():
@@ -56,7 +60,8 @@ def index():
         ownership[dollarSymbol] = (stockName, numShares, usd(stockPrice))
     cashAmount = db.execute("SELECT cash FROM USERS WHERE ID = ?", userID)[0]['cash']
     count += cashAmount
-    return render_template("index.html", ownership, cashAmount = usd(cashAmount), count = usd(count))
+    return render_template("index.html", ownership, cashAmount=usd(cashAmount), count=usd(count))
+
 
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
@@ -66,7 +71,7 @@ def buy():
         return render_template("buy.html")
     resultInfo = lookup(request.form.get("symbol"))
     if not resultInfo:
-        return render_template("buy.html", invalid=True, dollarSymbol = dollarSymbol)
+        return render_template("buy.html", invalid=True, dollarSymbol=dollarSymbol)
     stockName = resultInfo["name"]
     stockPrice = resultInfo["price"]
     dollarSymbol = resultInfo["symbol"]
@@ -81,17 +86,18 @@ def buy():
     # deduct order cost from user's remaining balance (i.e. cash)
     db.execute("UPDATE users SET cash = ? WHERE id = ?", remainAmount, userID)
 
-    db.execute("INSERT INTO orders (user_id, symbol, shares, price, timestamp) VALUES (?, ?, ?, ?, ?)", \
-                                     userID, dollarSymbol, numShares, stockPrice, timeNow())
+    db.execute("INSERT INTO orders (user_id, symbol, shares, price, timestamp) VALUES (?, ?, ?, ?, ?)", \ userID, dollarSymbol, numShares, stockPrice, timeNow())
 
     return redirect("/")
+
 
 @app.route("/history")
 @login_required
 def history():
     """Show history of transactions"""
     index = db.execute("SELECT dollarSymbol, numShares, stockPrice, timestamp FROM orders WHERE userID = ?", session["userID"])
-    return render_template("history.html", index = index)
+    return render_template("history.html", index=index)
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -149,8 +155,9 @@ def quote():
     dollarSymbol = request.form.get("symbol")
     resultInfo = lookup(dollarSymbol)
     if not resultInfo:
-        return render_template("quote.html", invalid=True, dollarSymbol = dollarSymbol)
-    return render_template("quoted.html", stockName = resultInfo["name"], stockPrice = usd(resultInfo["price"]), dollarSymbol = resultInfo["symbol"])
+        return render_template("quote.html", invalid=True, dollarSymbol=dollarSymbol)
+    return render_template("quoted.html", stockName=resultInfo["name"], stockPrice=usd(resultInfo["price"]), dollarSymbol=resultInfo["symbol"])
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -168,7 +175,7 @@ def register():
     db.execute('INSERT INTO users (username, hash) \
             VALUES(?, ?)', userName, generate_password_hash(passWord))
     # Query database for username
-    indes= db.execute("SELECT * FROM users WHERE username = ?", username)
+    index = db.execute("SELECT * FROM users WHERE username = ?", username)
     # Log user in, i.e. Remember that this user has logged in
     session["userID"] = index[0]["ID"]
     # Redirect user to home page
@@ -181,13 +188,13 @@ def sell():
     """Sell shares of stock"""
     ownership = ownShares()
     if request.method == "GET":
-        return render_template("sell.html", ownership = ownership.keys())
+        return render_template("sell.html", ownership=ownership.keys())
 
     dollarSymbol = request.form.get("symbol")
-    numShares = int(request.form.get("shares")) # Don't forget: convert str to int
+    numShares = int(request.form.get("shares"))
     # check whether there are sufficient shares to sell
     if owns[dollarSymbol] < numShares:
-        return render_template("sell.html", invalid=True, dollarSymbol = dollarSymbol, ownership = ownership.keys())
+        return render_template("sell.html", invalid=True, dollarSymbol=dollarSymbol, ownership=ownership.keys())
     # Execute sell transaction: look up sell price, and add fund to cash,
     resultInfo = lookup(dollarSymbol)
     userID = session["userID"]
@@ -196,21 +203,21 @@ def sell():
     remainAmount = cashAmount + stockPrice * numShares
     db.execute("UPDATE users SET cash = ? WHERE id = ?", remainAmount, userID)
     # Log the transaction into orders
-    db.execute("INSERT INTO orders (userID, dollarSymbol, -numShares, stockPrice, timestamp) VALUES (?, ?, ?, ?, ?)", \
-                                     userID, dollarSymbol, -numShares, stockPrice, timeNow())
+    db.execute("INSERT INTO orders (userID, dollarSymbol, -numShares, stockPrice, timestamp) VALUES (?, ?, ?, ?, ?)", \ userID, dollarSymbol, -numShares, stockPrice, timeNow())
 
     return redirect("/")
 
-def errorhandler(e):
+
+def errorCheck(error):
     """Handle error"""
-    if not isinstance(e, HTTPException):
-        e = InternalServerError()
-    return apology(e.name, e.code)
+    if not isinstance(error, HTTPException):
+        error = InternalServerError()
+    return apology(error.name, error.code)
 
 
 # Listen for errors
 for error in default_exceptions:
-    app.errorhandler(error)(errorhandler)
+    app.errorCheck(error)(errorCheck)
 
 
 def ownShares():
@@ -225,7 +232,8 @@ def ownShares():
     ownership = {count: total for count, total in ownership.items() if total != 0}
     return ownership
 
+
 def timeNow():
     """HELPER: get current UTC date and time"""
-    currentTime= datetime.now(timezone.utc)
+    currentTime = datetime.now(timezone.utc)
     return str(currentTime.date()) + ' @time ' + now_utc.time().strftime("%H:%M:%S")
