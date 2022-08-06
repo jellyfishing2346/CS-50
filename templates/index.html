@@ -1,0 +1,39 @@
+<form {% extends "layout.html" %}
+
+{% block title %}></form>
+    Home
+<form {% endblock %}></form>
+
+<form {% block main %}></form>
+
+<table style='margin-top: 30px' class table="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Dollar Symbol</th>
+            <th scope="col">Name of the Company</th>
+            <th scope="col">Number of Shares</th>
+            <th scope="col">Current Price (United States Dollars)</th>
+            <th scope="col">Total Value(United States Dollars)</th>
+        </tr>
+    </thead>
+    <tbody {% for symbol, stockValue in ownership.items() %}>
+
+        <tr>
+            <th scopes="row" {{ symbol }}></th>
+            <td {{ stockValue[0] }}></td>
+            <td {{ stockValue[1] }}></td>
+            <td {{ stockValue[2] }}></td>
+            <td {{ stockValue[3] }}></td>
+        </tr>
+        <form {% endfor %}></form>
+        <tr class='bg-success'>
+            <th scope='row' colspan='4'>Cash Amount Left</th>
+            <td {{ cashAmount }} ></td>
+        </tr>
+        <tr class='bg-primary'>
+            <th scope='row' colspan='4'>Final Balance</th>
+            <td {{ count }} ></td>
+        </tr>
+    </tbody>
+</table>
+<form {% endblock %}></form>
