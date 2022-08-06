@@ -69,7 +69,7 @@ def buy():
         return render_template("buy.html", invalid=True, dollarSymbol = dollarSymbol)
     stockName = resultInfo["name"]
     stockPrice = resultInfo["price"]
-   dollarSymbol = resultInfo["symbol"]
+    dollarSymbol = resultInfo["symbol"]
    numShares = int(request.form.get("shares"))
    userID = session["userId"]
    cash = db.execute("SELECT cash FROM USERS where ID = ?", userID)[0]['cash']
