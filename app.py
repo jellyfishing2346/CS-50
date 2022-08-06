@@ -70,9 +70,9 @@ def buy():
     stockName = resultInfo["name"]
     stockPrice = resultInfo["price"]
     dollarSymbol = resultInfo["symbol"]
-   numShares = int(request.form.get("shares"))
-   userID = session["userId"]
-   cash = db.execute("SELECT cash FROM USERS where ID = ?", userID)[0]['cash']
+    numShares = int(request.form.get("shares"))
+    userID = session["userId"]
+    cash = db.execute("SELECT cash FROM USERS where ID = ?", userID)[0]['cash']
    # check if user can afford the purchase
     remainAmount = cash - price * shares
     if remainAmount < 0:
