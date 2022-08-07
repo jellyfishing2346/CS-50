@@ -1,10 +1,10 @@
-<form{% extends "layout.html" %}
+{% extends "layout.html" %}
 
 {% block title %}
     Register
-{% endblock %}></form>
+{% endblock %}>
 
-<form{% block main %}></form>
+{% block main %}
     <form action="/register" method="post">
         <div class="form-group">
          <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
@@ -17,4 +17,4 @@
         </div>
         <button class="button button-primary" type="sumbit">Sumbit</button>
     </form>
-<form {% endblock %}></form>
+{% endblock %}>
