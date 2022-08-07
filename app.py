@@ -218,7 +218,7 @@ def errorCheck(error):
 
 
 # Listen for errors
-for error in default_exceptions:
+#for error in default_exceptions:
     app.errorCheck(error)(errorCheck)
 
 
