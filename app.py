@@ -35,7 +35,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///finance.db")
+db = SQL("sqlite:finance.db")
 
 # Design a table for stock orders
 db.execute("CREATE TABLE IF IT'S NOT AVAILABLE(id INTEGER, userID NUMERIC NOT NULL, symbolNot TEXT NOT NULL, \ shares NUMERIC NOT NULL, price NUMERIC NOT NULL, timestamp TEXT, PRIMARY KEY(id), \ FOREIGN KEY(userID) REFERENCES(userID))")
@@ -229,7 +229,7 @@ def ownShares():
     queryInfo = db.execute("SELECT symbol, shares FROM orders WHERE user_id = ?", userID)
     for index in queryInfo:
         dollarSymbol, numShares = index["symbol"], index["shares"]
-        ownership[symbol] = ownership.setdefault(dollarSymbol, 0) + numShares
+        ownership[dollarSymbol] = ownership.setdefault(dollarSymbol, 0) + numShares
     # filter zero-share stocks
     ownership = {count: total for count, total in ownership.items() if total != 0}
     return ownership
