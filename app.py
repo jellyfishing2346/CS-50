@@ -38,9 +38,9 @@ Session(app)
 db = SQL("sqlite:///finance.db")
 
 # Design a table for stock orders
-db.execute("CREATE TABLE IF NOT EXISTS TABLEINFO(id INTEGER, userID NUMERIC NOT NULL, symbolNot TEXT NOT NULL,  shares NUMERIC NOT NULL, price NUMERIC NOT NULL, timestamp TEXT, PRIMARY KEY(id),  FOREIGN KEY(userID) REFERENCES(userID))")
-db.execute("CREATE TABLE IF NOT EXISTS orders_by_user_id_index ON orders (userID)")
 
+db.execute("""CREATE TABLE IF NOT EXISTS TABLEINFO(id INTEGER, userID NUMERIC NOT NULL, symbolNot TEXT NOT NULL,  shares NUMERIC NOT NULL, price NUMERIC NOT NULL, timestamp TEXT, PRIMARY KEY(id),  FOREIGN KEY(userID) REFERENCES(userID))""")
+db.execute("""CREATE TABLE IF NOT EXISTS orders_by_user_id_index ON orders (userID)""")
 
 # API key
 if not os.environment.get("APIKEY"):
@@ -174,7 +174,7 @@ def register():
     if passWord == "" or passWord != confirm:
         return apology("Invalid Password: Blank, or does not match")
     # Add new user to users db (includes: username and HASH of password)
-    db.execute('INSERT INTO users (username, hash) \
+    db.execute('INSERT INTO users (username, hash)
             VALUES(?, ?)', userName, generate_password_hash(passWord))
     # Query database for username
     index = db.execute("SELECT * FROM users WHERE username = ?", username)
@@ -230,7 +230,7 @@ def ownShares():
     queryInfo = db.execute("SELECT symbol, shares FROM orders WHERE user_id = ?", userID)
     for index in queryInfo:
         dollarSymbol, numShares = index["symbol"], index["shares"]
-        ownership[dollarSymbol] = ownership.setdefault(dollarSymbol, 0) + numShares
+        ownership[symbol] = ownership.setdefault(dollarSymbol, 0) + numShares
     # filter zero-share stocks
     ownership = {count: total for count, total in ownership.items() if total != 0}
     return ownership
