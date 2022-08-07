@@ -1,0 +1,34 @@
+<form {% extends "layout.html" %}
+
+{% block title %}></form>
+    Quoted
+<form {% endblock %}
+
+{% block main %}></form>
+
+    <form action="/quote" method="post">
+        <div class="form-group">
+            <input autofocus class="form-control" name="symbol" placeholder="Stock symbol" type="text">
+        </div>
+        <button style='width: 200px' class=" form-group button button-primary" type="sumbit" {% if invalid %}>Look At Quote</button>
+
+        <div class="alert alert-warning" role="alert" The input symbol {{symbol}} is not valid></div>
+    </form>
+
+    <table style='margin-top: 30px' class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Company</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row" {{symbol}}> </th>
+                <td {{name}}></td>
+                <td {{symbol}}></td>
+            </tr>
+        </tbody>
+    </table>
+<form {% endblock %}></form>
