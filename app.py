@@ -38,10 +38,9 @@ Session(app)
 db = SQL("sqlite:///finance.db")
 
 # Design a table for stock orders
-
-db.execute("CREATE TABLE IF NOT EXISTS users")
-db.execute("""CREATE TABLE IF NOT EXISTS TABLEINFO(id INTEGER, userID NUMERIC NOT NULL, symbolNot TEXT NOT NULL,  shares NUMERIC NOT NULL, price NUMERIC NOT NULL, timestamp TEXT, PRIMARY KEY(id),  FOREIGN KEY(userID) REFERENCES(userID))""")
-
+db.execute("CREATE TABLE IF NOT EXISTS users(user_id INTEGER, username TEXT, password TEXT, name TEXT, cash REAL, PRIMARY KEY(user_id))")
+db.execute("CREATE TABLE IF NOT EXISTS orders(id INTEGER, user_id INTEGER NOT NULL, symbol TEXT NOT NULL, shares REAL NOT NULL, price REAL NOT NULL, timestamp TEXT, PRIMARY KEY(id),  FOREIGN KEY(user_id) REFERENCES users(user_id))")
+#db.execute("""CREATE TABLE IF NOT EXISTS orders_by_user_id_index ON orders (userID)""")
 
 # API key
 if not os.environment.get("APIKEY"):
@@ -98,7 +97,7 @@ def buy():
 @login_required
 def history():
     """Show history of transactions"""
-    index = db.execute("SELECT dollarSymbol, numShares, stockPrice, timestamp FROM orders WHERE userID = ?", session["userID"])
+    index = db.execute("SELECT symbol, shares, price, timestamp FROM orders WHERE user_ID = ?", session["userID"])
     return render_template("history.html", index=index)
 
 
@@ -205,8 +204,8 @@ def sell():
     remainAmount = cashAmount + stockPrice * numShares
     db.execute("UPDATE users SET cash = ? WHERE id = ?", remainAmount, userID)
     # Log the transaction into orders
-    db.execute("INSERT INTO orders (userID, dollarSymbol, -numShares, stockPrice, timestamp) VALUES (?, ?, ?, ?, ?)",
-               userID, dollarSymbol, -numShares, stockPrice, timeNow())
+    db.execute("INSERT INTO orders (userID, dollarSymbol, numShares, stockPrice, timestamp) VALUES (?, ?, ?, ?, ?)",
+               userID, dollarSymbol, numShares, stockPrice, timeNow())
 
     return redirect("/")
 
