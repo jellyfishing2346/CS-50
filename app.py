@@ -174,7 +174,7 @@ def register():
     if passWord == "" or passWord != confirm:
         return apology("Invalid Password: Blank, or does not match")
     # Add new user to users db (includes: username and HASH of password)
-    db.execute('INSERT INTO users (username, hash)
+    db.execute('INSERT INTO users (username, hash)')
             VALUES(?, ?)', userName, generate_password_hash(passWord))
     # Query database for username
     index = db.execute("SELECT * FROM users WHERE username = ?", username)
