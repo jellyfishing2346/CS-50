@@ -43,8 +43,8 @@ db.execute("CREATE TABLE IF NOT EXISTS orders(id INTEGER, user_id INTEGER NOT NU
 #db.execute("""CREATE TABLE IF NOT EXISTS orders_by_user_id_index ON orders (userID)""")
 
 # API key
-if not os.environ.get("APIKEY"):
-    raise RuntimeError("APIKEY IS NOT AVAILABLE")
+#if not os.environ.get("APIKEY"):
+    #raise RuntimeError("APIKEY IS NOT AVAILABLE")
 
 
 @app.route("/")
