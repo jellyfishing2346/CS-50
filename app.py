@@ -42,10 +42,6 @@ db.execute("CREATE TABLE IF NOT EXISTS users(user_id INTEGER, username TEXT, pas
 db.execute("CREATE TABLE IF NOT EXISTS orders(id INTEGER, user_id INTEGER NOT NULL, symbol TEXT NOT NULL, shares REAL NOT NULL, price REAL NOT NULL, timestamp TEXT, PRIMARY KEY(id),  FOREIGN KEY(user_id) REFERENCES users(user_id))")
 #db.execute("""CREATE TABLE IF NOT EXISTS orders_by_user_id_index ON orders (userID)""")
 
-# API key
-#if not os.environ.get("APIKEY"):
-    #raise RuntimeError("APIKEY IS NOT AVAILABLE")
-
 
 @app.route("/")
 @login_required
@@ -215,7 +211,6 @@ def errorCheck(error):
     if not isinstance(error, HTTPException):
         error = InternalServerError()
     return apology(error.name, error.code)
-
 
 
 def ownShares():
