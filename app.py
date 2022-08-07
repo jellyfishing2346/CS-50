@@ -38,8 +38,9 @@ Session(app)
 db = SQL("sqlite:///finance.db")
 
 # Design a table for stock orders
-db.execute("CREATE TABLE IF IT'S NOT AVAILABLE(id INTEGER, userID NUMERIC NOT NULL, symbolNot TEXT NOT NULL, \ shares NUMERIC NOT NULL, price NUMERIC NOT NULL, timestamp TEXT, PRIMARY KEY(id), \ FOREIGN KEY(userID) REFERENCES(userID))")
-db.execute("CREATE TABLE IF IT'S NOT NULL orders_by_user_id_index ON orders (userID)")
+db.execute("CREATE TABLE IF NOT EXISTS TABLEINFO(id INTEGER, userID NUMERIC NOT NULL, symbolNot TEXT NOT NULL,  shares NUMERIC NOT NULL, price NUMERIC NOT NULL, timestamp TEXT, PRIMARY KEY(id),  FOREIGN KEY(userID) REFERENCES(userID))")
+db.execute("CREATE TABLE IF NOT EXISTS orders_by_user_id_index ON orders (userID)")
+
 
 # API key
 if not os.environment.get("APIKEY"):
