@@ -217,10 +217,6 @@ def errorCheck(error):
     return apology(error.name, error.code)
 
 
-# Listen for errors
-#for error in default_exceptions:
-    app.errorCheck(error)(errorCheck)
-
 
 def ownShares():
     """Helper function: Which stocks the user owns, and numbers of shares owned. Return: dictionary {symbol: qty}"""
