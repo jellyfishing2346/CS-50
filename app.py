@@ -39,6 +39,7 @@ db = SQL("sqlite:///finance.db")
 
 # Design a table for stock orders
 
+db.execute("CREATE TABLE IF NOT EXISTS users")
 db.execute("""CREATE TABLE IF NOT EXISTS TABLEINFO(id INTEGER, userID NUMERIC NOT NULL, symbolNot TEXT NOT NULL,  shares NUMERIC NOT NULL, price NUMERIC NOT NULL, timestamp TEXT, PRIMARY KEY(id),  FOREIGN KEY(userID) REFERENCES(userID))""")
 
 
