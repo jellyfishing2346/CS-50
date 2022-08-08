@@ -174,7 +174,6 @@ def register():
     db.execute('INSERT INTO users (username, hash) VALUES(?, ?)', userName, generate_password_hash(passWord))
     # Query database for username
     index = db.execute("SELECT user_id FROM users WHERE username = ?", userName)
-   	print(index[0])
     # Log user in, i.e. Remember that this user has logged in
     session["userID"] = index[0]["user_id"]
     # Redirect user to home page
