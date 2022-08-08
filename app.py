@@ -172,7 +172,7 @@ def register():
     # Add new user to users db (includes: username and HASH of password)
     db.execute('INSERT INTO users (username, hash) VALUES(?, ?)', userName, generate_password_hash(passWord))
     # Query database for username
-    index = db.execute("SELECT * FROM users WHERE username = ?", username)
+    index = db.execute("SELECT * FROM users WHERE username = ?", userName)
     # Log user in, i.e. Remember that this user has logged in
     session["userID"] = index[0]["ID"]
     # Redirect user to home page
