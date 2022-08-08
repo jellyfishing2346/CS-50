@@ -38,7 +38,8 @@ Session(app)
 db = SQL("sqlite:///finance.db")
 
 # Design a table for stock orders
-db.execute("CREATE TABLE IF NOT EXISTS users(user_id INTEGER, username TEXT, password TEXT, name TEXT, cash REAL, PRIMARY KEY(user_id))")
+db.execute("DROP TABLE IF EXISTS users")
+db.execute("CREATE TABLE IF NOT EXITS users(user_id INTEGER, username TEXT, password TEXT, name TEXT, cash REAL, PRIMARY KEY(user_id))")
 db.execute("CREATE TABLE IF NOT EXISTS orders(id INTEGER, user_id INTEGER NOT NULL, symbol TEXT NOT NULL, shares REAL NOT NULL, price REAL NOT NULL, timestamp TEXT, PRIMARY KEY(id),  FOREIGN KEY(user_id) REFERENCES users(user_id))")
 #db.execute("""CREATE TABLE IF NOT EXISTS orders_by_user_id_index ON orders (userID)""")
 
@@ -172,8 +173,8 @@ def register():
     # Add new user to users db (includes: username and HASH of password)
     db.execute('INSERT INTO users (username, hash) VALUES(?, ?)', userName, generate_password_hash(passWord))
     # Query database for username
-    index = db.execute("SELECT * FROM users WHERE username = ?", userName)
-    print(index[0])
+    index = db.execute("SELECT user_id FROM users WHERE username = ?", userName)
+   	print(index[0])
     # Log user in, i.e. Remember that this user has logged in
     session["userID"] = index[0]["user_id"]
     # Redirect user to home page
