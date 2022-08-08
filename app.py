@@ -105,7 +105,7 @@ def login():
     session.clear()
 
     # User reached route via GET (as by submitting a form via POST)
-    if request.method == "GET":
+    if request.method == "POST":
         print(request.form.get('username'))
         # Ensure username was submitted
         if not request.form.get("username"):
