@@ -174,7 +174,7 @@ def register():
     # Query database for username
     index = db.execute("SELECT * FROM users WHERE username = ?", userName)
     # Log user in, i.e. Remember that this user has logged in
-    session["userID"] = index[0]["ID"]
+    session["userID"] = index[0]["user_id"]
     # Redirect user to home page
     return redirect("/")
 
