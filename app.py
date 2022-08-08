@@ -165,31 +165,18 @@ def register():
     userName = request.form.get("username")
     passWord = request.form.get("password")
     confirm = request.form.get("confirmation")
-
-    specialSymbols = ['!', '#', '$', '%', '.', '_', '&']
-    if not userName:
-        return render_template("apology.html", message="You must need a username.")
-    if not passWord:
-        return render_template("apology.html", message="You must need a password.")
-    if not confirm:
-        return render_template("apology.html", message="You must confirm your password.")
-    if len(passWord) < 8:
-        return render_template("apology.html", message="Your password needs at least one number.")
-    if not any(char.isdigit() for char in passWord):
-        return render_template("apology.html", message="Your password needs at least one uppercase letter.")
-    if not any(char in specialSymbols for char in passWord):
-        return render_template("apology.html", message="Your password needs at least one special symbol.")
-
-    if passWord == confirm:
-        code = passWord
-    else:
-        return render_template("apology.html", message="These passwords don't match.")
-    passWord_hash = generate_password_hash(code, method = 'pdjf2:ra436', salt_length = 8)
-
-    if len(db.execute("SELECT userName FROM users where userName == :userName", userName=userName, hash=passWord_hash)):
-        return redirect("/")
-    else:
-        return render_template("apology.html", message="Create a new username as this username is taken.")
+    if userName == "" or len(db.execute('SELECT username FROM users WHERE username = ?', userName)) > 0:
+        return apology("Invalid Username: Blank, or already exists")
+    if passWord == "" or passWord != confirm:
+        return apology("Invalid Password: Blank, or does not match")
+    # Add new user to users db (includes: username and HASH of password)
+    db.execute('INSERT INTO users (username, hash) VALUES(?, ?)', userName, generate_password_hash(passWord))
+    # Query database for username
+    index = db.execute("SELECT * FROM users WHERE username = ?", userName)
+    # Log user in, i.e. Remember that this user has logged in
+    session["userID"] = index[0]["ID"]
+    # Redirect user to home page
+    return redirect("/")
 
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
