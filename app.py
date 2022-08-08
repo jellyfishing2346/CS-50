@@ -180,7 +180,7 @@ def register():
         test = db.execute("INSERT INTO USERS (username, hash) VALUE(?,?)", request.form.get("username"), passWord)
         return redirect("/")
     except ValueError:
-        return apology("Username already exists", 400)
+        return apology("Username already exists", test, 400)
 
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
