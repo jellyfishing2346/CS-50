@@ -39,7 +39,7 @@ db = SQL("sqlite:///finance.db")
 
 # Design a table for stock orders
 db.execute("DROP TABLE IF EXISTS users")
-db.execute("CREATE TABLE IF NOT EXISTS users(user_id INTEGER, username TEXT, password TEXT, name TEXT, cash REAL, PRIMARY KEY(user_id))")
+db.execute("CREATE TABLE IF NOT EXISTS users(user_id INTEGER, username TEXT, hash TEXT, name TEXT, cash REAL, PRIMARY KEY(user_id))")
 db.execute("CREATE TABLE IF NOT EXISTS orders(id INTEGER, user_id INTEGER NOT NULL, symbol TEXT NOT NULL, shares REAL NOT NULL, price REAL NOT NULL, timestamp TEXT, PRIMARY KEY(id),  FOREIGN KEY(user_id) REFERENCES users(user_id))")
 #db.execute("""CREATE TABLE IF NOT EXISTS orders_by_user_id_index ON orders (userID)""")
 
