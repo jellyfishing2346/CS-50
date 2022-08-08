@@ -106,7 +106,7 @@ def login():
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-    print(request.form.get('username'))
+        print(request.form.get('username'))
         # Ensure username was submitted
         if not request.form.get("username"):
             return apology("must provide username", 400)
