@@ -176,8 +176,11 @@ def register():
     # Log user in, i.e. Remember that this user has logged in
     session["userID"] = index[0]["ID"]
     # Redirect user to home page
-    return redirect("/")
-
+    try:
+        test = db.execute("INSERT INTO USERS (username, hash) VALUE(?,?)", request.form.get("username"), passWord)
+        return redirect("/")
+    except ValueError:
+        return apology("Username already exists", 400)
 
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
