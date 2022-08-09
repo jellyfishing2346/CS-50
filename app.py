@@ -100,23 +100,23 @@ def history():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
-    print("In login()")
+    print("In login()", flush=True)
 
     # Forget any user_id
     session.clear()
 
     # User reached route via GET (as by submitting a form via POST)
     if request.method == "POST":
-        print("In POST handler")
+        print("In POST handler", flush=True)
         print(request.form.get('username'))
         # Ensure username was submitted
         if not request.form.get("username"):
-            print("No Username")
+            print("No Username", flush=True)
             return apology("must provide username", 400)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            print("No password")
+            print("No password", flush=True)
             return apology("must provide password", 400)
 
         # Query database for username
@@ -124,7 +124,7 @@ def login():
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            print("Bad UN/PW")
+            print("Bad UN/PW", flush=True)
             return apology("invalid username and/or password", 400)
 
         # Remember which user has logged in
