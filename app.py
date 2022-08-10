@@ -120,7 +120,7 @@ def login():
         rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(pwhash, password)):
+        if len(rows) != 1 or not check_password_hash(pwhash, password):
             print("Bad UN/PW", flush=True)
             return apology("invalid username and/or password", 400)
 
