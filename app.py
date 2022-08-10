@@ -52,7 +52,7 @@ def index():
     protocol = db.execute("SELECT symbol, SUM(shares) FROM stock WHERE userid = :userid GROUP BY symbol",
                             userID=session["user_id"])
     if not protocol:
-        return apology("error retrieving protocols", 400)
+        return apology("error retrieving protocols", 200)
 
     # Add current price and total value to each row; calculate total securities value
     protocolValue = 0.0
