@@ -121,14 +121,13 @@ def login():
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(pwhash, password):
-            print("Bad UN/PW", flush=True)
             return apology("invalid username and/or password", 400)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
 
         # Redirect user to home page
-        return redirect("/index")
+        return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
