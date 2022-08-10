@@ -170,9 +170,9 @@ def register():
     passWord = request.form.get("password")
     confirm = request.form.get("confirmation")
     if userName == "" or len(db.execute('SELECT username FROM users WHERE username = ?', userName)) > 0:
-        return apology("Invalid Username: Blank, or already exists", 200)
+        return apology("Invalid Username: Blank, or already exists")
     if passWord == "" or passWord != confirm:
-        return apology("Invalid Password: Blank, or does not match", 200)
+        return apology("Invalid Password: Blank, or does not match")
     # Add new user to users db (includes: username and HASH of password)
     db.execute('INSERT INTO users (username, hash) VALUES(?, ?)', userName, generate_password_hash(passWord))
     # Query database for username
