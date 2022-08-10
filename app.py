@@ -107,16 +107,14 @@ def login():
 
     # User reached route via GET (as by submitting a form via POST)
     if request.method == "POST":
-        print("In POST handler", flush=True)
         print(request.form.get('username'))
+
         # Ensure username was submitted
         if not request.form.get("username"):
-            print("No Username", flush=True)
             return apology("must provide username", 400)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            print("No password", flush=True)
             return apology("must provide password", 400)
 
         # Query database for username
@@ -172,9 +170,9 @@ def register():
     passWord = request.form.get("password")
     confirm = request.form.get("confirmation")
     if userName == "" or len(db.execute('SELECT username FROM users WHERE username = ?', userName)) > 0:
-        return apology("Invalid Username: Blank, or already exists")
+        return apology("Invalid Username: Blank, or already exists", 200)
     if passWord == "" or passWord != confirm:
-        return apology("Invalid Password: Blank, or does not match")
+        return apology("Invalid Password: Blank, or does not match", 200)
     # Add new user to users db (includes: username and HASH of password)
     db.execute('INSERT INTO users (username, hash) VALUES(?, ?)', userName, generate_password_hash(passWord))
     # Query database for username
