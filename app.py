@@ -142,7 +142,7 @@ def logout():
     session.clear()
 
     # Redirect user to login form
-    return redirect("/")
+    return redirect(url_for("login"))
 
 
 @app.route("/quote", methods=["GET", "POST"])
