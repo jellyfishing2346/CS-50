@@ -47,43 +47,18 @@ db.execute("CREATE TABLE IF NOT EXISTS orders(id INTEGER, user_id INTEGER NOT NU
 @login_required
 def index():
     """Show portfolio of stocks"""
-
-    # Query database stocks database for total number of shares of each stock owned by user
-    protocol = db.execute("SELECT symbol, SUM(shares) FROM stock WHERE userid = :userid GROUP BY symbol",
-                            userID=session["user_id"])
-    if not protocol:
-        return apology("error retrieving protocols", 200)
-
-    # Add current price and total value to each row; calculate total securities value
-    protocolValue = 0.0
-    for protocol in protocols:
-        # try 10 times to get quote -- often no value is returned
-        for index in range(0, 10):
-            protocolValue = lookup(security["symbol"])
-            if not quoteValue == None:
-                break
-
-        if protocolValue == None:
-            protocol["current_price"] = 0
-        else:
-            protocol["current_price"] = round(float(protocolValue["price"]), 2)
-
-        protocol["total_value"] = round(protocol["current_price"] * int(protocol["SUM(shares)"]), 2)
-        protocolValue += protocol["total_value"]
-
-    # Query database for current cash balance
-    index = db.execute("SELECT * FROM users WHERE id = :userid", userid=session["user_id"])
-    if not index:
-        return apology("error retreiving cash balance", 200)
-    cashAmount = rows[0]["cash"]
-
-    # Calculate total portfolio value
-    Value = round(protocolValue + cashAmount, 2)
-
-    return render_template("index.html", protocols=protocols, protocolValue=protocolValue, cashAmount=cashAmount,
-                           Value=Value)
-
-
+    ownership = ownShares()
+    count = 0
+    for dollarSymbol, numShares, in ownership.items():
+        resultInfo = lookup(dollarSymbol)
+        stockName, stockPrice = resultInfo["name"], resultInfo["price"]
+        stockValue = numShares * stockPrice
+        count += stockValue
+        ownership[dollarSymbol] = (stockName, numShares, usd(stockPrice), usd(stockValue))
+    cashAmount = db.execute("SELECT cash FROM users where id= ?", session["user_id"])[0]['cash']
+    count += cashAmount
+    return render_template("index.html", ownership = ownership, cashAmount = usd(cashAmount), count = usd(count))
+    
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
@@ -165,7 +140,7 @@ def logout():
     session.clear()
 
     # Redirect user to login form
-    return redirect(url_for("login"))
+    return redirect("/")
 
 
 @app.route("/quote", methods=["GET", "POST"])
