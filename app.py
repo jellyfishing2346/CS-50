@@ -74,7 +74,7 @@ def index():
     # Query database for current cash balance
     index = db.execute("SELECT * FROM users WHERE id = :userid", userid=session["user_id"])
     if not index:
-        return apology("error retreiving cash balance", 200)
+        return apology("error retreiving cash balance", 400)
     cashAmount = rows[0]["cash"]
 
     # Calculate total portfolio value
@@ -124,7 +124,6 @@ def history():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
-    print("In login()", flush=True)
 
     # Forget any user_id
     session.clear()
