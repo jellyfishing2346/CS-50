@@ -52,7 +52,7 @@ def index():
     protocol = db.execute("SELECT symbol, SUM(shares) FROM stock WHERE userid = :userid GROUP BY symbol",
                             userID=session["user_id"])
     if not protocol:
-        return apology("error retrieving protocols", 400)
+        return apology("error retrieving protocols", 200)
 
     # Add current price and total value to each row; calculate total securities value
     protocolValue = 0.0
@@ -74,7 +74,7 @@ def index():
     # Query database for current cash balance
     index = db.execute("SELECT * FROM users WHERE id = :userid", userid=session["user_id"])
     if not index:
-        return apology("error retreiving cash balance", 400)
+        return apology("error retreiving cash balance", 200)
     cashAmount = rows[0]["cash"]
 
     # Calculate total portfolio value
