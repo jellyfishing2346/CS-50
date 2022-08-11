@@ -230,4 +230,4 @@ def ownShares():
 def currentTimeZone():
     """HELPER: get current UTC date and time"""
     currentTime = Datetime.now(TimeZone.utc)
-    return str(currentTime.date()) + ' @time ' + currentTime.time().strftime("%H:%M:%S")
+    return str(currentTime.date() + ' @time ' + currentTime.time().strftime("%H:%M:%S"))
