@@ -58,7 +58,7 @@ def index():
     cashAmount = db.execute("SELECT cash FROM users where id= ?", session["user_id"])[0]['cash']
     count += cashAmount
     return render_template("index.html", ownership = ownership, cashAmount = usd(cashAmount), count = usd(count))
-    
+
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
@@ -146,6 +146,7 @@ def logout():
 @app.route("/quote", methods=["GET", "POST"])
 @login_required
 def quote():
+
     """Get stock quote."""
     if request.method == "GET":
         return render_template("quote.html")
@@ -229,4 +230,4 @@ def ownShares():
 def currentTimeZone():
     """HELPER: get current UTC date and time"""
     currentTime = datetime.now(timezone.utc)
-    return str(currentTime.date()) + ' @time ' + now_utc.time().strftime("%H:%M:%S")
+    return str(currentTime.date()) + ' @time ' + currentTime.time().strftime("%H:%M:%S")
