@@ -47,20 +47,17 @@ db.execute("CREATE TABLE IF NOT EXISTS orders(id INTEGER, user_id INTEGER NOT NU
 @login_required
 def index():
     """Show portfolio of stocks"""
-   stockInfo = db.execute("SELECT * FROM stocks WHERE id = :user_id", user_id = session["user_id"])
-   # Look to sum all the stocks into a portfolio
-   stockValue = 0
-   for index in stockInfo:
-        stockValue += index["value"]
-
-    # Observe the query information from user session and send this to the html
-    cashQuery = db.execute("SELECT cash FROM users WHERE id=:session", session=session["user_id"])
-    cashAmount = row_cash[0]["cash"]
-
-    # Calculate the total of the stock value and cash
-    total = stockValue + cashAmount
-    
-return render_template("index.html", stockInfo=stockInfo, cashAmount = usd(cashAmount), total = usd(total))
+    ownership = ownShares()
+    count = 0
+    for dollarSymbol, numShares, in ownership.items():
+        resultInfo = lookup(dollarSymbol)
+        stockName, stockPrice = resultInfo["name"], resultInfo["price"]
+        stockValue = numShares * stockPrice
+        count += stockValue
+        ownership[dollarSymbol] = (stockName, numShares, usd(stockPrice), usd(stockValue))
+    cashAmount = db.execute("SELECT cash FROM users where id= ?", session["user_id"])[0]['cash']
+    count += cashAmount
+    return render_template("index.html", ownership = ownership, cashAmount = usd(cashAmount), count = usd(count))
 
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
@@ -217,7 +214,7 @@ def errorCheck(error):
     return apology(error.name, error.code)
 
 
-#def ownShares():
+def ownShares():
     """Helper function: Which stocks the user owns, and numbers of shares owned. Return: dictionary {symbol: qty}"""
     userID = session["user_id"]
     ownership = {}
