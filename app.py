@@ -216,7 +216,7 @@ def errorCheck(error):
 
 def ownShares():
     """Helper function: Which stocks the user owns, and numbers of shares owned. Return: dictionary {symbol: qty}"""
-    userID = session["userID"]
+    userID = session["user_id"]
     ownership = {}
     queryInfo = db.execute("SELECT symbol, shares FROM orders WHERE user_id = ?", userID)
     for index in queryInfo:
