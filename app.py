@@ -108,7 +108,7 @@ def buy():
     db.execute("UPDATE users SET cash = ? WHERE id = ?", remainAmount, userID)
 
     db.execute("INSERT INTO orders (user_id, symbol, shares, price, timestamp) VALUES (?, ?, ?, ?, ?)",
-               userID, dollarSymbol, numShares, stockPrice, timeNow())
+               userID, dollarSymbol, numShares, stockPrice, currentTimeZone())
 
     return redirect("/")
 
@@ -180,10 +180,8 @@ def quote():
             return render_template("apology.html", styleMessage="Please enter a stock symbol.")
         getQuote = lookup(dollarSymbol)
         if not getQuote:
-            return render_template("apology.html", styleMessage="There is no symbol.")
-        stockName = getQuote("name")
-        stockPrice = getQuote("price")
-        return render_template("quote.html", stockName=stockName, dollarSymbol=dollarSymbol.upper(), stockPrice=stockPrice)
+            return render_template("quote.html", invalid = True, dollarSymbol = dollarSymbol)
+        return render_template("quoted.html", stockName = resultInfo["name"], stockPrice = resultInfo["price"], dollarSymbol = resultInfo["symbol"])
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -229,7 +227,7 @@ def sell():
     db.execute("UPDATE users SET cash = ? WHERE id = ?", remainAmount, userID)
     # Log the transaction into orders
     db.execute("INSERT INTO orders (userID, dollarSymbol, numShares, stockPrice, timestamp) VALUES (?, ?, ?, ?, ?)",
-               userID, dollarSymbol, numShares, stockPrice, timeNow())
+               userID, dollarSymbol, numShares, stockPrice, currentTimeZone())
 
     return redirect("/")
 
@@ -254,7 +252,7 @@ def ownShares():
     return ownership
 
 
-def timeNow():
+def currentTimeZone():
     """HELPER: get current UTC date and time"""
     currentTime = datetime.now(timezone.utc)
     return str(currentTime.date()) + ' @time ' + now_utc.time().strftime("%H:%M:%S")
