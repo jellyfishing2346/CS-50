@@ -191,7 +191,7 @@ def sell():
     dollarSymbol = request.form.get("symbol")
     numShares = int(request.form.get("shares"))
     # check whether there are sufficient shares to sell
-    if owns[dollarSymbol] < numShares:
+    if ownership[dollarSymbol] < numShares:
         return render_template("sell.html", invalid=True, dollarSymbol=dollarSymbol, ownership=ownership.keys())
     # Execute sell transaction: look up sell price, and add fund to cash,
     resultInfo = lookup(dollarSymbol)
@@ -229,5 +229,5 @@ def ownShares():
 
 def currentTimeZone():
     """HELPER: get current UTC date and time"""
-    currentTime = datetime.now(timezone.utc)
+    currentTime = Datetime.now(TimeZone.utc)
     return str(currentTime.date()) + ' @time ' + currentTime.time().strftime("%H:%M:%S")
