@@ -175,9 +175,9 @@ def quote():
     if request.method == "GET":
         return render_template("quote.html")
     dollarSymbol = request.form.get("symbol")
+    getQuote = lookup(dollarSymbol)
     if not dollarSymbol:
         return render_template("apology.html", styleMessage="Please enter a stock symbol.")
-        getQuote = lookup(dollarSymbol)
     if not getQuote:
         return render_template("quote.html", invalid = True, dollarSymbol = dollarSymbol)
     return render_template("quoted.html", stockName = resultInfo["name"], stockPrice = resultInfo["price"], dollarSymbol = resultInfo["symbol"])
