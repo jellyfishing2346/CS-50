@@ -174,14 +174,13 @@ def quote():
     """Get stock quote."""
     if request.method == "GET":
         return render_template("quote.html")
-    else:
-        dollarSymbol = request.form.get("symbol")
-        if not dollarSymbol:
-            return render_template("apology.html", styleMessage="Please enter a stock symbol.")
+    dollarSymbol = request.form.get("symbol")
+    if not dollarSymbol:
+        return render_template("apology.html", styleMessage="Please enter a stock symbol.")
         getQuote = lookup(dollarSymbol)
-        if not getQuote:
-            return render_template("quote.html", invalid = True, dollarSymbol = dollarSymbol)
-        return render_template("quoted.html", stockName = resultInfo["name"], stockPrice = resultInfo["price"], dollarSymbol = resultInfo["symbol"])
+    if not getQuote:
+        return render_template("quote.html", invalid = True, dollarSymbol = dollarSymbol)
+    return render_template("quoted.html", stockName = resultInfo["name"], stockPrice = resultInfo["price"], dollarSymbol = resultInfo["symbol"])
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
