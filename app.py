@@ -55,7 +55,8 @@ def index():
         stockValue = numShares * stockPrice
         count += stockValue
         ownership[dollarSymbol] = (stockName, numShares, usd(stockPrice), usd(stockValue))
-    cashAmount = db.execute("SELECT cash FROM users where id= ?", session["user_id"])[0]['cash']
+    cashAmount = db.execute("SELECT * FROM stocks WHERE id = :user_id", user_id = session["user_id"])
+
     count += cashAmount
     return render_template("index.html", ownership = ownership, cashAmount = usd(cashAmount), count = usd(count))
 
