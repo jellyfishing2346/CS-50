@@ -57,7 +57,8 @@ def index():
         ownership[dollarSymbol] = (stockName, numShares, usd(stockPrice), usd(stockValue))
     cashAmount = db.execute("SELECT cash FROM users where id= ?", session["user_id"])[0]['cash']
     count += cashAmount
-    return render_template("index.html", ownership = ownership, cashAmount = usd(cashAmount), count = usd(count))
+    return render_template("index.html", ownership=ownership, cashAmount=usd(cashAmount), count=usd(count))
+
 
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
@@ -146,7 +147,6 @@ def logout():
 @app.route("/quote", methods=["GET", "POST"])
 @login_required
 def quote():
-
     """Get stock quote."""
     if request.method == "GET":
         return render_template("quote.html")
@@ -155,8 +155,9 @@ def quote():
     if not dollarSymbol:
         return render_template("apology.html", styleMessage="Please enter a stock symbol.")
     if not getQuote:
-        return render_template("quote.html", invalid = True, dollarSymbol = dollarSymbol)
-    return render_template("quoted.html", stockName = resultInfo["name"], stockPrice = resultInfo["price"], dollarSymbol = resultInfo["symbol"])
+        return render_template("quote.html", invalid=True, dollarSymbol=dollarSymbol)
+    return render_template("quoted.html", stockName=resultInfo["name"], stockPrice=resultInfo["price"], dollarSymbol=resultInfo["symbol"])
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
