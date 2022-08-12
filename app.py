@@ -178,7 +178,7 @@ def register():
     # Log user in, i.e. Remember that this user has logged in
     session["userID"] = index[0]["user_id"]
     # Redirect user to home page
-    return redirect("/")
+    return redirect("/", 200)
 
 
 @app.route("/sell", methods=["GET", "POST"])
