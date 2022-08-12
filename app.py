@@ -189,27 +189,9 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    ownership = ownShares()
-    if request.method == "GET":
-        return render_template("sell.html", ownership=ownership.keys())
+    
 
-    dollarSymbol = request.form.get("symbol")
-    numShares = int(request.form.get("shares"))
-    # check whether there are sufficient shares to sell
-    if ownership[dollarSymbol] < numShares:
-        return render_template("sell.html", invalid=True, dollarSymbol=dollarSymbol, ownership=ownership.keys())
-    # Execute sell transaction: look up sell price, and add fund to cash,
-    resultInfo = lookup(dollarSymbol)
-    userID = session["userID"]
-    cashAmount = db.execute("SELECT cash FROM users WHERE id = ?", userID)[0]['cash']
-    stockPrice = resultInfo["price"]
-    remainAmount = cashAmount + stockPrice * numShares
-    db.execute("UPDATE users SET cash = ? WHERE id = ?", remainAmount, userID)
-    # Log the transaction into orders
-    db.execute("INSERT INTO orders (userID, dollarSymbol, numShares, stockPrice, timestamp) VALUES (?, ?, ?, ?, ?)",
-               userID, dollarSymbol, numShares, stockPrice, currentTimeZone())
-
-    return redirect("/")
+    return TODO("/")
 
 
 def errorCheck(error):
@@ -219,7 +201,7 @@ def errorCheck(error):
     return apology(error.name, error.code)
 
 
-def ownShares():
+#def ownShares():
     """Helper function: Which stocks the user owns, and numbers of shares owned. Return: dictionary {symbol: qty}"""
     userID = session["user_id"]
     ownership = {}
@@ -232,7 +214,7 @@ def ownShares():
     return ownership
 
 
-def currentTimeZone():
+#def currentTimeZone():
     """HELPER: get current UTC date and time"""
     currentTime = Datetime.now(TimeZone.utc)
     return str(currentTime.date() + ' @time ' + currentTime.time().strftime("%H:%M:%S"))
