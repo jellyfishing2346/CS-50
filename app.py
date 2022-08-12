@@ -189,9 +189,56 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    
+    @app.route("/sell", methods=["GET", "POST"])
+@login_required
+def sell():
+    """Sell shares of stock"""
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+        shares = request.form.get("shares")
+        try:
+            shares = int(shares)
+            if shares < 1:
+                return apology("shares must be a positive integer")
+        except ValueError:
+            return apology("shares must be a positive integer")
+        if not symbol:
+            return apology("missing symbol")
 
-    return TODO("/")
+        stocks = db.execute(
+            "SELECT SUM(shares) as shares FROM stocks WHERE userID = ? AND symbol = ?;",
+            session["user_id"],
+            symbol,
+        )[0]
+
+        if shares > stocks["shares"]:
+            return apology("You don't have this number of shares")
+        price = lookup(symbol)["price"]
+        shares_value = price * shares
+
+        db.execute(
+            "INSERT INTO stocks (userID, symbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)",
+            session["user_id"],
+            symbol.upper(),
+            -shares,
+            price,
+            "sell",
+        )
+
+        db.execute(
+            "UPDATE users SET cash = cash + ? WHERE id = ?",
+            shares_value,
+            session["user_id"],
+        )
+
+        flash("Sold!")
+        return redirect("/")
+    else:
+        stocks = db.execute(
+            "SELECT symbol FROM stocks WHERE userID = ? GROUP BY symbol",
+            session["user_id"],
+        )
+        return render_template("sell.html", stocks=stocks)
 
 
 def errorCheck(error):
@@ -201,20 +248,6 @@ def errorCheck(error):
     return apology(error.name, error.code)
 
 
-#def ownShares():
-    """Helper function: Which stocks the user owns, and numbers of shares owned. Return: dictionary {symbol: qty}"""
-    userID = session["user_id"]
-    ownership = {}
-    queryInfo = db.execute("SELECT symbol, shares FROM orders WHERE user_id = ?", userID)
-    for index in queryInfo:
-        dollarSymbol, numShares = index["symbol"], index["shares"]
-        ownership[symbol] = ownership.setdefault(dollarSymbol, 0) + numShares
-    # filter zero-share stocks
-    ownership = {count: total for count, total in ownership.items() if total != 0}
-    return ownership
 
 
-#def currentTimeZone():
-    """HELPER: get current UTC date and time"""
-    currentTime = Datetime.now(TimeZone.utc)
-    return str(currentTime.date() + ' @time ' + currentTime.time().strftime("%H:%M:%S"))
+
