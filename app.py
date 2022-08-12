@@ -213,7 +213,7 @@ def register():
         else:
             # Generate the hash of the password
             hashCode = generate_password_hash(
-                password, method="pbkdf2:sha256", salt_length=8
+                passWord, method="pbkdf2:sha256", salt_length=8
             )
             # Insert the new user
             db.execute(
