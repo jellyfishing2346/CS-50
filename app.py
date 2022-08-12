@@ -37,6 +37,10 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///finance.db")
 
+#
+if not os.environ.get("API_KEY"):
+    raise RuntimeError("API_KEY not set")
+
 # Design a table for stock orders
 db.execute("DROP TABLE IF EXISTS users")
 db.execute("CREATE TABLE IF NOT EXISTS users(user_id INTEGER, username TEXT, hash TEXT, name TEXT, cash REAL, PRIMARY KEY(user_id))")
@@ -141,7 +145,7 @@ def logout():
     session.clear()
 
     # Redirect user to login form
-    return redirect("/", 200)
+    return redirect("/")
 
 
 @app.route("/quote", methods=["GET", "POST"])
@@ -178,7 +182,7 @@ def register():
     # Log user in, i.e. Remember that this user has logged in
     session["userID"] = index[0]["user_id"]
     # Redirect user to home page
-    return redirect("/", 200)
+    return redirect("/")
 
 
 @app.route("/sell", methods=["GET", "POST"])
