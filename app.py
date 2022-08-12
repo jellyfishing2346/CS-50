@@ -165,9 +165,9 @@ def logout():
 @login_required
 def quote():
     if request.method == "POST":
-        quote = lookup(request.form.get("symbol"))
+        quotes = lookup(request.form.get("symbol"))
         # Ensure the simbol was submitted
-        if quote is None:
+        if quotes is None:
             return apology("must provide valid symbol", 400)
         else:
             return render_template(
@@ -189,7 +189,7 @@ def register():
         passWord = request.form.get("password")
         confirm = request.form.get("confirmation")
 
-        index = db.execute("SELECT * FROM users WHERE username = ?", username)
+        index = db.execute("SELECT * FROM users WHERE username = ?", userName)
 
         # Ensure the username was submitted
         if not userName:
