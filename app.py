@@ -37,8 +37,8 @@ Session(app)
 db = SQL("sqlite:///finance.db")
 
 # Make sure API key is set
-if not os.environ.get("API_KEY"):
-    raise RuntimeError("API_KEY not set")
+#if not os.environ.get("API_KEY"):
+   # raise RuntimeError("API_KEY not set")
 
 
 @app.route("/")
@@ -46,7 +46,7 @@ if not os.environ.get("API_KEY"):
 def index():
     cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
     stockInfo = db.execute(
-        "SELECT users, SUM(shares) as shares, operation FROM users WHERE userID = ? GROUP BY userID HAVING (SUM(shares)) > 0;",
+        "SELECT users, SUM(shares) as shares, operation FROM users WHERE userID = ? GROUP BY users HAVING (SUM(shares)) > 0;",
         session["user_id"],
     )
     totalStocks = 0
@@ -54,7 +54,7 @@ def index():
         quotes = lookup(stock["symbol"])
         stockValue["name"] = quotes["name"]
         stockValue["price"] = quotes["price"]
-        stockValue["total"] = stock["price"] * stock["shares"]
+        stockValue["total"] = stockValue["price"] * stockValue["shares"]
         totalStocks = totalStocks + totalStock["total"]
 
     cashAmount = totalStocks + cash[0]["cash"]
