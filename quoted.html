@@ -1,0 +1,27 @@
+<form {% extends "layout.html" %}
+
+{% block title %}></form>
+    Quoted
+<form {% endblock %}></form>
+<form {% blockmain %}></form>
+<form action="/quote" method="post">
+    <div class="form-group">
+        <input autofocus class="form-control" name="symbol" placeholder="Stock symbol" type="text">
+    </div>
+</form>
+
+<table style='margin-top: 30px' class="btn-btn primary" type="sumbit">View This Quote</table>
+    <thead>
+        <tr>
+            <th scope="col">Symbol</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Price (USD)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row" {{ symbol }}></th>
+            <td {{ name }}></td>
+            <td {{ price }}></td>
+        </tr>
+    </tbody>
