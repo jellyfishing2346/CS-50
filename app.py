@@ -37,17 +37,17 @@ Session(app)
 db = SQL("sqlite:///finance.db")
 
 # Make sure API key is set
-if  os.environ.get("API_KEY"):
+if not os.environ.get("API_KEY"):
    raise RuntimeError("API_KEY not set")
 
 
 @app.route("/")
 @login_required
 def index():
-    cash = db.execute("SELECT cash FROM users WHERE id = ?", userID = session["user_id"])
+    cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
     stockInfo = db.execute(
         "SELECT users, SUM(shares) as shares, operation FROM users WHERE userID = ? GROUP BY users HAVING (SUM(shares)) > 0;",
-        userID = session["user_id"],
+        session["user_id"],
     )
     totalStocks = 0
     for stockValue in stockInfo:
