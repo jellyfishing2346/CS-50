@@ -15,7 +15,7 @@ while True:
     except (ValueError, ZeroDivisionError):
             pass
 # Make sure to multiply the fraction's percentage by 100
-product = int (percentage * 100)
+product = round (percentage * 100)
 # Print E, if the fraction's percentage is less than 1
 if product <= 1:
     print("E")
