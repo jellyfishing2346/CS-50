@@ -92,7 +92,7 @@ def buy():
         else:
             db.execute("UPDATE users SET cash = cash - ? WHERE id = ?", sharePrice, session["user_id"],
             )
-            db.execute( "INSERT INTO users (userID, dollarSymbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)", session["user_id"], dollarSymbol.upper(),shares, price["price"], "buy",
+            db.execute( "INSERT INTO users (userID, symbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)", session["user_id"], dollarSymbol.upper(),shares, price["price"], "buy",
             )
 
             flash("Transaction successful")
@@ -244,7 +244,7 @@ def sell():
             return apology("missing symbol")
 
         stockPrice = db.execute(
-            "SELECT SUM(shares) as shares FROM stocks WHERE userID = ? AND dollarSymbol = ?;",
+            "SELECT SUM(shares) as shares FROM stocks WHERE userID = ? AND symbol = ?;",
             session["user_id"],
             dollarSymbol,
         )[0]
@@ -255,7 +255,7 @@ def sell():
         shareValue = stockPrice * numShares
 
         db.execute(
-            "INSERT INTO stocks (userID, dollarSymbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO stocks (userID, symbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)",
             session["user_id"],
             symbol.upper(),
             -numShares,
@@ -273,7 +273,7 @@ def sell():
         return redirect("/")
     else:
         stockInfo = db.execute(
-            "SELECT symbol FROM stocks WHERE userID = ? GROUP BY dollarSymbol",
+            "SELECT symbol FROM stocks WHERE userID = ? GROUP BY symbol",
             session["user_id"],
         )
         return render_template("sell.html", stockInfo=stockInfo)
