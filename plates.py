@@ -7,10 +7,13 @@ def main():
 
 
 def is_valid(s):
+    # The length of characters
     lengthInfo = len(s)
+
+    #The maximum of character length
     if lengthInfo >= 2 and lengthInfo <= 6:
-        for letterInfo in s:
-            if not s.isalnum(letterInfo):
+        for lengthInfo in s:
+            if not s.isalnum():
                 break
 
             if s[0:2].isalpha():
