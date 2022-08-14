@@ -20,7 +20,7 @@ product = round (percentage * 100)
 if product <= 1:
     print("E")
 # Print F, if the fraction's precentage is greater than 99
-elif product >= 100:
+elif product >= 99:
     print("F")
 # Otherwise print % as the default statement
 else:
