@@ -10,8 +10,9 @@ def is_valid(s):
     lengthInfo = len(s)
     if lengthInfo >= 2 and lengthInfo <= 6:
         for letterInfo in s:
-            if not s.isalnum():
+            if not s.isalnum(letterInfo):
                 break
+
             if s[0:2].isalpha():
                 middleIndex = s[1::-1]
                 if middleIndex.isnumeric() and middleIndex.find(0):
