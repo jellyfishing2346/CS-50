@@ -28,5 +28,5 @@ while True:
     except EOFError:
             print("\n")
             break
-     else:
+    else:
             continue
