@@ -23,10 +23,10 @@ def is_valid(s):
                 zero = s.find("0") - 1
                 if s[-(zero)].isdigit():
                     for index in s:
-                        if index.digit():
+                        if index.isdigit():
                             if index.startswith('0'):
                                 return False
-                            else
+                            else:
                                 return True
                 if s[-2].isdigit() and s[-1].isalpha():
                     break
@@ -36,5 +36,4 @@ def is_valid(s):
                     return True
             else:
                 return False
-
 main()
