@@ -26,5 +26,5 @@ item = input("Item: ")
 
 # Go through the fruit dictionary to determine the fruit's calories
 for calories in fruits:
-    if calories == item.islower():
+    if calories in item.islower():
         print("Calories: ", fruits[calories])
