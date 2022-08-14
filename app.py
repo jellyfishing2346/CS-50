@@ -46,7 +46,7 @@ if not os.environ.get("API_KEY"):
 def index():
     cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
     stockInfo = db.execute(
-        "SELECT id, SUM(cash) as cash, hash FROM users WHERE id = ? GROUP BY dollarSymbol HAVING (SUM(cash)) > 0;",
+        "SELECT id, SUM(cash) as cash, hash FROM users WHERE id = ? GROUP BY hash HAVING (SUM(cash)) > 0;",
         session["user_id"],
     )
     totalStocks = 0
