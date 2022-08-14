@@ -244,7 +244,7 @@ def sell():
             return apology("missing symbol")
 
         stockPrice = db.execute(
-            "SELECT SUM(shares) as shares FROM stocks WHERE userID = ? AND symbol = ?;",
+            "SELECT SUM(shares) as shares FROM stocks WHERE userID = ? AND dollarSymbol = ?;",
             session["user_id"],
             symbol,
         )[0]
@@ -255,7 +255,7 @@ def sell():
         shareValue = stockPrice * numShares
 
         db.execute(
-            "INSERT INTO stocks (userID, symbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO stocks (userID, dollarSymbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)",
             session["user_id"],
             symbol.upper(),
             -numShares,
@@ -273,7 +273,7 @@ def sell():
         return redirect("/")
     else:
         stockInfo = db.execute(
-            "SELECT symbol FROM stocks WHERE userID = ? GROUP BY symbol",
+            "SELECT symbol FROM stocks WHERE userID = ? GROUP BY dollarSymbol",
             session["user_id"],
         )
         return render_template("sell.html", stockInfo=stockInfo)
