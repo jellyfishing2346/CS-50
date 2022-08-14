@@ -92,7 +92,7 @@ def buy():
         else:
             db.execute("UPDATE users SET cash = cash - ? WHERE id = ?", sharePrice, session["user_id"],
             )
-            db.execute( "INSERT INTO users (userID, symbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)", session["user_id"], dollarSymbol.upper("symbol"),numShares, sharePice["price"], "buy",
+            db.execute( "INSERT INTO users (userID, symbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)", session["user_id"], dollarSymbol["symbol"],numShares, sharePrice["price"], "buy",
             )
 
             flash("Transaction successful")
