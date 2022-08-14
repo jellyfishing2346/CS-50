@@ -106,7 +106,7 @@ def buy():
 @login_required
 def history():
     """Show history of transactions"""
-    stockInfo = db.execute("SELECT * FROM stocks WHERE userID = ?", session["user_id"])
+    stockInfo = db.execute("SELECT * FROM stocks WHERE user_id = ?", session["user_id"])
     return render_template("history.html", stockInfo=stockInfo)
 
 
@@ -244,7 +244,7 @@ def sell():
             return apology("missing symbol")
 
         stockPrice = db.execute(
-            "SELECT SUM(shares) as shares FROM stocks WHERE userID = ? AND symbol = ?;",
+            "SELECT SUM(shares) as shares FROM stocks WHERE user_id = ? AND symbol = ?;",
             session["user_id"],
             dollarSymbol,
         )[0]
@@ -273,7 +273,7 @@ def sell():
         return redirect("/")
     else:
         stockInfo = db.execute(
-            "SELECT symbol FROM stocks WHERE userID = ? GROUP BY symbol",
+            "SELECT symbol FROM stocks WHERE user_id = ? GROUP BY symbol",
             session["user_id"],
         )
         return render_template("sell.html", stockInfo=stockInfo)
