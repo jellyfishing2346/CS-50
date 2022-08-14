@@ -246,7 +246,7 @@ def sell():
         stockPrice = db.execute(
             "SELECT SUM(shares) as shares FROM stocks WHERE userID = ? AND dollarSymbol = ?;",
             session["user_id"],
-            symbol,
+            dollarSymbol,
         )[0]
 
         if numShares > stockPrice["shares"]:
