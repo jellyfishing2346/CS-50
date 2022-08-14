@@ -23,7 +23,6 @@ fruits = {
 
 # Prompt the user to input
 item = input("Item: ")
-print(item)
 
 # Go through the fruit dictionary to determine the fruit's calories
 for calories in fruits:
