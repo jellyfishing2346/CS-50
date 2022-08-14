@@ -51,11 +51,11 @@ def index():
     )
     totalStocks = 0
     for stockValue in stockInfo:
-        quotes = lookup(stock["symbol"])
+        quotes = lookup(stockValue["symbol"])
         stockValue["name"] = quotes["name"]
         stockValue["price"] = quotes["price"]
         stockValue["total"] = stockValue["price"] * stockValue["shares"]
-        totalStocks = totalStocks + totalStock["total"]
+        totalStocks = totalStocks + totalStocks["total"]
 
     cashAmount = totalStocks + cash[0]["cash"]
     return render_template(
