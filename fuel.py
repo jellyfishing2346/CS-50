@@ -10,7 +10,7 @@ while True:
         # Calculate the fraction's percentage
         percentage = newNum / newDen
         # Checking if the fraction is less than 1, otherwise end the forever loop
-        if percentage <  1:
+        if percentage <=  1:
             break
     except (ValueError, ZeroDivisionError):
             pass
