@@ -6,7 +6,9 @@ while True:
             grocery[item] += 1
         else:
             grocery[item] = 1
-    except EOFError:
+    except EOFError as e:
         break
+
 for grocery, count in groceries.items():
     print(count, grocery)
+    
