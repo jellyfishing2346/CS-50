@@ -12,8 +12,8 @@
           break
       groceryDict = groceryDict.strip().upper()
       try:
-          [grocery]
+          groceryInfo[groceryDict]
       except KeyError:
-          groceries[grocery] = 1
+          groceryInfo[groceryDict] = 1
       else:
-          groceries[grocery] += 1
+          groceryInfo[groceryDict] += 1
