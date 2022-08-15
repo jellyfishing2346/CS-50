@@ -6,7 +6,7 @@ list = {}
 while True:
     try:
         # Retrieve the user's input
-        itemCollect = input(" ")
+        itemCollect = input("Item: ")
         itemCollect = itemCollect.upper()
         # Going through the grocery array
         groceryArray.append(itemCollect)
