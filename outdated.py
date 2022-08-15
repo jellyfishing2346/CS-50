@@ -50,5 +50,5 @@ while True:
         else:
             if day > 31:
                 continue
-            print(f"{year}-{month:02)}-{day:02}")
+            print(f"{year}-{month:02}-{day:02}")
             break
