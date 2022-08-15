@@ -6,8 +6,7 @@ list = {}
 while True:
     try:
         # Retrieve the user's input
-        itemCollect = input("Item: ")
-        itemCollect = itemCollect.upper()
+        itemCollect = input(" ")
         # Going through the grocery array
         groceryArray.append(itemCollect)
         groceryArray.sort()
