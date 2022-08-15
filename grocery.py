@@ -1,19 +1,24 @@
-# Create a grocery dictionary
-grocery = {}
+# Create a grocery array and list dictionary
+groceryArray = []
+list = {}
 
 # Design a while loop to loop through the grocery dictionary
 while True:
     try:
         # Retrieve the user's input
-        item = input("")
-        # Determine if the item is already in the grocery dictionary
-        if item.lower() in grocery:
-            grocery[item.lower()] += 1
-        else:
-            grocery[item.lower()] = 1
+        itemCollect = input(" ")
+        itemCollect = itemCollect.upper()
+        # Going through the grocery array
+        groceryArray.append(itemCollect)
+        groceryArray.sort()
     except EOFError:
-        # Print all grocery items in alphabetic order
-        for list in sorted(grocery.list):
-            print(grocery[list], list.upper())
-        # Terminate the while loop
-        break
+        for itemCollect in groceryArray:
+            if itemCollect in list:
+                list[itemCollect] += 1
+            else:
+                list[itemCollect] = 1
+            for index in list:
+                print(str(list[index]) + " " + index)
+            break
+        else:
+            continue
