@@ -15,7 +15,7 @@ numMonth = [
 ]
 # Design a forever loop to go through the date's proper format with month array
 while True:
-    date = input("Date: ")
+    date = input("Date: ").strip()
     if "/" in date:
         date = date.split("/")
         try:
