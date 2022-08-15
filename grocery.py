@@ -5,7 +5,7 @@ grocery = {}
 while True:
     try:
         # Retrieve the user's input
-        item = input()
+        item = input("")
         # Determine if the item is already in the grocery dictionary
         if item.lower() in grocery:
             grocery[item.lower()] += 1
