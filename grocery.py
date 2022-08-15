@@ -5,12 +5,12 @@ grocery = {}
 while True:
     try:
         # Retrieve the user's input
-        item = input().lower()
+        item = input()
         # Determine if the item is already in the grocery dictionary
-        if item in grocery:
-            grocery[item] += 1
+        if item.lower() in grocery:
+            grocery[item.lower()] += 1
         else:
-            grocery[item] = 1
+            grocery[item.lower()] = 1
     except EOFError:
         # Print all grocery items in alphabetic order
         for list in sorted(grocery.list):
