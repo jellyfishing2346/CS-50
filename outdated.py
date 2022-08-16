@@ -23,7 +23,7 @@ while True:
             month = int(date[0])
         except ValueError:
             # Conversion of string letters to integer numbers in progress
-            pass
+            continue
         else:
             day = int(date[1])
             year = date[2]
