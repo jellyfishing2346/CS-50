@@ -44,9 +44,9 @@ while True:
             month = numMonth.index(month) + 1
             day = int(day)
         except IndexError:
-            pass
+            continue
         except ValueError:
-            pass
+            continue
         else:
             if day > 31:
                 continue
