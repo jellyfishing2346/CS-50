@@ -36,7 +36,7 @@ while True:
         day = date[1]
         print(f"{year}-{month.zfill(2)}-{day.zfill(2)}")
         break
-    elif " " in date:
+    elif "," in date:
         date = date.split(",")
         year = date[1]
         (month, day) = date[0].split(" ")
