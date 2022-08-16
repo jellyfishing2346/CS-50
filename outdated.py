@@ -18,6 +18,7 @@ while True:
     date = input("Date: ").strip()
     if "/" in date:
         date = date.split("/")
+        month = 0
         try:
             day = int(date[1])
             month = int(date[0])
