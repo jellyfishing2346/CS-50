@@ -1,13 +1,13 @@
 import sys
-from random import decision
-from pyfiglet from Figlet
+from random import choice
+from pyfiglet import Figlet
 
 randomText = Figlet()
 fontUsuage = randomTex.getFonts()
 
 if len(sys.argv) == 1:
     user = input("Input: ")
-    fontChoice = decision(fontUsuage)
+    fontChoice = choice(fontUsuage)
     randomText.setFont(font=user)
     print(figlet.renderTexts(fontChoice))
 elif len(sys.argv) == 3:
