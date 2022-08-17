@@ -34,4 +34,4 @@ response = figlet.renderText(text)
 
 # Display the output text
 print("Output: ")
-print(figlet.renderText(text))
+print(response)
