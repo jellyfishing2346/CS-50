@@ -9,7 +9,7 @@ if len(sys.argv) == 1:
     isFont = True
 elif len(sys.argv) == 3:
     isFont = False
-elif (sys.argv[1] == "f" or sys.argv[1] == "--font"):
+elif len(sys.argv[1]) == "f" or len(sys.argv[1]) == "--font":
     isFont = True
 else:
     print("Invalid usuage")
