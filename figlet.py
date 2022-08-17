@@ -7,7 +7,7 @@ figlet = Figlet()
 # Evaluating the given random text
 if len(sys.argv) == 1:
     isFont = True
-elif len(sys.argv) == 3 and sys.argv[1] in ["f", "--font"]:
+elif len(sys.argv) == 3 and (sys.argv[1] == "f" or sys.argv[1] =="--font"):
     isFont = False
 else:
     print("Invalid usuage")
@@ -33,4 +33,4 @@ response = figlet.renderText(text)
 
 # Display the output text
 print("Output: ")
-print(response)
+print(figlet.renderText(text))
