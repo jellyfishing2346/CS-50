@@ -3,7 +3,7 @@ from random import choice
 from pyfiglet import Figlet
 
 randomText = Figlet()
-fontUsuage = randomTex.getFonts()
+fontUsuage = randomTexts.getFonts()
 
 if len(sys.argv) == 1:
     user = input("Input: ")
