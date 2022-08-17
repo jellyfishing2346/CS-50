@@ -9,13 +9,13 @@ fontChoice = choice(fontUsuage)
 if len(sys.argv) == 1:
     user = input("Input: ")
     randomTexts.setFont(font=user)
-    print(figlet.renderText(fontChoice))
+    print(Figlet.renderText(fontChoice))
 elif len(sys.argv) == 3:
     if sys.argv[1] in ["-f", "--font"] and sys.argv[2] in fontChoice:
         user = input("Input: ")
         fontChoice = sys.argv[2]
-        figlet.setFont(font=user)
-        print(figlet.renderText(fontChoice))
+        Figlet.setFont(font=user)
+        print(Figlet.renderText(fontChoice))
     else:
         sys.exit("Invalid usuage")
 else:
