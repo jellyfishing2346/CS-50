@@ -11,7 +11,7 @@ elif len(sys.argv) == 3:
     isFont = False
 else:
     print("Invalid usuage")
-    sys.exit(0)
+    sys.exit(1)
 
 # This will list the fonts that are avaiable from the figlet package
 figlet.getFonts()
@@ -21,7 +21,7 @@ if isFont == False:
         fontUser = figlet.setFont(font=sys.argv[2])
     except:
         print("Invalid usuage")
-        sys.exit(0)
+        sys.exit(1)
 else:
     fontUser = random.choice(figlet.getFonts())
 
