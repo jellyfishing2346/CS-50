@@ -7,10 +7,10 @@ figlet = Figlet()
 # Evaluating the given random text
 if len(sys.argv) == 1:
     isFont = True
-elif len(sys.argv) == 3: 
+elif len(sys.argv) == 3:
     isFont = False
 elif (sys.argv[1] == "f" or sys.argv[1] == "--font"):
-    isFont = False
+    isFont = True
 else:
     print("Invalid usuage")
     sys.exit(1)
