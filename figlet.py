@@ -35,3 +35,4 @@ response = figlet.renderText(text)
 # Display the output text
 print("Output: ")
 print(response)
+sys.exit(1)
