@@ -4,10 +4,10 @@ from pyfiglet import Figlet
 
 randomTexts = Figlet()
 fontUsuage = randomTexts.getFonts()
+fontChoice = choice(fontUsuage)
 
 if len(sys.argv) == 1:
     user = input("Input: ")
-    fontChoice = choice(fontUsuage)
     randomTexts.setFont(font=user)
     print(figlet.renderText(fontChoice))
 elif len(sys.argv) == 3:
