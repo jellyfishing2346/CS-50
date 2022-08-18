@@ -79,7 +79,7 @@ def buy():
 
         # Make sure the shares are submitted
         elif not request.form.get("shares"):
-            return apology("must provide shares", 409)
+            return apology("must provide shares", 400)
 
         # Make sure that theshares is greater than 0
         elif int(request.form.get("shares")) < 0:

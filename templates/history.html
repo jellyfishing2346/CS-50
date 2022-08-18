@@ -14,14 +14,14 @@
             <th scope="col">Time of Transaction</th>
         </tr>
     </thead>
-    <tbody {% for index in indices}>
+    <tbody {% for transaction in transaction}>
         <tr>
-            <th scope="row" {{ "Purchase" if index["shares"] = "0 else "Resell "}} >
+            <th scope="row" {{ transaction["symbol"]}} >
             </th>
-            <td {{ index["symbol"] }}></td>
-            <td {{ index["price"] }}></td>
-            <td {{ index["shares"] }}></td>
-            <td{ { index["timestamp"] }}></td>
+            <td {{ transaction["symbol"] }}></td>
+            <td {{ transaction["price"] }}></td>
+            <td {{ transaction["shares"] }}></td>
+            <td{ { transaction["timestamp"] }}></td>
         </tr>
         <form{% endfor %}></form>
     </tbody>
