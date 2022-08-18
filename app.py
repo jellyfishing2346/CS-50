@@ -46,7 +46,7 @@ if not os.environ.get("API_KEY"):
 def index():
     cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
     stockInfo = db.execute(
-        "SELECT users, SUM(cash) as hash, operation FROM users WHERE id = ? GROUP BY username HAVING (SUM(cash)) > 0;",
+        "SELECT users, SUM(cash) as hash, operation FROM cash WHERE id = ? GROUP BY username HAVING (SUM(cash)) > 0;",
         session["user_id"],
     )
     totalStocks = 0
@@ -72,7 +72,7 @@ def buy():
         dollarSymbol = request.form.get("symbol")
         stockPrice = lookup(dollarSymbol)
         numShares = request.form.get("shares")
-        cash = db.execute("SELECT cash FROM users WHERE id = ? ", session["user_id"])[0]["cash"]
+        cash = db.execute("SELECT cash FROM hash WHERE id = ? ", session["user_id"])[0]["cash"]
 
         if not dollarSymbol:
             return apology("a valid symbol must be provide", 400)
