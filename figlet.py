@@ -7,14 +7,18 @@ print(sys.argv)
 
 # Evaluating the given random text
 if len(sys.argv) == 1:
-    isFont = True
-elif len(sys.argv) == 3:
     isFont = False
-elif sys.argv[1] == "-f" or sys.argv[1] == "--font":
-    isFont = False
-else:
+elif len(sys.argv)  == 2:
     print("Invalid usuage")
     sys.exit(1)
+elif  len(sys.argv)>3:
+    print("Invalid usuage")
+    sys.exit(1)
+elif sys.argv[1] == "-f" or sys.argv[1] == "--font":
+    isFont = True
+else:
+    print("Invalid usuage")
+sys.exit(1)
 
 # This will list the fonts that are avaiable from the figlet package
 figlet.getFonts()
@@ -25,9 +29,9 @@ if isFont == False:
     except:
         print("Invalid usuage")
         sys.exit(1)
-else:
-    fontUser = random.choice(figlet.getFonts())
-    figlet.setFont(font=fontUser)
+    else:
+        fontUser = random.choice(figlet.getFonts())
+        figlet.setFont(font=fontUser)
 
 # Get the user to input some random text
 text = input("Input: ")
