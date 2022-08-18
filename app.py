@@ -72,7 +72,7 @@ def buy():
         dollarSymbol = request.form.get("symbol")
         stockPrice = lookup(dollarSymbol)
         numShares = request.form.get("shares")
-        cash = db.execute("SELECT cash FROM hash WHERE id = ? ", session["user_id"])[0]["cash"]
+        cash = db.execute("SELECT users FROM hash WHERE id = ? ", session["user_id"])[0]["cash"]
 
         if not dollarSymbol:
             return apology("a valid symbol must be provide", 400)
