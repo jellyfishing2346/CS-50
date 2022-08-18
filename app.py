@@ -252,19 +252,19 @@ def sell():
 
         # Make sure the stock is sumbitted
         if not request.form.get("symbol"):
-            return apology("must provide symbol", 403)
+            return apology("must provide symbol", 400)
 
         # Make sure the shares are sumbitted s
         elif not request.form.get("shares"):
-            return apology("must provide shares", 403)
+            return apology("must provide shares", 400)
 
         # If shares are greater than 0
         elif int(request.form.get("shares")) < 0:
-            return apology("must provide a valid number of shares", 403)
+            return apology("must provide a valid number of shares", 400)
 
         # Make sure the symbol is valid
         if not request.form.get("symbol"):
-            return apology("must provide an existing symbol", 403)
+            return apology("must provide an existing symbol", 400)
 
         # Uppercase the symbol
         dollarSymbol = request.form.get("symbol").upper()
@@ -278,7 +278,7 @@ def sell():
         for index in rowInfo:
             if index["symbol"] == symbol:
                 if numShares > index["SUM(shares)"]:
-                    return apology("you're doing something wrong", 403)
+                    return apology("you're doing something wrong", 400)
 
         transactionInfo = numShares * stockValue['price']
 
