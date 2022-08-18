@@ -210,19 +210,19 @@ def register():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 403)
+            return apology("must provide username", 400)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 403)
+            return apology("must provide password", 400)
 
         # Ensure password was submitted
         elif not request.form.get("password_confirm"):
-            return apology("must provide password confirmation", 403)
+            return apology("must provide password confirmation", 400)
 
         # Ensure confirmation password is equal to password
         elif request.form.get("password") != request.form.get("password_confirm"):
-            return apology("password dont match", 403)
+            return apology("password dont match", 400)
         try:
             # Add into db
             newUser = db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)", userName=request.form.get(
@@ -230,7 +230,7 @@ def register():
 
         except:
             # Check if its unique
-            return apology("username is already registered", 403)
+            return apology("username is already registered", 400)
 
         # Remember the user
         session["user_id"] = newUser
