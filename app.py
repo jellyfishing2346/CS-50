@@ -278,10 +278,15 @@ def sell():
         )
         return render_template("sell.html", stockInfo=stockInfo)
 
+
+def errorhandler(error):
+    """Handle error"""
+    if not isinstance(error, HTTPException):
+        error = InternalServerError()
+    return apology(error.name, error.code)
+
 # Listen for errors
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
-
-
 
 
