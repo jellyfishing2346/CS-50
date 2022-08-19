@@ -166,7 +166,7 @@ def logout():
 def quote():
     if request.method == "POST":
         quotes = lookup(request.form.get("symbol"))
-        # Ensure the simbol was submitted
+        # Ensure the symbol was submitted
         if quotes is None:
             return apology("must provide valid symbol", 400)
         else:
@@ -283,6 +283,11 @@ def errorhandler(error):
     """Handle error"""
     if not isinstance(error, HTTPException):
         error = InternalServerError()
+          try:
+        dbCall = db.execute(. . .)
+      except Exception as e:
+        print(e)
+        return apology("db.execute fail: " + str(e), 400)
     return apology(error.name, error.code)
 
 
