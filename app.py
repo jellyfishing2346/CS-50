@@ -281,13 +281,11 @@ def sell():
 
 def errorhandler(error):
     """Handle error"""
-    if not isinstance(error, HTTPException):
-        error = InternalServerError()
-          try:
+      try:
         dbCall = db.execute(. . .)
-      except Exception as error:
+      except Exception as e:
         print(e)
-        return apology("db.execute fail: " + str(error), 400)
+        return apology("db.execute fail: " + str(e), 400)
 
 
 # Listen for errors
