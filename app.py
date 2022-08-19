@@ -90,7 +90,7 @@ def buy():
         if cash < (sharePrice):
             return apology("cash is not sufficient", 400)
         else:
-            db.execute("UPDATE cash SET users = cash - ? WHERE id = ?", sharePrice, session["user_id"],
+            db.execute("UPDATE users SET cash = cash - ? WHERE id = ?", sharePrice, session["user_id"],
             )
             db.execute( "INSERT INTO users (userID, symbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)", session["user_id"], dollarSymbol.upper(),shares, price["price"], "buy",
             )
@@ -264,7 +264,7 @@ def sell():
         )
 
         db.execute(
-            "UPDATE cash SET users = cash + ? WHERE id = ?",
+            "UPDATE users SET cash = cash + ? WHERE id = ?",
             shareValue,
             session["user_id"],
         )
