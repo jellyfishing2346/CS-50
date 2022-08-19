@@ -46,7 +46,7 @@ if not os.environ.get("API_KEY"):
 def index():
     cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
     stockInfo = db.execute(
-        "SELECT users, SUM(cash) as hash, operation FROM cash WHERE id = ? GROUP BY username HAVING (SUM(cash)) > 0;",
+        "SELECT symbol, SUM(shares) as shares, operation FROM stocks WHERE userID = ? GROUP BY symbol HAVING (SUM(shares)) > 0;",
         session["user_id"],
     )
     totalStocks = 0
@@ -72,7 +72,7 @@ def buy():
         dollarSymbol = request.form.get("symbol")
         stockPrice = lookup(dollarSymbol)
         numShares = request.form.get("shares")
-        cash = db.execute("SELECT users FROM hash WHERE id = ? ", session["user_id"])[0]["cash"]
+        cash = db.execute("SELECT cash FROM users WHERE id = ? ", session["user_id"])[0]["cash"]
 
         if not dollarSymbol:
             return apology("a valid symbol must be provide", 400)
@@ -92,7 +92,7 @@ def buy():
         else:
             db.execute("UPDATE users SET cash = cash - ? WHERE id = ?", sharePrice, session["user_id"],
             )
-            db.execute( "INSERT INTO users (userID, symbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)", session["user_id"], dollarSymbol.upper(),shares, price["price"], "buy",
+            db.execute( "INSERT INTO stocks (userID, symbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)", session["user_id"], symbol.upper(),shares, price["price"], "buy",
             )
 
             flash("Transaction successful")
@@ -213,7 +213,7 @@ def register():
         else:
             # Generate the hash of the password
             hashCode = generate_password_hash(
-                passWord, method="pbkdf2:sha256", salt_length=8
+                password, method="pbkdf2:sha256", salt_length=8
             )
             # Insert the new user
             db.execute(
