@@ -283,7 +283,7 @@ def sell():
         for row in rows:
             if row["symbol"] == symbol:
                 if shares > row["SUM(shares)"]:
-                    return apology("you're doing something wrong", 403)
+                    return apology("you're doing something wrong", 400)
 
         transaction = shares * stock['price']
 
