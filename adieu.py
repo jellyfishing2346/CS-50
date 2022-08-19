@@ -14,3 +14,4 @@ while True:
         print(f"Adieu, adieu to {adieu}")
         break
     nameStorage = nameStorage + (userName)
+    exit(0)
