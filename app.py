@@ -278,16 +278,6 @@ def sell():
         )
         return render_template("sell.html", stockInfo=stockInfo)
 
-
-def errorhandler(error):
-    """Handle error"""
-      try:
-        dbCall = db.execute(. . .)
-      except Exception as error:
-        print(e)
-        return apology("db.execute fail: " + str(error), 400)
-
-
 # Listen for errors
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
