@@ -264,7 +264,7 @@ def sell():
         )
 
         db.execute(
-            "UPDATE users SET cash = cash + ? WHERE id = ?",
+            "UPDATE cash SET users = cash + ? WHERE id = ?",
             shareValue,
             session["user_id"],
         )
