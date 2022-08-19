@@ -283,9 +283,9 @@ def errorhandler(error):
     """Handle error"""
       try:
         dbCall = db.execute(. . .)
-      except Exception as e:
+      except Exception as error:
         print(e)
-        return apology("db.execute fail: " + str(e), 400)
+        return apology("db.execute fail: " + str(error), 400)
 
 
 # Listen for errors
