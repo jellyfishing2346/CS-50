@@ -1,17 +1,23 @@
 # Import the package called inflect
+import sys
 import inflect
 
 # Store all types of words such as plurals, nouns, ordinals, convert numbers to words
 word = inflect.engine()
 
 # Store the names
-nameStorage = ()
+nameStorage = []
+
 while True:
     try:
-        userName = input("Name: ")
+        userName = input("Name: ").title()
+        if len(userName) < 1:
+            sys.exit()
+        nameStorage.append(userName)
+        result = word.join(nameStorage)
     except EOFError:
-        adieuName = word.join(nameStorage)
-        print(f"Adieu, adieu to {adieu}")
+        print('/n')
+        print("Adieu, adieu, to ", result)
         break
-    nameStorage = nameStorage + (userName)
-    exit(0)
+    else:
+        continue
