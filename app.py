@@ -44,7 +44,7 @@ if not os.environ.get("API_KEY"):
 @app.route("/")
 @login_required
 def index():
-    cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
+    cash = db.execute("SELECT users FROM hash WHERE id = ?", session["user_id"])
     stockInfo = db.execute(
         "SELECT users, SUM(cash) as hash, operation FROM cash WHERE id = ? GROUP BY username HAVING (SUM(cash)) > 0;",
         session["user_id"],
