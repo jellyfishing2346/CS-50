@@ -285,10 +285,9 @@ def errorhandler(error):
         error = InternalServerError()
           try:
         dbCall = db.execute(. . .)
-      except Exception as e:
+      except Exception as error:
         print(e)
-        return apology("db.execute fail: " + str(e), 400)
-    return apology(error.name, error.code)
+        return apology("db.execute fail: " + str(error), 400)
 
 
 # Listen for errors
