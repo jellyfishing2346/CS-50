@@ -13,4 +13,4 @@ while True:
         adieuName = word.join(nameStorage)
         print(f"Adieu, adieu to {adieu}")
         break
-    nameStorage = nameStorage + (userName, )
+    nameStorage = nameStorage + (userName)
