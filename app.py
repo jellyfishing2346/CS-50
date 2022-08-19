@@ -143,11 +143,11 @@ def login():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 403)
+            return apology("must provide username", 400)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 403)
+            return apology("must provide password", 400)
 
         # Query database for username
         rows = db.execute("SELECT * FROM users WHERE username = :username",
@@ -155,7 +155,7 @@ def login():
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return apology("invalid username and/or password", 403)
+            return apology("invalid username and/or password", 400)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
@@ -236,7 +236,7 @@ def register():
 
         except:
             # Check if its unique
-            return apology("username is already registered", 403)
+            return apology("username is already registered", 400)
 
         # Remember the user
         session["user_id"] = new_user
@@ -258,19 +258,19 @@ def sell():
 
         # Ensure stock was submitted
         if not request.form.get("symbol"):
-            return apology("must provide symbol", 403)
+            return apology("must provide symbol", 400)
 
         # Ensure shares was submitted
         elif not request.form.get("shares"):
-            return apology("must provide shares", 403)
+            return apology("must provide shares", 400)
 
         # Ensure shares is greater than 0
         elif int(request.form.get("shares")) < 0:
-            return apology("must provide a valid number of shares", 403)
+            return apology("must provide a valid number of shares", 400)
 
         # Ensure shock exists
         if not request.form.get("symbol"):
-            return apology("must provide an existing symbol", 403)
+            return apology("must provide an existing symbol", 400)
 
         # Lookup function
         symbol = request.form.get("symbol").upper()
