@@ -44,7 +44,7 @@ if not os.environ.get("API_KEY"):
 @app.route("/")
 @login_required
 def index():
-    cash = db.execute("SELECT users FROM hash WHERE id = ?", session["user_id"])
+    cashInfo = db.execute("SELECT hash FROM users WHERE id = ?", session["user_id"])
     stockInfo = db.execute(
         "SELECT users, SUM(cash) as hash, operation FROM cash WHERE id = ? GROUP BY username HAVING (SUM(cash)) > 0;",
         session["user_id"],
@@ -54,12 +54,12 @@ def index():
         quotes = lookup(stock["symbol"])
         stockValue["name"] = quotes["name"]
         stockValue["price"] = quotes["price"]
-        stockValue["total"] = stock["price"] * stock["shares"]
-        totalStocks = totalStocks + totalStock["total"]
+        stockValue["total"] = stockValue["price"] * stockValue["shares"]
+        totalStocks = totalStocks + totalStocks["total"]
 
-    cashAmount = totalStocks + cash[0]["cash"]
+    cashAmount = totalStocks + cashInfo[0]["cash"]
     return render_template(
-        "index.html", stockInfo=stockInfo, cash=cash[0], cashAmount=cashAmount
+        "index.html", stockInfo=stockInfo, cashInfo=cashInfo[0], cashAmount=cashAmount
     )
 
 
