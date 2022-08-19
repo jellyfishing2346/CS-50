@@ -1,5 +1,4 @@
 # Import the package called inflect
-import sys
 import inflect
 
 # Store all types of words such as plurals, nouns, ordinals, convert numbers to words
@@ -10,14 +9,13 @@ nameStorage = []
 
 while True:
     try:
-        userName = input("Name: ").title()
-        if len(userName) < 1:
-            sys.exit()
-        nameStorage.append(userName)
-        result = word.join(nameStorage)
+        # Retrieve the user's input
+        userName = input("Name: ")
+        nameStore.append(userName)
     except EOFError:
-        print('/n')
-        print("Adieu, adieu, to ", result)
+        # Create a new line and then terminate the loop
+        print()
         break
-    else:
-        continue
+# Print through the use of the inflect module
+result = words.join(nameStorage)
+print("Adieu, adieu, to " + result)
