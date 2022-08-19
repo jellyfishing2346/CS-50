@@ -11,11 +11,11 @@ while True:
     try:
         # Retrieve the user's input
         userName = input("Name: ")
-        nameStore.append(userName)
+        nameStorage.append(userName)
     except EOFError:
         # Create a new line and then terminate the loop
         print()
         break
 # Print through the use of the inflect module
-result = words.join(nameStorage)
-print("Adieu, adieu, to " + result)
+result = word.join(nameStorage)
+print("Adieu, adieu, to "+ result)
