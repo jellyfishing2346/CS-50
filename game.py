@@ -18,11 +18,11 @@ while True:
         userGuess = int(input("Guess: "))
         if userGuess > 0:
             if userGuess < randomNumber:
-                print("Too small")
+                print("Too small!")
             elif userGuess > randomNumber:
-                print("Too large")
+                print("Too large!")
             else:
-                print("Just right")
+                print("Just right!")
                 break
     except:
         pass
