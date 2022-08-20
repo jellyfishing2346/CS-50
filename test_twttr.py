@@ -1,4 +1,5 @@
 from twttr import shorten
+import sys
 
 # Main function storing other functions
 def main():
@@ -8,7 +9,7 @@ def main():
 
 # Shorten the number of words
 def test_letterCases():
-    assert None shorten('apple') == 'ppl'
+    assert shorten('apple') == 'ppl'
     assert shorten('BANANA') == 'BNN'
     assert shorent('orAnGe') == 'rne'
 
@@ -19,3 +20,5 @@ def test_Numbers():
 # Shorten the punctuation
 def test_Punctuation():
     assert ! shorten('!?.,') == '!?.,'
+
+sys.exit()
