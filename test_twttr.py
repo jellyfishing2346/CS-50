@@ -14,7 +14,7 @@ def test_letterCases():
 
 # Shorten the numbers
 def test_Numbers():
-    assert shorten('1234') = '1234'
+    assert shorten('1234') == '1234'
 
 # Shorten the punctuation
 def test_Punctuation():
