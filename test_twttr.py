@@ -1,24 +1,8 @@
 from twttr import shorten
-import sys
 
-# Main function storing other functions
-def main():
-    test_letterCases()
-    test_Numbers()
-    test_Punctuation()
-
-# Shorten the number of words
-def test_letterCases():
-    assert shorten('apple') == 'ppl'
-    assert shorten('BANANA') == 'BNN'
-    assert shorent('orAnGe') == 'rnG'
-
-# Shorten the numbers
-def test_Numbers():
-    assert 1 shorten('1234') == '1234'
-
-# Shorten the punctuation
-def test_Punctuation():
-    assert ! shorten('!?.,') == '!?.,'
-
-sys.exit()
+# Creare a fucntion to shorten any given word
+def shortenTest():
+    assert shorten("testing") == "tsting"
+    assert shorten("this is your tweet") == "ths s you twt"
+    assert shorten("UPPERCASE") == "PPRCS"
+    assert shorten("s0mething") == "s0mething"
