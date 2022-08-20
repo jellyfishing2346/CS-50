@@ -2,9 +2,9 @@ import random
 
 # Create a main function to determine to get the user's score
 def main():
-levelInfo = retrieveLevel()
-scoreResult = game(levelInfo)
-print("Score: ", scoreResult)
+    levelInfo = retrieveLevel()
+    scoreResult = game(levelInfo)
+    print("Score: ", scoreResult)
 
 # This function is to know what level the user is on
 def retrieveLevel():
@@ -20,14 +20,14 @@ def retrieveLevel():
 # Random integers for each level for the game
 def randomIntegers(levelInfo):
     if levelInfo == 1:
-        index = random.radint(0,9)
-        count = random.radint(0,9)
+        index = random.randint(0,9)
+        count = random.randint(0,9)
     elif levelInfo == 2:
-        index = random.radint(10,99)
-        count = random.radint(10,99)
-    elif levelInfo = 3:
-        index = random.radint(100,999)
-        count = random.radint(100,999)
+        index = random.randint(10,99)
+        count = random.randint(10,99)
+    elif levelInfo == 3:
+        index = random.randint(100,999)
+        count = random.randint(100,999)
     return index, count
 
 # This found generates the number of rounds
@@ -48,8 +48,8 @@ def roundGenerator(index, count):
         print(f"{index} + {count} = {index + count}")
         return False
 
- # This function will start the game
- def game(levelInfo):
+# This function will start the game
+def game(levelInfo):
     round = 0
     scoreTrack = 0
     while round < 10:
@@ -61,5 +61,5 @@ def roundGenerator(index, count):
     return scoreTrack
 
 # Main function set up
-if __name__ == "__main__:
+if __name__ == '__main__':
     main()
