@@ -1,64 +1,57 @@
 import random
+import sys
 
 # Create a main function to determine to get the user's score
 def main():
     levelInfo = retrieveLevel()
-    scoreResult = game(levelInfo)
-    print("Score: ", scoreResult)
+
+    mistakes = 1
+    scoreTrack = 0
+
+    for track in range(10):
+        index = randomIntegers(levelInfo)
+        for check in range(1):
+            count = randomIntegers(levelInfo)
+
+            result = index + count
+            equation = input(f"{index} + {count} = ")
+
+            if int(equation) == result:
+                scoreTrack += 1
+
+            while int(equation) != result:
+                mistakes += 1
+                print("EEE")
+                equation = input(f"{index} + {count} = ")
+                if mistakes >= 3:
+                    print(result)
+                    sys.exit("Score: " + str(scoreTrack))
+
+    print("Score: " + str(scoreTrack))
 
 # This function is to know what level the user is on
 def retrieveLevel():
-    while True:
-        try:
-            levelInfo = int(input("Level: "))
-            if levelInfo in [1,2,3]:
-                 break
-        except:
-            pass
-    return levelInfo
+    levelInfo = input("Level: ")
+
+    if levelInfo.isalpha() or int(levelInfo) <= 0 or int(levelInfo) > 3:
+        input("Level: ")
+    else:
+        levelInfo = int(levelInfo)
+        for game in [1,2,3]:
+            if levelInfo == game:
+                return levelInfo
 
 # Random integers for each level for the game
 def randomIntegers(levelInfo):
-    if levelInfo == 1:
-        index = random.randint(0,9)
-        count = random.randint(0,9)
-    elif levelInfo == 2:
-        index = random.randint(10,99)
-        count = random.randint(10,99)
-    elif levelInfo == 3:
-        index = random.randint(100,999)
-        count = random.randint(100,999)
-    return index, count
-
-# This found generates the number of rounds
-def roundGenerator(index, count):
-    attempts = 1
-    while attempts <= 3:
-        try:
-            equation = int(input(f"{index} + {count} = "))
-            if equation == (index + count):
-                return True
-            else:
-                print("EEE")
-                attempts += 1
-        except:
-            print("EEE")
-            attempts += 1
-            pass
-        print(f"{index} + {count} = {index + count}")
-        return False
-
-# This function will start the game
-def game(levelInfo):
-    round = 0
-    scoreTrack = 0
-    while round < 10:
-        index, count = randomIntegers(levelInfo)
-        responseAnalyze = roundGenerator(index, count)
-        if responseAnalyze == True:
-            scoreTrack += 1
-        round += 1
-    return scoreTrack
+    try:
+        if levelInfo == 1:
+            return random.randint(0,9)
+        elif levelInfo == 2:
+            return random.randint(10,99)
+        elif levelInfo == 3:
+            return random.randint(100,999)
+    except:
+        raise ValueError
 
 # Main function set up
 if __name__ == '__main__':
