@@ -11,7 +11,7 @@ def main():
 def test_letterCases():
     assert shorten('apple') == 'ppl'
     assert shorten('BANANA') == 'BNN'
-    assert shorent('orAnGe') == 'rne'
+    assert shorent('orAnGe') == 'rnG'
 
 # Shorten the numbers
 def test_Numbers():
