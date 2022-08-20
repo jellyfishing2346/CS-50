@@ -2,15 +2,15 @@ import random
 
 def main():
 
-    levelInfo = retrieveLevel()
+    level = get_level()
 
-    correct = randomIntegers(levelInfo)
+    correct = generate_integer(level)
 
     print("Score:", correct)
 
 
 
-def retrieveLevel():
+def get_level():
 
     while True:
 
@@ -32,11 +32,11 @@ def retrieveLevel():
 
 
 
-def randomIntegers(levelInfo):
+def generate_integer(level):
 
     scoreTracking = 0
 
-    if levelInfo == 1:
+    if level == 1:
 
         for _ in range(10):
 
@@ -70,7 +70,7 @@ def randomIntegers(levelInfo):
 
         return scoreTracking
 
-    elif levelInfo == 2:
+    elif level == 2:
 
         for _ in range(10):
 
@@ -104,7 +104,7 @@ def randomIntegers(levelInfo):
 
         return scoreTracking
 
-    else:
+    elif level == 3:
 
         for _ in range(10):
 
