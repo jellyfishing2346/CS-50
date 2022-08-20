@@ -38,7 +38,24 @@ def randomIntegers(levelInfo):
                     print('EEE')
                     rounds += 1
                 return scoreTrack
-        else:
+        elif levelInfo == 2:
+            for _ in range(10):
+                first = random.randint(10,99)
+                second = random.randint(10,99)
+                rounds = 0
+                while True:
+                    if rounds == 3:
+                        print(f'{first} + {second} = {first + second}')
+                        break
+                    index = int(input(f'{first} + {second} = '))
+                    if index == first + second:
+                        scoreTrack += 1
+                        break
+                    else:
+                        print('EEE')
+                        rounds += 1
+                return scoreTrack
+            elif levelInfo == 3:
             for _ in range(10):
                 first = random.randint(100,999)
                 second = random.randint(109,999)
