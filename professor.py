@@ -2,29 +2,29 @@ import random
 
 def main():
 
-    lvl = get_level()
+    levelInfo = retrieveLevel()
 
-    num_correct = generate_integer(lvl)
+    correct = randomIntegers(levelInfo)
 
-    print('Score:', num_correct)
+    print("Score:", correct)
 
 
 
-def get_level():
+def retrieveLevel():
 
     while True:
 
         try:
 
-            i = int(input('Select Level: '))
+            index = int(input("Level: "))
 
-            if i not in range(1,4):
+            if index not in range(1,4):
 
                 raise ValueError
 
             else:
 
-                return i
+                return index
 
         except ValueError:
 
@@ -32,33 +32,33 @@ def get_level():
 
 
 
-def generate_integer(level):
+def randomIntegers(levelInfo):
 
-    score = 0
+    scoreTracking = 0
 
-    if level == 1:
+    if levelInfo == 1:
 
         for _ in range(10):
 
-            a = random.randint(0,9)
+            first = random.randint(0,9)
 
-            b = random.randint(0,9)
+            second = random.randint(0,9)
 
-            attempt = 0
+            rounds = 0
 
             while True:
 
-                if attempt == 3:
+                if rounds == 3:
 
-                    print((f'{a} + {b} = {a+b}'))
+                    print((f"{first} + {second} = {first+second}"))
 
                     break
 
-                i = int(input(f'{a} + {b} = '))
+                index = int(input(f"{first} + {second} = "))
 
-                if i == a + b:
+                if index == first + second:
 
-                    score += 1
+                    scoreTracking += 1
 
                     break
 
@@ -66,33 +66,33 @@ def generate_integer(level):
 
                     print('EEE')
 
-                    attempt += 1
+                    rounds += 1
 
-        return score
+        return scoreTracking
 
-    elif level == 2:
+    elif levelInfo == 2:
 
         for _ in range(10):
 
-            a = random.randint(10,99)
+            first = random.randint(10,99)
 
-            b = random.randint(10,99)
+            second = random.randint(10,99)
 
-            attempt = 0
+            rounds = 0
 
             while True:
 
-                if attempt == 3:
+                if rounds == 3:
 
-                    print((f'{a} + {b} = {a+b}'))
+                    print((f'{first} + {second} = {first+second}'))
 
                     break
 
-                i = int(input(f'{a} + {b} = '))
+                index = int(input(f'{first} + {second} = '))
 
-                if i == a + b:
+                if index == first + second:
 
-                    score += 1
+                    scoreTracking += 1
 
                     break
 
@@ -100,33 +100,33 @@ def generate_integer(level):
 
                     print('EEE')
 
-                    attempt += 1
+                    rounds += 1
 
-        return score
+        return scoreTracking
 
     else:
 
         for _ in range(10):
 
-            a = random.randint(100, 999)
+            first = random.randint(100, 999)
 
-            b = random.randint(100, 999)
+            second = random.randint(100, 999)
 
-            attempt = 0
+            rounds = 0
 
             while True:
 
-                if attempt == 3:
+                if rounds == 3:
 
-                    print((f'{a} + {b} = {a+b}'))
+                    print((f'{first} + {second} = {first+second}'))
 
                     break
 
-                i = int(input(f'{a} + {b} = '))
+                index = int(input(f'{first} + {second} = '))
 
-                if i == a + b:
+                if index == first + second:
 
-                    score += 1
+                    scoreTracking += 1
 
                     break
 
@@ -134,12 +134,12 @@ def generate_integer(level):
 
                     print('EEE')
 
-                    attempt += 1
+                    rounds += 1
 
-    return score
+    return scoreTracking
 
 
 
-if _name_ == "__main__":
+if __name__ == "__main__":
 
     main()
