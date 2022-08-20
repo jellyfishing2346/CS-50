@@ -10,8 +10,8 @@ def main():
 def retrieveLevel():
     while True:
         try:
-            input = int(input("Level: "))
-            if not input in range(1,4):
+            index = int(input("Level: "))
+            if not index in range(1,4):
                 raise ValueError
             else:
                 return input
@@ -19,7 +19,7 @@ def retrieveLevel():
             continue
 
 # Random integers for each level for the game
-def randomIntegers():
+def randomIntegers(levelInfo):
     scoreTrack = 0
     if levelInfo == 1:
         for _ in range(10):
@@ -31,7 +31,7 @@ def randomIntegers():
                     print(f'{first} + {second} = {first + second}')
                     break
                 input = int(input(f'{first} + {second} = '))
-                if input == first + second:
+                if index == first + second:
                     scoreTrack += 1
                     break
                 else:
@@ -47,15 +47,15 @@ def randomIntegers():
                     if rounds == 3:
                         print(f'{first} + {second} = {first + second}')
                         break
-                    input = int(input(f'{first} + {second} = '))
-                    if input == first + second:
+                    index = int(input(f'{first} + {second} = '))
+                    if index == first + second:
                         scoreTrack += 1
                         break
                     else:
                         print('EEE')
                         rounds += 1
                 return scoreTrack
-                
+
 # Main function set up
 if __name__ == '__main__':
     main()
