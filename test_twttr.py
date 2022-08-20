@@ -19,4 +19,3 @@ def test_Numbers():
 # Shorten the punctuation
 def test_Punctuation():
     assert ! shorten('!?.,') == '!?.,'
-sys.exit(0)
