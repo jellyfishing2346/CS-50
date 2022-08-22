@@ -21,3 +21,7 @@ def returnTwenty():
 def returnHundred():
     assert value("What is up bro?") == 100
     assert value('good evening') == 100
+
+
+if __name__ == "__main__":
+    main()
