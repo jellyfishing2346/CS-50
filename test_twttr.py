@@ -1,4 +1,4 @@
-from twitter import shorten
+from twttr import shorten
 
 # Creare a fucntion to shorten any given word
 def shortenTest():
