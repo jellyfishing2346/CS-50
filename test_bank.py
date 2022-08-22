@@ -8,9 +8,10 @@ def main():
 
 # This function deals with conditions that return 0
 def returnZero():
-    assert value('hello mark') == 0
+    assert value('hello, mark') == 0
     assert value('Hello') == 0
-    assert value('Hello Mark') == 0
+    assert value('hello, Mark') == 0
+    assert value('Hello, Mark') == 0
 
 # This function deals with conditions that return 20
 def returnTwenty():
