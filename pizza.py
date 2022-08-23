@@ -18,5 +18,5 @@ if sys.argv[1].endswith(".csv"):
         sys.exit("File does not exist")
 else:
     sys.exit("Not a CSV file")
-    
-print(tabulate(tableInfo, headers="key", tablefmt="grid"))
+
+print(tabulate(tableInfo, index="key", tablefmt="grid"))
