@@ -35,4 +35,4 @@ def test_first_number_is_zero():
 def test_existing_characters():
     assert is_valid('SI4.1354') == False
     assert is_valid('CP 40') == False
-    assert is_valid('Hi!') == Falses
+    assert is_valid('Hi!') == False
