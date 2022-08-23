@@ -19,4 +19,4 @@ if sys.argv[1].endswith(".csv"):
 else:
     sys.exit("Not a CSV file")
 
-print(tabulate(tableInfo, index="key", tablefmt="grid"))
+print(tabulate(tableInfo, headers="keys", tablefmt="grid"))
