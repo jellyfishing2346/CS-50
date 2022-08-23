@@ -25,4 +25,5 @@ def main():
         else:
             lineInfo += 1
 
-    print(lineInfo)
+print(lineInfo)
+fileInfo.close()
