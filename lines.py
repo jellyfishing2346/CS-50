@@ -7,6 +7,7 @@ def main():
     try:
         with open(sys.argv[1], "r") as fileInfo:
             lineInfo = fileInfo.readlines()
+        lineInfo.close()
             # If the file is not opening
     except FileNotFoundError:
          sys.exit("File does not exist")
