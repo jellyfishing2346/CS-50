@@ -36,4 +36,3 @@ def check_command_line_is_empty(index):
     elif index.isspace():
         return False
     return True
-
