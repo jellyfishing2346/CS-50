@@ -26,4 +26,4 @@ def main():
             lineInfo += 1
 
     print(lineInfo)
-fileInfo.close()
+    fileInfo.close()
