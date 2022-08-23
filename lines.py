@@ -29,3 +29,6 @@ def main():
     print(lineInfo)
 
     fileInfo.close()
+
+if __name__ == "__main__":
+    main()
