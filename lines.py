@@ -8,6 +8,7 @@ def main():
     elif len(sys.argv) > 2:
         sys.exit("Too many command-line arguments")
     lineInfo = 0
+
     # Determine if the file is python
     if ".py" not in sys.argv[1]:
         try:
@@ -24,6 +25,5 @@ def main():
             pass
         else:
             lineInfo += 1
-
     print(lineInfo)
     fileInfo.close()
