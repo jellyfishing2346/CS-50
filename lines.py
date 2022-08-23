@@ -10,7 +10,7 @@ def main():
     lineInfo = 0
 
     # Determine if the file is python
-    if ".py" not in sys.argv[1]:
+    if  sys.argv[1].endswith(".py"):
         try:
             fileInfo = open(sys.argv[1], "r")
         except FileNotFoundError:
