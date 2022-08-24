@@ -19,7 +19,7 @@ def main():
 
     # Write the csv file with the following information
     with open(sys.argv[2], "w") as csvFile:
-        write = csv.DictReader(csvFile, fieldnames=["first", "last", "house"])
+        write = csv.DictWriter(csvFile, fieldnames=["first", "last", "house"])
         write.writerow({"first": "first", "last": "last", "house": "house"})
         for index in response:
             write.writerow({"first": index['first'], "last": index['last'], "house": index['house']})
