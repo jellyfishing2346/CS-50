@@ -6,8 +6,8 @@ def main():
 
 # Convert function
 def convert(s):
-    correct = re.search(r"^(([0-9][0-2]*):*([0-5][0-9])*) ([A-P]M) to [0-9][0-2]*):*([0-5][0-9])*) ([A-P]M)$", s)
-    if is correct:
+    correct = re.search(r"^(([0-9][0-2]*):*([0-5][0-9])*) ([A-P]M) to (([0-9][0-2]*):*([0-5][0-9])*) ([A-P]M)$", s)
+    if correct:
         time = correct.groups()
         if int(time[1]) > 12 or int(time[5]) > 12:
             raise ValueError
@@ -37,5 +37,5 @@ def time_format(hours, minutes, AM_PM):
         numTime = f"{numHours:02}" + ":" + minutes
     return numTime
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     main()
