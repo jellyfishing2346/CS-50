@@ -1,5 +1,5 @@
 import sys
-import cvs
+import csv
 
 # Main function
 def main():
