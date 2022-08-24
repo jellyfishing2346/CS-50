@@ -22,15 +22,15 @@ def convert(s):
 # Time format function
 def time_format(hours, minutes, AM_PM):
     if AM_PM == 'PM':
-        if hours == 12:
+        if float(hours) == 12:
             numHours = 12
         else:
-            numHours = str(hours) + 12
+            numHours = float(hours) + 12
     else:
-        if hours == 12:
+        if float(hours) == 12:
             numHours = 0
         else:
-            numHours = hours
+            numHours = float(hours)
     if minutes == None:
         numTime = f"{numHours:02}" + ":00"
     else:
