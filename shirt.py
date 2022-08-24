@@ -13,7 +13,7 @@ def main():
     # Open the shirt
     shirtInfo = Image.open("shirt.png")
     # Retrieve the size of the shirt
-    sizeAmount = shirt.size
+    sizeAmount = shirtInfo.size
     # Resize the muppet's image to fit the shirt
     muppetInfo = ImageOps.fit(muppetInfo, sizeAmount)
     # Paste the shirt on the muppet
@@ -44,4 +44,4 @@ def check_extensions_info(fileInfo):
     return False
 
 if __name__ == "__main__":
-main()
+    main()
