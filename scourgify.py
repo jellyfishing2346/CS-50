@@ -33,4 +33,7 @@ def check_command_line():
         sys.exit("Too many command-line arguments")
     # Determine if the file is a CSV file
     if ".csv" not in sys.argv[1] or ".csv" not in sys.argv[2]:
-        sys.exit("Could not read invalid_file.csv")
+        sys.exit("Not a CSV file")
+
+if __name__ = "__main__":
+    main()
