@@ -11,11 +11,11 @@ def test_format_info():
     assert validate(r'130') == False
     assert validate(r'130.0') == False
     assert validate(r'130.0.1') == False
-    assert validate(r'130.0.1.2') == False
+    assert validate(r'130.0.1.2') == True
 
 # Range function
 def test_range_info():
-    assert validate(r'300.300.300.300') == True
+    assert validate(r'300.300.300.300') == False
     assert validate(r'614.1.1.1') == False
     assert validate(r'1.614.1.1') == False
     assert validate(r'1.1.614.1') == False
