@@ -35,5 +35,5 @@ def check_command_line():
     if ".csv" not in sys.argv[1] or ".csv" not in sys.argv[2]:
         sys.exit("Not a CSV file")
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     main()
