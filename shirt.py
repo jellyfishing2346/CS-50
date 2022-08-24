@@ -43,5 +43,5 @@ def check_extensions_info(fileInfo):
         return True
     return False
 
-if __name__ == "__main__"
+if __name__ == "__main__":
 main()
