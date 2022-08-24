@@ -15,7 +15,7 @@ def main():
                 response.append({"first": name[1].lstrip(), "last": name[0], "house": index['house']})
     # If the file is not opening, then it doesn't exist
     except FileNotFoundError:
-        sys.exit("Could not read {sys.argv[1]}")
+        sys.exit(f"Could not read {sys.argv[1]}")
 
     # Write the csv file with the following information
     with open(sys.argv[2], "w") as csvFile:
