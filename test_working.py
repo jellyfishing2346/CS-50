@@ -23,6 +23,7 @@ def test_time_format_info():
 def test_wrong_hour_info():
     with pytest.raises(ValueError):
         convert('09:00 AM - 17:00')
+    
 
 # Check if the minutes are wrong
 def test_wrong_minute_info():
