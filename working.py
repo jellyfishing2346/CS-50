@@ -18,6 +18,7 @@ def convert(s):
         return first + " to " + second
     else:
         raise ValueError
+    
 
 # Time format function
 def time_format(hours, minutes, AM_PM):
