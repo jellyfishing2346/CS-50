@@ -33,13 +33,26 @@ def test_wrong_minute_info():
 # Invalid time format
 def test_invalid_time_format():
     with pytest.raises(ValueError):
-        convert('9 AM - 5 PM')
+        convert('9 AM:12 - 5 PM:14')
         convert('9 AM : 5 PM')
         convert('9 AM // 5 PM')
         convert('9 AM ---- 5 PM')
         convert('9 AM <-> 5 PM')
         convert('9 AM - 5 PM')
-        convert('10:7 AM // 5:1 PM')
+        convert('10:7 AM - 5:1 PM')
+        convert('10::7 AM - 5::1 PM')
+        convert('10:12:05 AM - 17:10:01 PM')
+        convert('1212 to 1111')
+        convert('9 to 5')
+        convert('8@00 PM to 8@00 AM')
+        convert('8-00 PM to 8-00 AM')
+        convert('8/00 PM to 8/00 AM')
+        convert('8 00 PM to 8 00 AM')
+        convert('15:15 to 17:10')
+        convert('9:0 AM to 5:0 PM')
+        convert('9:0 AM to 5:01 PM')
+        convert('9:01 AM to 5:0 PM')
+        convert('9:0 AM to 5:0 PM')
 
 if __name__ == "__main__":
     main()
