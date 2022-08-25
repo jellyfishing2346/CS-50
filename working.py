@@ -39,3 +39,4 @@ def time_format(hours, minutes, AM_PM):
 
 if __name__ == "__main__":
     main()
+exit(1)
