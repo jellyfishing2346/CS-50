@@ -21,7 +21,7 @@ def convert(s):
             raise ValueError
     except ValueError:
         sys.exit("ValueError")
-        
+
 # Time format function
 def time_format(hours, minutes, AM_PM):
     if AM_PM == 'PM':
