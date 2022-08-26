@@ -34,44 +34,26 @@ def test_wrong_minute_info():
 def test_invalid_time_format():
     with pytest.raises(ValueError):
         convert('9 AM:12 - 5 PM:14')
-    with pytest raises(ValueError):
         convert('9 AM : 5 PM')
-    with pytest raises(ValueError):
         convert('9 AM // 5 PM')
-    with pytest raises(ValueError):
         convert('9 AM ---- 5 PM')
-    with pytest raises(ValueError):
         convert('9 AM <-> 5 PM')
-    with pytest raises(ValueError):
         convert('9 AM - 5 PM')
-    with pytest raises(ValueError):
         convert('10:7 AM - 5:1 PM')
-    with pytest raises(ValueError):
         convert('10::7 AM - 5::1 PM')
-    with pytest raises(ValueError):
         convert('10:12:05 AM - 17:10:01 PM')
-    with pytest raises(ValueError):
         convert('1212 to 1111')
-    with pytest raises(ValueError):
         convert('9 to 5')
-    with pytest raises(ValueError):
         convert('8@00 PM to 8@00 AM')
-    with pytest raises(ValueError):
         convert('8-00 PM to 8-00 AM')
-    with pytest raises(ValueError):
         convert('8/00 PM to 8/00 AM')
-    with pytest raises(ValueError):
         convert('8 00 PM to 8 00 AM')
-    with pytest raises(ValueError):
         convert('15:15 to 17:10')
-    with pytest raises(ValueError):
         convert('9:0 AM to 5:0 PM')
-    with pytest raises(ValueError):
         convert('9:0 AM to 5:01 PM')
-    with pytest raises(ValueError):
         convert('9:01 AM to 5:0 PM')
-    with pytest raises(ValueError):
         convert('9:0 AM to 5:0 PM')
+    raise Exception("No numbers entered")
 
 if __name__ == "__main__":
     main()
