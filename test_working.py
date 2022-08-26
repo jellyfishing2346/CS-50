@@ -53,7 +53,7 @@ def test_invalid_time_format():
         convert('9:0 AM to 5:01 PM')
         convert('9:01 AM to 5:0 PM')
         convert('9:0 AM to 5:0 PM')
-    raise Exception("No numbers entered")
+    
 
 if __name__ == "__main__":
     main()
