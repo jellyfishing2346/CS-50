@@ -18,3 +18,6 @@ def test_um():
 # Space function
 def test_space():
     assert count('Hi um baby') == 1
+
+if __name__ == "__main__":
+    main()
