@@ -14,6 +14,7 @@ def test_letter_case():
 # Um function
 def test_um():
     assert count('yummi') == 0
+    assert count('umm') = 0
 
 # Space function
 def test_space():
