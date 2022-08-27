@@ -15,7 +15,7 @@ def main():
     birthdayInformation = date(int(numYear), int(numMonth), int(numDay))
     todayDateInfo = date.today()
     difference = todayDateInfo - birthdayInformation
-    minutes = difference.numDay * 24 * 60
+    minutes = difference.days * 24 * 60
     response = information.number_to_words(minutes, andword='')
     print(response.capitalize() + " minutes")
 
