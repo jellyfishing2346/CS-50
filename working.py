@@ -36,6 +36,7 @@ def time_format(hours, minutes, AM_PM):
     else:
         numTime = f"{numHours:02}" + ":" + minutes
     return numTime
+    
 
 if __name__ == "__main__":
     main()
