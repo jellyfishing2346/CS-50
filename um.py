@@ -7,9 +7,8 @@ def main():
 # Count function
 def count(s):
     um = re.findall(r"\b\W*um\W*", s, re.IGNORECASE)
-    return um
+    return len(um)
 
 
 if __name__ == "__main__":
     main()
-          
