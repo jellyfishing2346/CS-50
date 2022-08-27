@@ -5,6 +5,7 @@ def main():
     test_letter_case()
     test_um()
     test_space()
+    test_not_um()
 
 # Upper and lower case function for letters
 def test_letter_case():
@@ -18,6 +19,10 @@ def test_um():
 # Space function
 def test_space():
     assert count('Hi um baby') == 1
+
+# If not um don't count
+def test_not_um():
+    assert count('umm') == 0
 
 if __name__ == "__main__":
     main()
