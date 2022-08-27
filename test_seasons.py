@@ -17,7 +17,7 @@ def main():
     difference = todayDateInfo - birthdayInformation
     minutes = difference.numDay * 24 * 60
     response = information.number_to_words(minutes, andword='')
-    print(response.capitalize() + " minutes ")
+    print(response.capitalize() + " minutes")
 
 # Check the person's birthday
 def check_birthday_info(dateofBirth):
