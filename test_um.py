@@ -10,7 +10,7 @@ def main():
 # Upper and lower case function for letters
 def test_letter_case():
     assert count('Um, thank you for the album') == 1
-    assert count('Um, thank you, UM, for, um, the album') == 2
+    assert count('Um, thank you, UM, for, um, the album') == 3
 
 # Um function
 def test_um():
