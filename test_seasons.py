@@ -1,4 +1,4 @@
-from seasons import check
+from seasons import data
 
 # Main function
 def main():
@@ -6,9 +6,9 @@ def main():
 
 # This function is to verify a person's birthday info
 def test_check_birthday_info():
-    assert check("July 3, 1998") == None
-    assert check("1998-7-3") == None
-    assert check("1998-07-03") == ("1998", "07", "03")
+    assert data("July 3, 1998") == None
+    assert data("1998-7-3") == None
+    assert data("1998-07-03") == ("1998", "07", "03")
 
 if __name__ == "__main__":
     main()
