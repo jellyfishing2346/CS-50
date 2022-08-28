@@ -20,9 +20,5 @@ def test_um():
 def test_space():
     assert count('Hi um baby') == 1
 
-# If not um don't count
-def test_not_um():
-    assert count('umm') == 0
-
 if __name__ == "__main__":
     main()
