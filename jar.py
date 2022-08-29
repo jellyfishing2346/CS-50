@@ -2,7 +2,6 @@ class Jar:
     def __init__(self, capacity=12):
         self._capacity = capacity
         self.jars = []
-        return Jar(capacity, jars)
 
     def __str__(self):
         return self.size * '🍪'
@@ -38,3 +37,4 @@ jar.deposit(5)
 print(jar)
 jar.withdraw(2)
 print(jar)
+return capacity(jars, capacity)
