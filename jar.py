@@ -17,7 +17,6 @@ class Jar:
             raise ValueError
         for _ in range(n):
             self.jars.pop()
-        return n
 
     @property
     def capacity(self):
@@ -28,6 +27,7 @@ class Jar:
         if capacity < 0:
             raise ValueError
         self_.capacity = capacity
+        return n
 
     @property
     def size(self):
