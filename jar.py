@@ -28,7 +28,7 @@ class Jar:
         if capacity < 0:
             raise ValueError
         self_.capacity = capacity
-        return Jar()
+        return Jar(capacity, jars)
 
     @property
     def size(self):
