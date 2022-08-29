@@ -17,6 +17,7 @@ class Jar:
             raise ValueError
         for _ in range(n):
             self.jars.pop()
+        return n
 
     @property
     def capacity(self):
