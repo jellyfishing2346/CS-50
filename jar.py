@@ -1,6 +1,6 @@
 class Jar:
     def __init__(self, capacity=12):
-        self.capacity = capacity
+        self_.capacity = capacity
         self.jars = []
 
     def __str__(self):
