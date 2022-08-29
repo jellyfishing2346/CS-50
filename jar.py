@@ -1,6 +1,6 @@
 class Jar:
     def __init__(self, capacity=12):
-        self_.capacity = capacity
+        self._capacity = capacity
         self.jars = []
 
     def __str__(self):
@@ -37,3 +37,4 @@ jar.deposit(5)
 print(jar)
 jar.withdraw(2)
 print(jar)
+
