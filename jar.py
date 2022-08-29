@@ -18,15 +18,15 @@ class Jar:
         for _ in range(n):
             self.jars.pop()
 
-     @capacity.setter
+    @property
+    def capacity(self):
+        return self._capacity
+
+    @capacity.setter
     def capacity(self, capacity):
         if capacity < 0:
             raise ValueError
         self.capacity = capacity
-
-    @property
-    def capacity(self):
-        return self._capacity
 
     @property
     def size(self):
