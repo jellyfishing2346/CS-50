@@ -2,6 +2,7 @@ class Jar:
     def __init__(self, capacity=12):
         self._capacity = capacity
         self.jars = []
+        return
 
     def __str__(self):
         return self.size * '🍪'
@@ -26,8 +27,8 @@ class Jar:
     def capacity(self, capacity):
         if capacity < 0:
             raise ValueError
-        self.capacity = capacity
-        return capacity
+        self_.capacity = capacity
+        return Jar()
 
     @property
     def size(self):
