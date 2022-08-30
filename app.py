@@ -91,9 +91,9 @@ def buy():
             return apology("cash is not sufficient", 400)
         else:
             db.execute("UPDATE users SET cash = cash - ? WHERE id = ?", sharePrice, session["user_id"],
-            )
-            db.execute( "INSERT INTO users (userID, symbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)", session["user_id"], dollarSymbol.upper(),shares, price["price"], "buy",
-            )
+                       )
+            db.execute("INSERT INTO users (userID, symbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)", session["user_id"], dollarSymbol.upper(), shares, price["price"], "buy",
+                       )
 
             flash("Transaction successful")
             return redirect("/")
@@ -285,8 +285,8 @@ def errorhandler(error):
         error = InternalServerError()
     return apology(error.name, error.code)
 
+
 # Listen for errors
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
-
 
