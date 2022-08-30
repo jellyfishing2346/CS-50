@@ -69,7 +69,7 @@ def buy():
     """Buy shares of stock"""
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-        dollarSymbol = request.form.get("symbol")
+        dollarSymbol = request.form.get(" symbol")
         stockPrice = lookup(dollarSymbol)
         numShares = request.form.get("shares")
         cash = db.execute("SELECT users FROM hash WHERE id = ? ", session["user_id"])[0]["cash"]
