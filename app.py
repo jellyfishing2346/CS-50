@@ -48,7 +48,7 @@ def index():
     totalStocks = 0
     print(stockInfo)
     for stockValue in stockInfo:
-        quotes = lookup(stockValue["quotes"])
+        quotes = lookup(stockValue["cash"])
         stockValue["name"] = quotes["name"]
         stockValue["price"] = quotes["price"]
         stockValue["total"] = stockValue["price"] * stockValue["shares"]
