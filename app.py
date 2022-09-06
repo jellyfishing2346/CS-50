@@ -46,8 +46,9 @@ def index():
         session["user_id"],
     )
     totalStocks = 0
+    print(stockInfo)
     for stockValue in stockInfo:
-        quotes = lookup(stockValue["user_id"])
+        quotes = lookup(stockValue["quotes"])
         stockValue["name"] = quotes["name"]
         stockValue["price"] = quotes["price"]
         stockValue["total"] = stockValue["price"] * stockValue["shares"]
