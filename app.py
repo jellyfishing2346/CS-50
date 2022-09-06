@@ -254,7 +254,7 @@ def sell():
         db.execute(
             "INSERT INTO stocks (userID, symbol, shares, price, operation) VALUES (?, ?, ?, ?, ?)",
             session["user_id"],
-            symbol.upper(),
+            symbol,
             -numShares,
             stockPrice,
             "sell",
