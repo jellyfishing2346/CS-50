@@ -162,24 +162,24 @@ def logout():
 
 def quote():
     import logging
-    logging.basicConfig(filename='debug_render.log', encoding='utf-8', level=logging.DEBUG)
+    logging.basicConfig(filename='debug_render.txt', encoding='utf-8', level=logging.DEBUG)
     if request.method == "POST":
         quotes = lookup(request.form.get("symbol"))
         # Ensure the symbol was submitted
         if quotes is None:
             return apology("must provide valid symbol", 400)
         else:
-            logging.DEBUG('Logging before call to render')
-            logging.DEBUG(f'price = {stockPrice}')
+            logging.debug('Logging before call to render')
+            logging.debug(f'price = {stockPrice}')
             ret_value = render_template(
                 "quoted.html",
                 stockName=quotes["name"],
                 dollarSymbol=quotes["symbol"],
                 stockPrice=quotes["price"],
             )
-            logging.DEBUG('After call to render')
-            logging.DEBUG(ret_value)
-            logging.DEBUG('After  print of ret_value')
+            logging.debug('After call to render')
+            logging.debug(ret_value)
+            logging.debug('After  print of ret_value')
             return ret_value
     # User reached route via GET (as by clicking a link or via redirect)
     else:
