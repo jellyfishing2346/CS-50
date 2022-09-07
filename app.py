@@ -40,19 +40,14 @@ db = SQL("sqlite:///finance.db")
 @app.route("/")
 @login_required
 def index():
-    cashInfo = db.execute("SELECT hash FROM users WHERE id = ?", session["user_id"])
+    cashInfo = db.execute("SELECT hash, cash FROM users WHERE id = ?", session["user_id"])
     stockInfo = db.execute(
-    	"SELECT * FROM users INNER JOIN orders ON orders.user_id = user.id WHERE username"
+    	"SELECT * FROM users INNER JOIN orders ON orders.user_id = users.id WHERE username = ?"
        	,session["user_id"]
     )
 
     totalStocks = 0
-    print(stockInfo)
     for stockValue in stockInfo:
-
-
-
-
         quotes = lookup(stockValue["cash"])
         stockValue["name"] = quotes["name"]
         stockValue["price"] = quotes["price"]
@@ -275,7 +270,7 @@ def sell():
         return redirect("/")
     else:
         stockInfo = db.execute(
-            "SELECT symbol FROM stocks WHERE userID = ? GROUP BY symbol",
+            "SELECT symbol FROM users WHERE userID = ? GROUP BY symbol",
             session["user_id"],
         )
         return render_template("sell.html", stockInfo=stockInfo)
