@@ -42,7 +42,7 @@ db = SQL("sqlite:///finance.db")
 def index():
     cashInfo = db.execute("SELECT hash, cash FROM users WHERE id = ?", session["user_id"])
     stockInfo = db.execute(
-        "SELECT * FROM users INNER JOIN orders ON orders.user_id = users.id WHERE username = ?", session["user_id"]
+       "SELECT * FROM users INNER JOIN orders ON orders.user_id = users.id WHERE username = ?", session["user_id"]
     )
 
     totalStocks = 0
