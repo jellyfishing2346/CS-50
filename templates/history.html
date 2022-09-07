@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<form {% extends "layout.html" %}
+
+{% block title %}
+    The Order History Information
+{% block main %}></form>
+
+<table style='margin-top: 30px' class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Transaction</th>
+            <th scope="col">Dollars</th>
+            <th scope="col">Price</th>
+            <th scope="col">Shares</th>
+            <th scope="col">Time of Transaction</th>
+        </tr>
+    </thead>
+    <tbody {% for transaction in transaction}>
+        <tr>
+            <th scope="row" {{ transaction["symbol"]}} >
+            </th>
+            <td {{ transaction["symbol"] }}></td>
+            <td {{ transaction["price"] }}></td>
+            <td {{ transaction["shares"] }}></td>
+            <td{ { transaction["timestamp"] }}></td>
+        </tr>
+        <form{% endfor %}></form>
+    </tbody>
+</table>
+<form{% endblock %}></form>
