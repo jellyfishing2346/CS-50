@@ -42,13 +42,18 @@ db = SQL("sqlite:///finance.db")
 def index():
     cashInfo = db.execute("SELECT hash FROM users WHERE id = ?", session["user_id"])
     stockInfo = db.execute(
-        "SELECT cash, SUM(cash) as hash, username FROM users WHERE id = ? GROUP BY username HAVING (SUM(cash)) > 0;",
-        session["user_id"],
+    	"SELECT * FROM users INNER JOIN orders ON orders.user_id = user.id,  WHERE username"
+       	session["user_id"],
     )
+
     totalStocks = 0
     print(stockInfo)
     for stockValue in stockInfo:
-        quotes = lookup(stockValue["hash"])
+
+
+
+
+        quotes = lookup(stockValue["cash"])
         stockValue["name"] = quotes["name"]
         stockValue["price"] = quotes["price"]
         stockValue["total"] = stockValue["price"] * stockValue["shares"]
@@ -286,4 +291,3 @@ def errorhandler(error):
 # Listen for errors
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
-
