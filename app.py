@@ -168,7 +168,7 @@ def quote():
         else:
             return render_template(
                 "quoted.html",
-                userName=quotes["name"],
+                stockName=quotes["name"],
                 dollarSymbol=quotes["symbol"],
                 stockPrice=quotes["price"],
             )
