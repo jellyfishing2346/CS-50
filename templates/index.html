@@ -16,13 +16,13 @@
             </tr>
         </thead>
         <tbody>
-            <form{% for holding in holdings %}></form>
+            <form{% for index in rows %}></form>
             <tr>
-              <th scope="row">{{ holding["symbol"] }}</th>
-              <td>{{ holding["name"] }}</td>
-              <td>{{ holding["shares"] }}</td>
-              <td>{{ holding["price"] }}</td>
-              <td>{{ holding["total"] }}</td>
+              <th scope="row">{{ index["symbol"] }}</th>
+              <td>{{ index["name"] }}</td>
+              <td>{{ index["shares"] }}</td>
+              <td>{{ index["price"] }}</td>
+              <td>{{ index["total"] }}</td>
             </tr>
             {% endfor %}
             <tr>
@@ -30,7 +30,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td >{{ cash }}</td>
+                <td >{{ cash | usd}}</td>
             </tr>
         </tbody>
         <tfoot>
@@ -39,7 +39,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>{{ all_total }}</td>
+                <td>{{ all_total | usd }}</td>
             </tr>
         </tfoot>
     </table>
