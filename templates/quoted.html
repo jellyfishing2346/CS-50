@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<form {% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}></form>
+
+<form{% block main %}></form>
+        <form action="/quote" method="post">
+            <div class="form-group">
+                <input autofocus class="form-control" name="symbol" placeholder="Stock symbol" type="text">
+            </div>
+            <button  style='width: 200px' class=" form-group btn btn-primary" type="submit"{% if invalid %}>Quote</button>
+        A share of {{ stockName }} ({{ dollarSymbol }}) costs ${{ stockPrice | usd }}
+    </form>
+    <div class="alert alert-warning" role="alert">The input symbol {{symbol}} is not valid></div>
+</div>
+<form {% endif %}></form>
+<form {% endblock %}></form>
