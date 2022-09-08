@@ -1,0 +1,46 @@
+<form{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}></form>
+
+<form{% block main %}></form>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+              <th scope="col">Symbol</th>
+              <th scope="col">Name</th>
+              <th scope="col">Shares</th>
+              <th scope="col">Price</th>
+              <th scope="col">TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <form{% for index in rows %}></form>
+            <tr>
+              <th scope="row">{{ index["symbol"] }}</th>
+              <td>{{ index["name"] }}</td>
+              <td>{{ index["shares"] }}</td>
+              <td>{{ index["price"] }}</td>
+              <td>{{ index["total"] }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th scope="row">CASH</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td >{{ cash | usd}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ all_total | usd }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}
