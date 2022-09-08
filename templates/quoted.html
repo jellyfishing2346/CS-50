@@ -8,7 +8,7 @@
 <form{% block main %}></form>
 <div class="container">
     <form action="/quote" method="post">
-        A share of {{ stockName | str }} ({{ dollarSymbol | str }}) costs ${{ stockPrice | usd }}
+        A share of {{ stockName }} ({{ dollarSymbol }}) costs ${{ stockPrice | usd }}
     </form>
 </div>
 <form {% endblock %}></form>
