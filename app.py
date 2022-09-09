@@ -169,7 +169,9 @@ def quote():
         print(quotes)
         return render_template(
                 "quoted.html",
-                stockName=str(quotes),
+                stockName=quotes["name"],
+                dollarSymbol=quotes["symbol"],
+                stockPrice=quotes["price"],
             )
         # Ensure the symbol was submitted
         if quotes is None:
