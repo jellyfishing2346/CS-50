@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<form {% extends "layout.html" %}
+
+{% block title %}
+    Purchase Stock
+{% endblock %}
+
+{% block main %}>
+    <form action="/buy" method="post">
+        <div class="form-group">
+        <input autofocus required class="form-control" name="symbol" placeholder="Stock symbol" type="text">
+        <input required class="form-control" style="width: 120px" id="shares" name=" #shares " type="number" min="1">
+    </div>
+    <button style='width: 200px' class="form-group button button-success" type="sumbit"{% if invalid %}>Buy This Stock</button>
+    <div class="alert alert-warning" role="alert">This symbol is {{symbol}} is not valid</div>
+    </form>
+</form>
+<form {% endif %}
+{% endblock %}></form>
