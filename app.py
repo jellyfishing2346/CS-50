@@ -162,7 +162,7 @@ def logout():
 
 def quote():
     import logging
-    logging.basicConfig(filename='debug_render.txt', encoding='utf-8', level=logging.DEBUG)
+    logging.basicConfig(filename='', encoding='utf-8', level=logging.DEBUG)
     if request.method == "POST":
         quotes = lookup(request.form.get("symbol"))
         # Ensure the symbol was submitted
