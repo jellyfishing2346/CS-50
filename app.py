@@ -165,6 +165,12 @@ def quote():
     logging.basicConfig(filename='', encoding='utf-8', level=logging.DEBUG)
     if request.method == "POST":
         quotes = lookup(request.form.get("symbol"))
+        #print quotes here
+        print(quotes)
+        return render_template(
+                "quoted.html",
+                stockName=str(quotes),
+            )
         # Ensure the symbol was submitted
         if quotes is None:
             return apology("must provide valid symbol", 400)
