@@ -170,7 +170,7 @@ def quote():
             return apology("must provide valid symbol", 400)
         else:
             logging.debug('Logging before call to render')
-            stockPrice = quotes["price"]
+            stockPrice = usd(quotes["price"])
             logging.debug(f'price = {stockPrice}')
             ret_value = render_template(
                 "quoted.html",
