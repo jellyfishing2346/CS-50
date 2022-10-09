@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<form {% extends "layout.html" %}
+
+{% block title %}
+    Purchase Stock
+{% endblock %}></form>
+
+<form{% block main %}>
+    <form action="/buy" method="post">
+        <div class="form-group">
+        <input autofocus required class="form-control" name="symbol" placeholder="Stock symbol" type="text">
+        <input autocomplete="off" class="form-control mx-auto w-auto" min="1" name="shares" placeholder="Shares" type="number">
+    </div>
+    <button class="btn btn-primary" type="submit">Buy</button>
+    <div class="alert alert-warning" role="alert">This symbol is {{symbol}} is not valid</div>
+    <% block %/form>
+
