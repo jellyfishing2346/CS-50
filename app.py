@@ -42,7 +42,7 @@ db = SQL("sqlite:///finance.db")
 def index():
     cashInfo = db.execute("SELECT hash, cash FROM users WHERE id = ?", session["user_id"])
     stockInfo = db.execute(
-       "SELECT * FROM users INNER JOIN orders ON orders.user_id = users.id WHERE username = ?", session["user_id"]
+        "SELECT * FROM users INNER JOIN orders ON orders.user_id = users.id WHERE username = ?", session["user_id"]
     )
 
     totalStocks = 0
@@ -159,7 +159,6 @@ def logout():
 
 @app.route("/quote", methods=["GET", "POST"])
 @login_required
-
 def quote():
     import logging
     logging.basicConfig(filename='', encoding='utf-8', level=logging.DEBUG)
@@ -170,7 +169,6 @@ def quote():
             return apology("must provide valid symbol", 400)
         else:
             logging.debug('Logging before call to render')
-            logging.debug(f'price = {stockPrice}')
             ret_value = render_template(
                 "quoted.html",
                 stockName=quotes["name"],
@@ -184,6 +182,7 @@ def quote():
     # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("quote.html")
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
