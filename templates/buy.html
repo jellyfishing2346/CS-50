@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <form {% extends "layout.html" %}
+
+{% block title %}
     Purchase Stock></form>
 
 <form{% block main %}>
@@ -11,4 +13,4 @@
     <button class="btn btn-primary" type="submit">Buy</button>
     <div class="alert alert-warning" role="alert">This symbol is {{symbol}} is not valid</div>
     </form>
-</form>
+<{% endblock %}/form>
