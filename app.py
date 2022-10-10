@@ -160,19 +160,24 @@ def logout():
 @app.route("/quote", methods=["GET", "POST"])
 @login_required
 def quote():
-     if request.method == "POST":
-        symbol = request.form.get("symbol")
 
-        if not symbol:
-            return apology("Please input a symbol")
-
-        stock = lookup(symbol)
-
-        if not stock:
-            return apology("Symbol isn't valid")
-        return render_template("quoted.html", stock = stock)
+    if request.method == "POST":
+        quotes = lookup(request.form.get("symbol"))
+        # Ensure the symbol was submitted
+        if quotes is None:
+            return apology("must provide valid symbol", 400)
+        else:
+            logging.debug('Logging before call to render')
+            return render_template(
+                "quoted.html",
+                stockName=quotes["name"],
+                dollarSymbol=quotes["symbol"],
+                stockPrice=usd(quotes["price"]),
+            )
+    # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("quote.html")
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
