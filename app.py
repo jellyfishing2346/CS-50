@@ -49,8 +49,8 @@ def index():
     for stockValue in stockInfo:
         quotes = lookup(stockValue["cash"])
         stockValue["name"] = quotes["name"]
-        stockValue["price"] = usd(quotes["price"])
-        stockValue["total"] = usd(stockValue["price"]) * stockValue["shares"]
+        stockValue["price"] = quotes["price"]
+        stockValue["total"] = stockValue["price"] * stockValue["shares"]
         totalStocks = totalStocks + totalStocks["total"]
 
     cashAmount = totalStocks + cashInfo[0]["cash"]
@@ -169,7 +169,7 @@ def quote():
         else:
             return render_template(
                 "quoted.html",
-                stockName=lookup(request.form.get("stock").upper()),
+                stockName=lookup(request.form.get("stock")),
                 dollarSymbol=dollarSymbol["symbol"],
                 stockPrice=stockPrice["price"],
             )
