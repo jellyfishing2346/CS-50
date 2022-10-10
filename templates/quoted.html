@@ -8,7 +8,6 @@
 <form{% block main %}></form>
         <form action="/quote" method="post">
             <div class="form-group">
-                <input autofocus class="form-control" name="symbol" placeholder="Stock symbol" type="text">
             </div>
             <button  style='width: 200px' class=" form-group btn btn-primary" type="submit"{% if invalid %}>Quote</button>
         A share of {{ stockName }} ({{ dollarSymbol }}) costs {{ stockPrice | usd }}
