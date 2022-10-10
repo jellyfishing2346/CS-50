@@ -169,7 +169,7 @@ def quote():
         else:
             return render_template(
                 "quoted.html",
-                stockName=stockName["name"],
+                stockName=lookup(request.form.get("stock")),
                 dollarSymbol=dollarSymbol["symbol"],
                 stockPrice=stockPrice["price"],
             )
