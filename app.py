@@ -49,8 +49,8 @@ def index():
     for stockValue in stockInfo:
         quotes = lookup(stockValue["cash"])
         stockValue["name"] = quotes["name"]
-        stockValue["price"] = quotes["price"]
-        stockValue["total"] = stockValue["price"] * stockValue["shares"]
+        stockValue["price"] = usd(quotes["price"])
+        stockValue["total"] = usd(stockValue["price"]) * stockValue["shares"]
         totalStocks = totalStocks + totalStocks["total"]
 
     cashAmount = totalStocks + cashInfo[0]["cash"]
@@ -173,7 +173,7 @@ def quote():
                 "quoted.html",
                 stockName=quotes["name"],
                 dollarSymbol=quotes["symbol"],
-                stockPrice=quotes["price"],
+                stockPrice=usd(quotes["price"]),
             )
             logging.debug('After call to render')
             logging.debug(ret_value)
