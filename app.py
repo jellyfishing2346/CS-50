@@ -173,7 +173,7 @@ def quote():
                 "quoted.html",
                 stockName=quotes["name"],
                 dollarSymbol=quotes["symbol"],
-                stockPrice=usd(quotes["price"]),
+                stockPrice=quotes["price"],
             )
             logging.debug('After call to render')
             logging.debug(ret_value)
