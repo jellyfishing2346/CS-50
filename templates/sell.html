@@ -14,7 +14,7 @@
             <option value="{{symbol}}"> {{symbol}}</option>
             {% endfor %}
             </select>
-            <input required class="form-control button button-info" style='width: 120px' name="shares" placeholder="# shares" type="number" min="1">
+            <input autocomplete="off" class="form-control mx-auto w-auto" min="0" name="shares" placeholder="Shares" type="number">
         </div>
             <button style='width: 200px' class="form-group button button-info" type="sumbit"{% if invalid %}>Sell</button>
 
