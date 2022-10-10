@@ -170,9 +170,9 @@ def quote():
             logging.debug('Logging before call to render')
             return render_template(
                 "quoted.html",
-                stockName=quotes["name"],
-                dollarSymbol=quotes["symbol"],
-                stockPrice=usd(quotes["price"]),
+                stockName=stockNamequotes,
+                dollarSymbol=dollarSymbolquotes,
+                stockPrice=stockPrice,
             )
     # User reached route via GET (as by clicking a link or via redirect)
     else:
