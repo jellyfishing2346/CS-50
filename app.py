@@ -167,11 +167,10 @@ def quote():
         if quotes is None:
             return apology("must provide valid symbol", 400)
         else:
-            logging.debug('Logging before call to render')
             return render_template(
                 "quoted.html",
-                stockName=stockNamequotes,
-                dollarSymbol=dollarSymbolquotes,
+                stockName=stockName,
+                dollarSymbol=dollarSymbol,
                 stockPrice=stockPrice,
             )
     # User reached route via GET (as by clicking a link or via redirect)
