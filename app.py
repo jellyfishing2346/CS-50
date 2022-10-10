@@ -169,9 +169,9 @@ def quote():
         else:
             return render_template(
                 "quoted.html",
-                stockName=stockName,
-                dollarSymbol=dollarSymbol,
-                stockPrice=stockPrice,
+                stockName=stockName["name"],
+                dollarSymbol=dollarSymbol["symbol"],
+                stockPrice=stockPrice["price"],
             )
     # User reached route via GET (as by clicking a link or via redirect)
     else:
