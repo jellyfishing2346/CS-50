@@ -162,7 +162,7 @@ def logout():
 def quote():
 
     if request.method == "POST":
-        quotes = request.form.get("symbol").upper()
+        quotes = lookup(request.form.get("symbol"))
         # Ensure the symbol was submitted
         if quotes is None:
             return apology("must provide valid symbol", 400)
