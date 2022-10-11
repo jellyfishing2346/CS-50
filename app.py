@@ -170,8 +170,8 @@ def quote():
             return render_template(
                 "quoted.html",
                 stockName=lookup(request.form.get("stock")),
-                dollarSymbol=dollarSymbol["symbol"],
-                stockPrice=stockPrice["price"],
+                dollarSymbol=lookup(request.form.get("symbol")),
+                stockPrice=lookup(request.form.get("price")),
             )
     # User reached route via GET (as by clicking a link or via redirect)
     else:
