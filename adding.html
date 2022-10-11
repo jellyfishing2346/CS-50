@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h2>Add an Employee</h2>
+    <form action="/add" method="POST">
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Max" required>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Mustermann" required>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="gender">Gender</label>
+                <select class="form-control" name="gender" id="gender">
+                    <option value="W">Women</option>
+                    <option value="M">Men</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+        <h5 class="d-block">Birthday</h5>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="day">Day</label>
+                <select class="form-control" name="day" id="day">
+                    {% for day in range(1, 32) %}
+                        <option value="{{ day }}">{{ day }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="month">Month</label>
+                <select class="form-control" name="month" id="month">
+                    {% for month in range(1, 13) %}
+                        <option value="{{ month }}">{{ month }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="year">Year</label>
+                <select class="form-control" name="year" id="year">
+                    {% for year in range(0, 43) %}
+                        <option value="{{ 2000 - year }}">{{ 2000 - year }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="department">Student year</label>
+                <input type="text" class="form-control" name="year" id="year" placeholder="IT" required>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="workload">Class type</label>
+                <input type="number" class="form-control" name="class" id="class" placeholder="40" required>
+            </div>
+        </div>
+        <div class="form-row">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
