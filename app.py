@@ -160,7 +160,6 @@ def logout():
 @app.route("/quote", methods=["GET", "POST"])
 @login_required
 def quote():
-    quotes.upper() = None
     if request.method == "POST":
         quotes = lookup(request.form.get("symbol"))
         # Ensure the symbol was submitted
