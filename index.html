@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h2>Overview</h2>
+    <button class="filter btn-block btn btn-dark text-left">Filter <img src="/static/down-arrow.svg" class="float-right" id ="arrow" height="16px"></button>
+    <div class="filtercontent p-3 bg-light border border-dark" style="display: none">
+            <div class="form-inline">
+                <div class="form-group">
+                    <select class="custom-select" id="searchCategory">
+                        <option selected>--Category--</option>
+                        <option value="0">UID</option>
+                        <option value="1">First Name</option>
+                        <option value="2">Last Name</option>
+                        <option value="3">Birthdate</option>
+                        <option value="4">Age</option>
+                        <option value="5">Gender</option>
+                        <option value="6">Student Year</option>
+                        <option value="7">Class Type</option>
+                    </select>
+                </div>
+                <div class="form-group mx-3">
+                    <input type="text" class="form-control"id="query">
+                </div>
+                <button class="btn btn-primary mr-3" onclick="updateFilter()">Submit</button>
+                <button class="btn btn-danger" onclick="location.href='/';">Reset</button>
+            </div>
+    </div>
+    <table class="table mt-4" id="students">
+        <thead class="thead-dark">
+            <tr>
+                <th>UID <img src="/static/down-arrow.svg" id ="arrow0" height="16px" onclick="sort(0)"></th>
+                <th>First Name <img src="/static/down-arrow.svg" id ="arrow1" height="16px" onclick="sort(1)"></th>
+                <th>Last Name <img src="/static/down-arrow.svg" id ="arrow2" height="16px" onclick="sort(2)"></th>
+                <th>Birthdate <img src="/static/down-arrow.svg" id ="arrow3" height="16px" onclick="sort(3)"></th>
+                <th>Age <img src="/static/down-arrow.svg" id ="arrow4" height="16px" onclick="sort(4)"></th>
+                <th>Gender <img src="/static/down-arrow.svg" id ="arrow5" height="16px" onclick="sort(5)"></th>
+                <th>Weekly Workload <img src="/static/down-arrow.svg" id ="arrow6" height="16px" onclick="sort(6)"></th>
+                <th>Department <img src="/static/down-arrow.svg" id ="arrow7" height="16px" onclick="sort(7)"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employee in db_employees %}
+            <tr class="text-center">
+                <td>{{ student[0] }}</td>
+                <td>{{ student[1] }}</td>
+                <td>{{ student[2] }}</td>
+                <td>{{ student[3] }}</td>
+                <td>{{ student[4] }}</td>
+                <td>{{ student[5] }}</td>
+                <td>{{ student[6] }}</td>
+                <td>{{ student[7] }}</td>
+                <td><form action="/delete" method="POST">
+                <input type="hidden" name="uid" id="uid" value={{ employee[0] }}>
+                <button type="submit">Delete</button>
+                </form></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
