@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous"
+		></script>
+		<link href="styles.css" rel="stylesheet" />
+		<title>Top 3 Ivy League Schools</title>
+	</head>
+	<body>
+		<!-- this is a navbar from bootstrap -->
+		<nav class="navbar navbar-expand-md navbar-light bg-light border">
+			<ul class="navbar -nav mr-auto mt-2">
+				<li class="nav">
+					<a class="nav-link" href="index.html"> Home </a>
+				</li>
+
+				<li class="nav">
+					<a class="nav-link" href="harvard.html"> Harvard </a>
+				</li>
+
+				<li class="nav">
+					<a class="nav-link" href="yale.html"> Yale </a>
+				</li>
+
+				<li class="nav">
+					<a class="nav-link" href="darmouth.html"> Darmouth </a>
+				</li>
+			</ul>
+		</nav>
+
+		<main class="container-p5">
+			<h1>This is page for top schools</h1>
+			<h3>Let's talk about these colleges</h3>
+			<img src="TopSchools.jpg" />
+
+			<h4 class="about" Some interesting facts about Harvard></h4>
+			<table>
+				<tr></tr>
+			</table>
+			<div class="accordion" id="accordionExample">
+				<div class="accordion-item">
+					<h2 class="accordion-header">
+						<button
+							class="accordion-button"
+							type="button"
+							id="headingOne"
+							data-bs-toggle="collapse"
+							data-bs-target="#collapseOne"
+							aria-expanded="true"
+							aria-controls="collapseOne"
+						>
+							Havard
+						</button>
+					</h2>
+					<div
+						id="collapseOne"
+						class="accordion-collapse collapse show"
+						aria-labelledby="headingOne"
+						data-bs-parent="#accordionExample"
+					>
+						<div class="accordion-body">
+							One fact is that many of the students have earned the Pulitzer
+							prizes. Another fact is that a harvard alum named Dr. George
+							Parkman was murdered by Harvard professor Webster. The reason was
+							over Parkman lent money to Webster, but Webster didn't pay him
+							back. Parkman's burnt body was in Webster's lab which during the
+							trial was the first time forensic antropology to be used in a
+							court case. The third fact is about the three lies of the
+							founder's statue. The first lie is that the founder is not John
+							Harvard, but he was a major benefactor. The second lie is that the
+							institution is founed in 1636 not 1638. The third lie is the
+							sculpture of a random student not John Harvard.
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header">
+						<button
+							class="accordion-button collapsed"
+							type="button"
+							id="headingTwo"
+							data-bs-toggle="collapse"
+							data-bs-target="#collapseTwo"
+							aria-expanded="false"
+							aria-controls="collapseTwo"
+						>
+							Yale
+						</button>
+					</h2>
+					<div
+						id="collapseTwo"
+						class="accordion-collapse collapse"
+						aria-labelledby="headingTwo"
+						data-bs-parent="#accordionExample"
+					>
+						<div class="accordion-body">
+							One fact is that a Yale graduate named Nathan Hale(worst spy)
+							uttered the phrase "I only regret that I have but one life to lose
+							to my country. The institution created a statue for the patriot,
+							so the CIA tried to buy the statue but the institution refused. So
+							the agents broke in to make a mold cast to replicate the statue
+							while others swap the original with a decoy. Another fact is that
+							the CIA spy network is constructed by Yale graduates to help
+							enhance their technology. A third fact is the institution has a
+							secret society called Skull and Bones where rumor claims they
+							stole the skull of a Native American name Geronimo after
+							descreating a Native American burial ground.
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header">
+						<button
+							class="accordion-button collapsed"
+							type="button"
+							id="headingThree"
+							data-bs-toggle="collapse"
+							data-bs-target="#collapseThree"
+							aria-expanded="false"
+							aria-controls="collapseThree"
+						>
+							Dartmouth
+						</button>
+					</h2>
+					<div
+						id="collapseThree"
+						class="accordion-collapse collapse"
+						aria-labelledby="headingThree"
+						data-bs-parent="#accordionExample"
+					>
+						<div class="accordion-body">
+							One fact is that hundreds of students in the icy water of Occom
+							Pond for the polar bear swim during the winter carnival. Another
+							fact is a homecoming tradition where the freshman class create a
+							bonfire and runs around it a set number of times for their class
+							year. A third fact is that Dr.Seuss was a Darmouth student in the
+							Class of 1925 that was caught drinking and ban from
+							extracurriculars. He took the alias called "Seuss" to continuely
+							write the College's humor magazine.
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<div class="alert alert-dark" id="nameBox" role="alert"></div>
+	</body>
+	<script>
+		let name = prompt("Hello! please tell us your name:");
+		let nameBox = document.getElementById("nameBox");
+		nameBox.innerHTML += `Welcome ${name} , Thank you for visiting our site.`;
+	</script>
+</html>
+
