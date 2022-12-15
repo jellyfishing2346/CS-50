@@ -1,7 +1,6 @@
-# YOUR PROJECT TITLE
-#### Video Demo:  <https://youtube.com/shorts/P2B-79BHorI>
-#### Description: Student data base
-This video creates a list of students in the database.
-It creates the list of their names both first and last.
-It has there gender, class type, school year, and other
-pivot information found in a regular school setting.
+# Top Schools
+#### Video Demo:  < https://youtu.be/i1hVyVv14CM >
+#### Description: I designed a program that deals with which top school is the best.
+### The schools are yale, Harvard, and Darmouth. Also which school is the best.
+### I chose to make it to determine which school has more opportunities after
+### gradueating high school.
