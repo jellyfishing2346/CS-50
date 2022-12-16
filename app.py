@@ -97,7 +97,7 @@ def delete(filename):
 def login():
     session.clear()
     if request.method == "GET":
-        return render_template("login.html")
+        return render_template("index.html")
     else:
         username = request.form.get("username")
         password = request.form.get("password")
