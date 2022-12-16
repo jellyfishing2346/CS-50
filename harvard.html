@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <link href="styles.css" rel="stylesheet" />
+    <title>Top 3 Ivy League Schools</title>
+  </head>
+  <body>
+    <!-- this is a navbar from bootstrap -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light border">
+      <ul class="navbar -nav mr-auto mt-2">
+        <li class="nav">
+          <a class="nav-link" href="index.html"> Home </a>
+        </li>
+
+        <li class="nav">
+          <a class="nav-link" href="harvard.html"> Harvard </a>
+        </li>
+
+        <li class="nav">
+          <a class="nav-link" href="yale.html"> Yale </a>
+        </li>
+
+        <li class="nav">
+          <a class="nav-link" href="darmouth.html"> Darmouth </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="container-p5">
+      <h1>This is page for top schools</h1>
+      <h3>Let's talk about these colleges</h3>
+      <img src="harvard.jpg"/>
+
+      <h4 class="about" Some interesting facts about Harvard></h4>
+      <table>
+        <tr>
+        </tr>
+      </table>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button"
+              type="button"
+              id="headingOne"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              History
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              During the antebellum era, well after the end of slavery in Massachusetts, and even after the 13th Amendment
+              to the US Constitution conferred emancipation nationwide in 1865, vestiges—or legacies—of the system lingered.
+              Legacies of slavery such as exclusion, segregation, and discrimination against Blacks in employment, voting,
+              housing, healthcare, public accommodations, criminal punishment, and education, among other areas, persisted
+              in the South as well as the North.⁠Go to footnote 38 detail Notwithstanding the Commonwealth’s Revolutionary War
+              heritage as birthplace of the colonists’ struggle for liberty, its celebrated antislavery activists,
+              and its many brave Union veterans of the Civil War,
+              ⁠Go to footnote 39 detail racial inequality flourished in Massachusetts—and at Harvard—as Blacks
+              struggled for equal opportunity and full citizenship.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              id="headingTwo"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              Day of Service
+            </button>
+          </h2>
+          <div
+            id="collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              Harvard's first-ever Global Day of Service expands on an annual Harvard College orientation event
+              that welcomes first year students to their new communities of Boston, Cambridge, and Somerville through service.
+              Through this program we engage a broad range of students, community partners, faculty, staff, and alumni will work
+              together to support virtual volunteer projects.  This community-wide effort introduces incoming first-year students
+              to a vibrant culture of public service programs at Harvard. Throughout this program, we will highlight several ways
+              that all participants can stay civically engaged throughout the year.
+              The Global Day of Service unites students, staff, faculty, alums, and community partners around a shared purpose.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              id="headingThree"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseThree"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              Athletic Traditions
+            </button>
+          </h2>
+          <div
+            id="collapseThree"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              Football was one sport that students participated in at Harvard University.
+              It was organized by students although it was banned twice because it was violent and dangerous.
+              The alumni of the university became more involved in the sport, therefore, making football
+               a legacy for Harvard University. Harvard Crimson is also an athletic team of Harvard University.
+               The Harvard baseball program began competing in 1865. It has appeared in the four College World Series.
+               Harvard’s men’s basketball made an appearance in 2014 in  NCAA Division I Men’s Basketball Tournament and beat Cincinnati.
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+     <div class="alert alert-dark" id="nameBox" role="alert"></div>
+    </body>
+    <script>
+      let name = prompt("Hello! please tell us your name:");
+      let nameBox = document.getElementById("nameBox");
+      nameBox.innerHTML += `Welcome ${name} , Thank you for visiting our site.`;
+    </script>
+</html>
