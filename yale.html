@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <link href="styles.css" rel="stylesheet" />
+    <title>Top 3 Ivy League Schools</title>
+  </head>
+  <body>
+    <!-- this is a navbar from bootstrap -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light border">
+      <ul class="navbar -nav mr-auto mt-2">
+        <li class="nav">
+          <a class="nav-link" href="index.html"> Home </a>
+        </li>
+
+        <li class="nav">
+          <a class="nav-link" href="harvard.html"> Harvard </a>
+        </li>
+
+        <li class="nav">
+          <a class="nav-link" href="yale.html"> Yale </a>
+        </li>
+
+        <li class="nav">
+          <a class="nav-link" href="darmouth.html"> Darmouth </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="container-p5">
+      <h1>This is page for top schools</h1>
+      <h3>Let's talk about these colleges</h3>
+      <img src="yale.jpg"/>
+
+      <h4 class="about" Some interesting facts about Harvard></h4>
+      <table>
+        <tr>
+        </tr>
+      </table>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button"
+              type="button"
+              id="headingOne"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              History
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+            Yale has grown and evolved for 300-plus years,
+            passing many milestones and forging traditions along the way.
+            The university traces its roots to the 1640s,
+            when colonial clergymen led an effort to establish a local college
+            in the tradition of European liberal education.
+            In 1701 the Connecticut legislature adopted a charter
+            “to erect a Collegiate School.”
+            The school officially became Yale College in 1718, when it was renamed in
+            honor of Welsh merchant Elihu Yale, who had donated the proceeds from the sale
+            of nine bales of goods together with 417 books and a portrait of King George I.
+            Take a stroll through Yale’s three centuries of history, and learn about the
+            traditions that have become part of the fabric of our university.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              id="headingTwo"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              Handsome Dan
+            </button>
+          </h2>
+          <div
+            id="collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              Handsome Dan became the Yale mascot in 1889 when student
+              Andrew B. Graves saw the dog sitting in front
+              of a shop and purchased him from a New Haven blacksmith for $5.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              id="headingThree"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseThree"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              Military Traditions
+            </button>
+          </h2>
+          <div
+            id="collapseThree"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+             Yale’s connections to the military have been long-standing.
+             Yale President Ezra Stiles led more than half of the student body
+             to take on the overwhelming Redcoat troops in 1779 when the largest flotilla ever to enter
+             Long Island Sound attacked New Haven. Twenty-five Yale graduates served as Generals for the
+             Union Army during the Civil War, and almost 9,500 Yale graduates and students served in World War I.
+             During World War II, the campus was largely given over to the military, and over 20,000 soldiers,
+             sailors and marines were trained on campus at Yale.
+             In addition to basic training, Yale hosted the Army Specialized Training Program, the Navy’s V-12 program,
+             the Army Air Forces Technical Training School and a Military Intelligence School.
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+     <div class="alert alert-dark" id="nameBox" role="alert"></div>
+    </body>
+    <script>
+      let name = prompt("Hello! please tell us your name:");
+      let nameBox = document.getElementById("nameBox");
+      nameBox.innerHTML += `Welcome ${name} , Thank you for visiting our site.`;
+    </script>
+</html>
+
+
