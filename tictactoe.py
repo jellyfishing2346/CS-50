@@ -37,6 +37,7 @@ def player(board):
         else:
             return players
 
+
 def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
@@ -61,17 +62,20 @@ def result(board, action):
     boardCopy[index][count] = player(board)
     return boardCopy
 
+
 def checkIndex(board, players):
     for index in range(len(board)):
         if board[index][0] == players and board[index][1] == players and board[index][2] == players:
             return True
         return False
 
+
 def checkCount(board, players):
     for count in range(len(board)):
         if board[count][0] == players and board[count][1] == players and board[count][2] == players:
             return True
         return False
+
 
 def topBottom(board, players):
     counting = 0
@@ -81,6 +85,7 @@ def topBottom(board, players):
                 counting += 1
             return counting == 3
 
+
 def bottomTop(board, players):
     counting = 0
     for index in range(len(board)):
@@ -88,6 +93,7 @@ def bottomTop(board, players):
             if index == count and board[index][count] == players:
                 counting += 1
             return counting == 3
+
 
 def winner(board):
     """
@@ -99,6 +105,7 @@ def winner(board):
         return turns
     else:
         return None
+
 
 def terminal(board):
     """
@@ -127,6 +134,7 @@ def utility(board):
     else:
         return 0
 
+
 def maxValue(board):
     value = -math.inf
     if terminal(board):
@@ -135,6 +143,7 @@ def maxValue(board):
         value = max(value, minValue(result(board, action)))
     return value
 
+
 def minValue(board):
     value = -math.inf
     if terminal(board):
@@ -142,6 +151,7 @@ def minValue(board):
     for action in actions(board):
         value = min(value, maxValue(result(board, action)))
     return value
+
 
 def minimax(board):
     """
@@ -153,9 +163,9 @@ def minimax(board):
         work = []
         for action in actions(board):
             work.append([minValue(result(board, action)), action])
-        return sorted(plays, key=lambda index:index[0], reverse=True)[0][1]
+        return sorted(plays, key=lambda index: index[0], reverse=True)[0][1]
     elif player(board) == turns:
         work = []
         for action in actions(board):
             work.append([maxValue(result(board, action)), action])
-        return sorted(plays, key=lambda index:index[0], reverse=True)[0][1]
+        return sorted(plays, key=lambda index: index[0], reverse=True)[0][1]
