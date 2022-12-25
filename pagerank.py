@@ -57,7 +57,7 @@ def transition_model(corpus, page, damping_factor):
     linked to by `page`. With probability `1 - damping_factor`, choose
     a link at random chosen from all pages in the corpus.
     """
-    pageList =  {}
+    pageList = {}
     linkPage = len(corpus[page])
 
     if linkPage:
@@ -67,8 +67,9 @@ def transition_model(corpus, page, damping_factor):
             pageList[linkInformation] = (1 - damping_factor) / linkPage
     else:
         for linkInformation in corpus:
-            pageList[linkInformation] =  len(corpus)
+            pageList[linkInformation] = len(corpus)
     return pageList
+    
 
 
 def sample_pagerank(corpus, damping_factor, n):
