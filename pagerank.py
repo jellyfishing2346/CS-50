@@ -69,7 +69,6 @@ def transition_model(corpus, page, damping_factor):
         for linkInformation in corpus:
             pageList[linkInformation] = len(corpus)
     return pageList
-    
 
 
 def sample_pagerank(corpus, damping_factor, n):
@@ -92,6 +91,7 @@ def sample_pagerank(corpus, damping_factor, n):
             pageList[page] = ((index-1) * pageList[page] + current[page]) / index
         page = random.choices(list(pageList.keys()), list(pageList.values()))[0]
     return pageList
+    
 
 def iterate_pagerank(corpus, damping_factor):
     """
