@@ -177,7 +177,6 @@ def joint_probability(people, one_gene, two_genes, have_trait):
     return choice
 
 
-
 def update(probabilities, one_gene, two_genes, have_trait, p):
     """
     Add to `probabilities` a new joint probability `p`.
@@ -196,7 +195,7 @@ def normalize(probabilities):
     Update `probabilities` such that each probability distribution
     is normalized (i.e., sums to 1, with relative proportions the same).
     """
-    normalSet= probabilities.copy()
+    normalSet = probabilities.copy()
     for count in probabilities:
         for index in ['gene', 'trait']:
             summed = sum(probabilities[count][index].values())
