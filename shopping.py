@@ -7,6 +7,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 TEST_SIZE = 0.4
 
+
 def main():
 
     # Check command-line arguments
@@ -92,7 +93,6 @@ def load_data(filename):
             )
 
     return evidence, labels
-
 
 
 def train_model(evidence, labels):
