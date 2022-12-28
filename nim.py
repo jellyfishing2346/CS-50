@@ -112,13 +112,13 @@ class NimAI():
         given the previous Q-value `old_q`, a current reward `reward`,
         and an estiamte of future rewards `future_rewards`."""
 
-        #Use the formula:
+        # Use the formula:
 
-        #Q(s, a) <-
-         #old value estimate + alpha * (new value estimate - old value estimate)
+        # Q(s, a) <-
+        # old value estimate + alpha * (new value estimate - old value estimate)
 
-       #`alpha` is the learning rate, and `new value estimate`
-        #is the sum of the current reward and estimated future rewards.
+       #` alpha` is the learning rate, and `new value estimate`
+        # is the sum of the current reward and estimated future rewards.
 
         self.q[(tuple(state), action)] = old_q + self.alpha * ((reward + future_rewards) - old_q)
 
@@ -168,13 +168,16 @@ class NimAI():
                 best = possible_reward
 
         # if we are not using epsilon and using greedy algorithm, return the best action
-        if not epsilon: return best_action
+        if not epsilon:
+             return best_action
 
         # if we are using epsilon and using exploration rather than exploitation, choose action randomly
         weights = [(1 - self.epsilon) if action is None else self.epsilon for action in available]
         best_action = random.choices(list(available), weights, k=1)[0]
 
         return best_action
+
+
 def train(n):
     """
     Train an AI by playing `n` games against itself.
