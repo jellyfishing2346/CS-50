@@ -169,7 +169,7 @@ class NimAI():
 
         # if we are not using epsilon and using greedy algorithm, return the best action
         if not epsilon:
-             return best_action
+            return best_action
 
         # if we are using epsilon and using exploration rather than exploitation, choose action randomly
         weights = [(1 - self.epsilon) if action is None else self.epsilon for action in available]
