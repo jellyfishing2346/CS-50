@@ -65,8 +65,8 @@ def load_data(data_dir):
             # don't forget to join the directory path with the filename
             internet = cv2.imread(os.path.join(information, filename))
             # resize the hell out of the image
-            internet= cv2.resize(img, (IMG_WIDTH, IMG_HEIGHT))
-            internet= cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            internet = cv2.resize(img, (IMG_WIDTH, IMG_HEIGHT))
+            internet = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             # append the image and its corresponding category
             images.append(internet)
             labels.append(category)
