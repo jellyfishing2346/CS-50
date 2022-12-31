@@ -72,6 +72,7 @@ def preprocess(sentence):
     word = [index for index in word if index not in removed]
     return word
 
+
 def np_chunk(tree):
     """
     Return a list of all noun phrase chunks in the sentence tree.
@@ -84,6 +85,7 @@ def np_chunk(tree):
         if index.label() == "NP":
             chunks.append(index)
     return chunks
+
 
 if __name__ == "__main__":
     main()
