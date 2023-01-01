@@ -108,9 +108,8 @@ def top_files(query, files, idfs, n):
         if info != 0:
             track[filename] = info
 
-    sorted_by_score = [k for k,  in sorted(scores.items(), key=lambda x: x[1], reverse=True)]
+    sorted_by_score = [k for k, in sorted(scores.items(), key=lambda x: x[1], reverse=True)]
     return sorted_by_score[:n]
-
 
 
 def top_sentences(query, sentences, idfs, n):
