@@ -1,7 +1,7 @@
 import itertools
 
 
-class Sentence():
+class Sentence:
 
     def evaluate(self, model):
         """Evaluates the logical sentence."""
@@ -26,6 +26,7 @@ class Sentence():
     @classmethod
     def parenthesize(cls, s):
         """Parenthesizes an expression if not already parenthesized."""
+
         def balanced(s):
             """Checks if a string has balanced parentheses."""
             count = 0
@@ -37,8 +38,11 @@ class Sentence():
                         return False
                     count -= 1
             return count == 0
-        if not len(s) or s.isalpha() or (
-            s[0] == "(" and s[-1] == ")" and balanced(s[1:-1])
+
+        if
+        not len(
+            s) or s.isalpha()
+            or (s[0] == "(" and s[-1] == ")" and balanced(s[1:-1])
         ):
             return s
         else:
@@ -46,7 +50,6 @@ class Sentence():
 
 
 class Symbol(Sentence):
-
     def __init__(self, name):
         self.name = name
 
