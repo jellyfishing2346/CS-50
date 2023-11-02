@@ -13,7 +13,10 @@ class Sentence():
 
     def symbols(self):
         """Returns a set of all symbols in the logical sentence."""
-        return set()
+        numSymbol = set()
+        for s in self.conjucts:
+            numSymbol.update(s.symbols())
+        return numSymbol
 
     @classmethod
     def validate(cls, sentence):
@@ -127,7 +130,7 @@ class And(Sentence):
                            for conjunct in self.conjuncts])
 
     def symbols(self):
-        return set.union(*[conjunct.symbols() for conjunct in self.conjuncts])
+        return set.union(*[conjunct.symbols() for conjunct in self.conjuncts]) if self.conjuncts else set()
 
 
 class Or(Sentence):

@@ -9,12 +9,25 @@ BKnave = Symbol("B is a Knave")
 CKnight = Symbol("C is a Knight")
 CKnave = Symbol("C is a Knave")
 
+# Common knowledge base
+knowledgeBase = And(
+    Or(AKnight, AKnave),
+    Or(BKnight, BKnave),
+    Or(CKnight, CKnave),
+    Not(And(AKnight, AKnave)),
+    Not(And(BKnight, BKnave)),
+    Not(And(CKnight, CKnave)),
+)
+
 # Puzzle 0
 # A says "I am both a knight and a knave."
 knowledge0 = And(
     knowledgeBase,
-    Implication(AKnight, And(AKnave, BKnave)),
-    Implication(AKnave, Not((And(AKnave, BKnave))))
+    Or(AKnight, AKnave),
+    Or(And(AKnight, AKnight),
+    (And(AKnave, Not(AKnight)))),
+    Not(And(AKnight, AKnave)),
+    Not(And(AKnave, AKnave))
 )
 
 # Puzzle 1
@@ -43,14 +56,18 @@ knowledge2 = And(
 # B says "A said 'I am a knave'."
 # B says "C is a knave."
 # C says "A is a knight."
+
 knowledge3 = And(
-    Implication(AKnight, Or(AKnight, AKnave)),
-    Implication(AKnave, Not(AKnight, AKnave)),
-    Or(Implication(BKnight, Or(Implication(AKnight, AKnave)),Implication(AKnight, Not(AKnave)), Implication(BKnave, Not(Or(Implication(AKnight, AKnave), Implication(AKnight, Not(AKnave)))))))),
-    Implication(BKnight, CKnave),
-    Implication(BKnave, Not(CKnave)),
-    Implication(CKnight, AKnight)
-    Implication(CKnave, Not(AKnight))
+    knowledgeBase,
+    Or((And(AKnight, Or(Implication(AKnight, AKnight), Implication(AKnave, AKnight)))),
+    And(AKnave, Or(Implication(AKnight, AKnave), Implication(AKnave, AKnave)))),
+    Or(And(BKnight, Implication(AKnight, AKnave)),
+       And(BKnave, Implication(AKnave, AKnave))),
+    Or(And(BKnight, CKnave),
+       And(BKnave, Not(CKnave))),
+    Or(And(CKnight, CKnave),
+       And(CKnave, Not(AKnight))),
+
 )
 
 
@@ -68,9 +85,9 @@ def main():
             print("    Not yet implemented.")
         else:
             for symbol in symbols:
+               # print("Checking symbol: ", symbol)
                 if model_check(knowledge, symbol):
                     print(f"    {symbol}")
-
 
 if __name__ == "__main__":
     main()
