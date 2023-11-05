@@ -23,11 +23,12 @@ def player(board):
     """
     counter = 0
     for row in board:
-       for cell in row:
-          if cell is not EMPTY:  # assuming EMPTY is a constant defined elsewhere
-             counter += 1
-    return X if counter % 2 == 0 else O  # assuming X and O are constants defined elsewhere
-
+        for cell in row:
+            if cell is not EMPTY:  # assuming EMPTY is a constant defined elsewhere
+                counter += 1
+    return (
+        X if counter % 2 == 0 else O
+    )  # assuming X and O are constants defined elsewhere
 
 
 def actions(board):
@@ -104,19 +105,19 @@ def winner(board):
     Returns the winner of the game, if there is one.
     """
     if (
-        checkIndex(board, 'X')
-        or checkCount(board, 'X')
-        or topBottom(board, 'X')
-        or bottomTop(board, 'X')
+        checkIndex(board, "X")
+        or checkCount(board, "X")
+        or topBottom(board, "X")
+        or bottomTop(board, "X")
     ):
-        return 'X'
+        return "X"
     elif (
-        checkIndex(board, 'O')
-        or checkCount(board, 'O')
-        or topBottom(board, 'O')
-        or bottomTop(board, 'O')
+        checkIndex(board, "O")
+        or checkCount(board, "O")
+        or topBottom(board, "O")
+        or bottomTop(board, "O")
     ):
-        return 'O'
+        return "O"
     else:
         return None
 
@@ -183,4 +184,3 @@ def minimax(board):
         return max(work, key=lambda numIndex: numIndex[0])[1]
     else:
         return min(work, key=lambda numIndex: numIndex[0])[1]
-
