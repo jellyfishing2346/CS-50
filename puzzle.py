@@ -22,13 +22,12 @@ knowledgeBase = And(
 # Puzzle 0
 # A says "I am both a knight and a knave."
 knowledge0 = And(
-    knowledgeBase,
     Or(AKnight, AKnave),
-    Or(And(AKnight, AKnight),
-    (And(AKnave, Not(AKnight)))),
     Not(And(AKnight, AKnave)),
-    Not(And(AKnave, AKnave))
+    Biconditional(AKnight, And(AKnight, AKnave)),
+    Biconditional(AKnave, Not(And(AKnight, AKnave))),
 )
+
 
 # Puzzle 1
 # A says "We are both knaves."
@@ -36,7 +35,7 @@ knowledge0 = And(
 knowledge1 = And(
     knowledgeBase,
     Implication(AKnight, And(AKnave, BKnave)),
-    Implication(AKnave, Not((And(AKnave, BKnave))))
+    Implication(AKnave, Not((And(AKnave, BKnave)))),
 )
 
 # Puzzle 2
@@ -59,15 +58,14 @@ knowledge2 = And(
 
 knowledge3 = And(
     knowledgeBase,
-    Or((And(AKnight, Or(Implication(AKnight, AKnight), Implication(AKnave, AKnight)))),
-    And(AKnave, Or(Implication(AKnight, AKnave), Implication(AKnave, AKnave)))),
-    Or(And(BKnight, Implication(AKnight, AKnave)),
-       And(BKnave, Implication(AKnave, AKnave))),
-    Or(And(BKnight, CKnave),
-       And(BKnave, Not(CKnave))),
-    Or(And(CKnight, CKnave),
-       And(CKnave, Not(AKnight))),
-
+    Or(
+        And(AKnight, Implication(AKnight, AKnight)),
+        And(AKnave, Implication(AKnave, AKnight)),
+    ),
+    Biconditional(BKnight, And(AKnave, Implication(AKnight, AKnave))),
+    Biconditional(BKnave, Not(And(AKnave, Implication(AKnight, AKnave)))),
+    Biconditional(CKnight, AKnight),
+    Biconditional(CKnave, Not(AKnight)),
 )
 
 
@@ -77,7 +75,7 @@ def main():
         ("Puzzle 0", knowledge0),
         ("Puzzle 1", knowledge1),
         ("Puzzle 2", knowledge2),
-        ("Puzzle 3", knowledge3)
+        ("Puzzle 3", knowledge3),
     ]
     for puzzle, knowledge in puzzles:
         print(puzzle)
@@ -85,9 +83,10 @@ def main():
             print("    Not yet implemented.")
         else:
             for symbol in symbols:
-               # print("Checking symbol: ", symbol)
-                if model_check(knowledge, symbol):
+                result = model_check(knowledge, symbol)
+                if result:
                     print(f"    {symbol}")
+
 
 if __name__ == "__main__":
     main()
