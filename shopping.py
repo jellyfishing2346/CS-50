@@ -2,14 +2,16 @@ import csv
 import sys
 
 
+
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import confusion_matrix
 
 TEST_SIZE = 0.4
 
 
 def main():
-
     # Check command-line arguments
     if len(sys.argv) != 2:
         sys.exit("Usage: python shopping.py data")
@@ -20,10 +22,20 @@ def main():
         evidence, labels, test_size=TEST_SIZE
     )
 
-    # Train model and make predictions
+    # Train model and making predictions
     model = train_model(X_train, y_train)
     predictions = model.predict(X_test)
     sensitivity, specificity = evaluate(y_test, predictions)
+
+    # Load data from spreadsheet and split into the train and test sets
+    evidence, labels = load_data(sys.argv[1])
+
+    # Scale the features
+    scaler = StandardScaler()
+    evidence_scaled = scaler.fit_transform(evidence)
+
+    # Use cross-validation
+    model = train_model(evidence_scaled, labels)
 
     # Print results
     print(f"Correct: {(y_test == predictions).sum()}")
@@ -62,35 +74,38 @@ def load_data(filename):
     """
     evidence, labels = [], []
     import calendar
-    month_to_number = {name: num - 1 for num, name in enumerate(calendar.month_abbr) if num}
+
+    month_to_number = {
+        name: num - 1 for num, name in enumerate(calendar.month_abbr) if num
+    }
 
     with open(filename) as data:
         reader = csv.reader(data)
         next(reader)
         for index in reader:
-            evidence.append([
-                int(index[0]),
-                float(index[1]),
-                int(index[2]),
-                float(index[3]),
-                int(index[4]),
-                float(index[5]),
-                float(index[6]),
-                float(index[7]),
-                float(index[8]),
-                float(index[9]),
-                month_to_number[index[10][:3]],  # Month
-                int(index[11]),
-                int(index[12]),
-                int(index[13]),
-                int(index[14]),
-                1 if index[15] == 'Returning_Visitor' else 0,  # VisitorType
-                int((index[16]) == 'TRUE'),
-            ])
-
-            labels.append(
-                int(index[17] == 'TRUE')
+            evidence.append(
+                [
+                    int(index[0]),
+                    float(index[1]),
+                    int(index[2]),
+                    float(index[3]),
+                    int(index[4]),
+                    float(index[5]),
+                    float(index[6]),
+                    float(index[7]),
+                    float(index[8]),
+                    float(index[9]),
+                    month_to_number[index[10][:3]],  # Month
+                    int(index[11]),
+                    int(index[12]),
+                    int(index[13]),
+                    int(index[14]),
+                    1 if index[15] == "Returning_Visitor" else 0,  # VisitorType
+                    int((index[16]) == "TRUE"),
+                ]
             )
+
+            labels.append(int(index[17] == "TRUE"))
 
     return evidence, labels
 
@@ -100,7 +115,7 @@ def train_model(evidence, labels):
     Given a list of evidence lists and a list of labels, return a
     fitted k-nearest neighbor model (k=1) trained on the data.
     """
-    nModel = KNeighborsClassifier(neighbors=1)
+    nModel = KNeighborsClassifier(n_neighbors=5)
     nModel.fit(evidence, labels)
     return nModel
 
@@ -120,23 +135,18 @@ def evaluate(labels, predictions):
     representing the "true negative rate": the proportion of
     actual negative labels that were accurately identified.
     """
-    sensitivity, specificity = 0.0, 0.0
-    positive, negative = 0.0, 0.0
+    confuse = confusion_matrix(labels, predictions)
 
-    for label, prediction in zip(index, count):
-        if label == 1:
-            positive += 1
-            if label == prediction:
-                sensitivity += 1
-        else:
-            negative += 1
-            if label == prediction:
-                specificity += 1
+    true_positives = confuse[1, 1]
+    false_positives = confuse[0, 1]
+    true_negatives = confuse[0, 0]
+    false_negatives = confuse[1, 0]
 
-        sensitivity /= positive
-        specificity /= negative
+    sensitivity = true_positives / (true_positives + false_negatives)
+    specificity = true_negatives / (true_negatives + false_positives)
 
-        return sensitivity, specificity
+
+    return sensitivity, specificity
 
 
 if __name__ == "__main__":
