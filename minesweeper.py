@@ -13,6 +13,7 @@ class Minesweeper():
         self.height = height
         self.width = width
         self.mines = set()
+        self.know_mines = 0
 
         # Initialize an empty field with no mines
         self.board = []
@@ -49,8 +50,7 @@ class Minesweeper():
         print("--" * self.width + "-")
 
     def is_mine(self, cell):
-        i, j = cell
-        return self.board[i][j]
+        return cell in self.mines
 
     def nearby_mines(self, cell):
         """
@@ -83,7 +83,6 @@ class Minesweeper():
         """
         return self.mines_found == self.mines
 
-
 class Sentence():
     """
     Logical statement about a Minesweeper game
@@ -105,28 +104,43 @@ class Sentence():
         """
         Returns the set of all cells in self.cells known to be mines.
         """
-        raise NotImplementedError
+        known_mines = set()
+        if self.count == len(self.cells):
+            known_mines = self.cells
+        return known_mines
 
     def known_safes(self):
         """
         Returns the set of all cells in self.cells known to be safe.
         """
-        raise NotImplementedError
+        known_safe = set()
+        if self.count == 0:
+            known_safe = self.cells
+        return known_safe
 
     def mark_mine(self, cell):
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be a mine.
         """
-        raise NotImplementedError
+        if cell in self.cells:
+            self.cells.remove(cell)
+            self.count += 1
+
 
     def mark_safe(self, cell):
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be safe.
         """
-        raise NotImplementedError
+        if cell in self.cells:
+            self.cells.remove(cell)
+            self.count -= 1
+        if self.count == 0:
+            for remaining_cell in self.cells:
+                self.count -= 1
 
+instance = Sentence(cells=set(), count=0)
 
 class MinesweeperAI():
     """
@@ -191,31 +205,32 @@ class MinesweeperAI():
         # Step 3
         cellInfo = []
         counting = 0
-        for index in range(cellInfo[0] - 1, cellInfo[0] + 2):
-            for count in range(cellInfo[0] - 1, cellInfo[0] + 2):
+        for index in range(cell[0] - 1, cell[0] + 2):
+            for count in range(cell[1] - 1, cell[1] + 2):
                 if (index, count) in self.mines:
                     counting += 1
-                    if 0 <= index < self.height and 0 <= count < self.width and (index, count) not in self.safes and (index, count) not in self.mines:
-                        cellInfo.append((index, count))
-                    work = Sentence(cellInfo, count - counting)
-                     # Step 5
-                    self.knowledge.append(work)
-                    # Step 4
-                    for check in self.knowledge:
-                        if check.known_mines():
-                            for checkIndex in check.known_mines().copy():
-                                self.mark_mine(checkIndex)
-                        if check.known_safes():
-                                for checkIndex in check.known_mines().copy():
-                                self.mark_mine(checkIndex)
-                    for check in self.knowledge:
-                        if workInformation.cells.issubset(check.cells) and check.count > 0 and workInformation.count > 0  and workInformation != check:
-                            subset = check.cells.difference(workInformation.cells)
-                            newSubset = Sentence(list(subset), check.count - subset.count)
-                            self.knowledge.append(newSubset)
+                    if 0 <= index < self.height and 0 <= count < self.width:
+                        if (index, count) not in self.safes and (index, count) not in self.mines:
+                            cellInfo.append((index, count))
+        new_sentence = Sentence(cellInfo, counting)
+        # Step 5
+        self.knowledge.append(new_sentence)
+        # Step 4
+        for sentence in self.knowledge:
+            if sentence.known_mines():
+                for checkIndex in sentence.known_mines():
+                    self.mark_mine(checkIndex)
+                if sentence.known_safes():
+                    for checkIndex in sentence.known_safes().copy():
+                        self.mark_safe(checkIndex)
+                        for check in self.knowledge:
+                            if sentence.cells.issubset(check.cells) and check.count > 0 and sentence.count > 0  and sentence != check:
+                                subset = check.cells.difference(sentence.cells)
+                                newSubset = Sentence(list(subset), check.count - len(subset))
+                                self.knowledge.append(newSubset)
 
 
-def make_safe_move(self):
+    def make_safe_move(self):
         """
         Returns a safe cell to choose on the Minesweeper board.
         The move must be known to be safe, and not already a move
@@ -231,19 +246,19 @@ def make_safe_move(self):
                 return index
         return None
 
-def make_random_move(self):
+    def make_random_move(self):
         """
         Returns a move to make on the Minesweeper board.
         Should choose randomly among cells that:
             1) have not already been chosen, and
             2) are not known to be mines
         """
-       cellList = []
-       for index in range(self.height):
-        for count in range(self.width):
-            if (index, count) not self.moves_made and (index, count) not in self.mines:
+        cellList = []
+        for index in range(self.height):
+           for count in range(self.width):
+               if (index, count) not in self.moves_made and (index, count) not in self.mines:
                 cellList.append((index, count))
-       if len(cellList) != 0:
-        return random.choice(cellList)
-       else:
-        return None
+        if len(cellList) != 0:
+            return random.choice(cellList)
+        else:
+            return None
