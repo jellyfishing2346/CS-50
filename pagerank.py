@@ -58,16 +58,19 @@ def transition_model(corpus, page, damping_factor):
     a link at random chosen from all pages in the corpus.
     """
     pageList = {}
-    linkPage = len(corpus[page])
+    numPages = len(corpus)
+    linkPage = len(corpus[page]) if page in corpus else 0
 
     if linkPage:
         for linkInformation in corpus:
-            pageList[linkInformation] = (1 - damping_factor) / len(corpus)
+            pageList[linkInformation] = (1 - damping_factor) / numPages
         for linkInformation in corpus[page]:
             pageList[linkInformation] = (1 - damping_factor) / linkPage
     else:
+        print("Transition Model for Page:", page)
         for linkInformation in corpus:
-            pageList[linkInformation] = len(corpus)
+            pageList[linkInformation] = 1 / numPages
+            print(f"  {linkInformation}: {pageList[linkInformation]:.4f}")
     return pageList
 
 
@@ -80,18 +83,19 @@ def sample_pagerank(corpus, damping_factor, n):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    pageList = {}
-    for page in corpus:
-        pageList[page] = 0
+    pageList = {page: 0 for page in corpus}
     page = random.choice(list(corpus.keys()))
 
-    for index in range(1, n):
+    for _ in range(n):
         current = transition_model(corpus, page, damping_factor)
-        for page in pageList:
-            pageList[page] = ((index-1) * pageList[page] + current[page]) / index
+        pageList = {page: pageList[page] + current[page] for page in corpus}
         page = random.choices(list(pageList.keys()), list(pageList.values()))[0]
+
+    total = sum(pageList.values())
+    for page in pageList:
+        pageList[page] /= total
+
     return pageList
-    
 
 def iterate_pagerank(corpus, damping_factor):
     """
@@ -103,29 +107,35 @@ def iterate_pagerank(corpus, damping_factor):
     PageRank values should sum to 1.
     """
     rankInformation = {}
-    throttle = 0.0005
     index = len(corpus)
 
     for pageKey in corpus:
         rankInformation[pageKey] = 1 / index
 
+    thresholdValue = 0.0001
+
+
+    numIterations = 0
+
     while True:
-        counting = 0
+        counting = {}
         for pageKey in corpus:
             newPage = (1 - damping_factor) / index
-            amount = 0
             for pageInfo in corpus:
                 if pageKey in corpus[pageInfo]:
-                    linkNum = len(corpus[pageInfo])
-                    counting = counting + rankInformation[pageInfo]/linkNum
-                    amount = damping_factor * amount
-                    newPage += amount
-                    if abs(rankInformation[pageKey] - newPage) < throttle:
-                        counting += 1
-                    rankInformation[pageKey] = newPage
-                if counting == index:
-                    break
-                return rankInformation
+                    pages = len(corpus[pageInfo])
+                    newPage += damping_factor * rankInformation[pageInfo] / pages
+            counting[pageKey] = newPage
+
+        # Check for bounds
+        maximum = max(abs(counting[pageVal] - rankInformation[pageVal]) for pageVal in corpus)
+        if maximum < thresholdValue:
+            return counting
+
+        rankInformation = counting
+        numIterations += 1
+
+    return rankInformation
 
 if __name__ == "__main__":
     main()
