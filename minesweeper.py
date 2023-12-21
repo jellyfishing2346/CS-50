@@ -14,6 +14,7 @@ class Minesweeper():
         self.width = width
         self.mines = set()
         self.know_mines = 0
+        self.states = set()
 
         # Initialize an empty field with no mines
         self.board = []
@@ -90,9 +91,11 @@ class Sentence():
     and a count of the number of those cells which are mines.
     """
 
-    def __init__(self, cells, count):
+    def __init__(self, cells, count, mines, states):
         self.cells = set(cells)
         self.count = count
+        self.mines = set(mines)
+        self.states = set(states)
 
     def __eq__(self, other):
         return self.cells == other.cells and self.count == other.count
@@ -105,8 +108,9 @@ class Sentence():
         Returns the set of all cells in self.cells known to be mines.
         """
         known_mines = set()
-        if self.count == len(self.cells):
-            known_mines = self.cells
+        for cell in self.cells:
+            if self.is_mine(cell):
+                known_mines.add(cell)
         return known_mines
 
     def known_safes(self):
@@ -114,8 +118,9 @@ class Sentence():
         Returns the set of all cells in self.cells known to be safe.
         """
         known_safe = set()
-        if self.count == 0:
-            known_safe = self.cells
+        for cell in self.cells:
+            if not self.is_mine(cell):
+                known_safe.add(cell)
         return known_safe
 
     def mark_mine(self, cell):
@@ -125,8 +130,7 @@ class Sentence():
         """
         if cell in self.cells:
             self.cells.remove(cell)
-            self.count += 1
-
+            self.count -= 1
 
     def mark_safe(self, cell):
         """
@@ -136,11 +140,9 @@ class Sentence():
         if cell in self.cells:
             self.cells.remove(cell)
             self.count -= 1
-        if self.count == 0:
-            for remaining_cell in self.cells:
-                self.count -= 1
 
-instance = Sentence(cells=set(), count=0)
+
+instance = Sentence(cells=set(), count=0, mines=set(), states=set())
 
 class MinesweeperAI():
     """
@@ -152,6 +154,7 @@ class MinesweeperAI():
         # Set initial height and width
         self.height = height
         self.width = width
+        self.states = set()
 
         # Keep track of which cells have been clicked on
         self.moves_made = set()
@@ -180,6 +183,7 @@ class MinesweeperAI():
         self.safes.add(cell)
         for sentence in self.knowledge:
             sentence.mark_safe(cell)
+            
 
     def add_knowledge(self, cell, count):
         """
@@ -212,7 +216,7 @@ class MinesweeperAI():
                     if 0 <= index < self.height and 0 <= count < self.width:
                         if (index, count) not in self.safes and (index, count) not in self.mines:
                             cellInfo.append((index, count))
-        new_sentence = Sentence(cellInfo, counting)
+        new_sentence = Sentence(cellInfo, counting, self.mines, self.states)
         # Step 5
         self.knowledge.append(new_sentence)
         # Step 4
