@@ -2,13 +2,12 @@ import itertools
 import random
 
 
-class Minesweeper():
+class Minesweeper:
     """
     Minesweeper game representation
     """
 
     def __init__(self, height=8, width=8, mines=8):
-
         # Set initial width, height, and number of mines
         self.height = height
         self.width = width
@@ -66,7 +65,6 @@ class Minesweeper():
         # Loop over all cells within one row and column
         for i in range(cell[0] - 1, cell[0] + 2):
             for j in range(cell[1] - 1, cell[1] + 2):
-
                 # Ignore the cell itself
                 if (i, j) == cell:
                     continue
@@ -84,7 +82,8 @@ class Minesweeper():
         """
         return self.mines_found == self.mines
 
-class Sentence():
+
+class Sentence:
     """
     Logical statement about a Minesweeper game
     A sentence consists of a set of board cells,
@@ -144,13 +143,13 @@ class Sentence():
 
 instance = Sentence(cells=set(), count=0, mines=set(), states=set())
 
-class MinesweeperAI():
+
+class MinesweeperAI:
     """
     Minesweeper game player
     """
 
     def __init__(self, height=8, width=8):
-
         # Set initial height and width
         self.height = height
         self.width = width
@@ -183,7 +182,6 @@ class MinesweeperAI():
         self.safes.add(cell)
         for sentence in self.knowledge:
             sentence.mark_safe(cell)
-            
 
     def add_knowledge(self, cell, count):
         """
@@ -214,7 +212,10 @@ class MinesweeperAI():
                 if (index, count) in self.mines:
                     counting += 1
                     if 0 <= index < self.height and 0 <= count < self.width:
-                        if (index, count) not in self.safes and (index, count) not in self.mines:
+                        if (index, count) not in self.safes and (
+                            index,
+                            count,
+                        ) not in self.mines:
                             cellInfo.append((index, count))
         new_sentence = Sentence(cellInfo, counting, self.mines, self.states)
         # Step 5
@@ -228,11 +229,17 @@ class MinesweeperAI():
                     for checkIndex in sentence.known_safes().copy():
                         self.mark_safe(checkIndex)
                         for check in self.knowledge:
-                            if sentence.cells.issubset(check.cells) and check.count > 0 and sentence.count > 0  and sentence != check:
+                            if (
+                                sentence.cells.issubset(check.cells)
+                                and check.count > 0
+                                and sentence.count > 0
+                                and sentence != check
+                            ):
                                 subset = check.cells.difference(sentence.cells)
-                                newSubset = Sentence(list(subset), check.count - len(subset))
+                                newSubset = Sentence(
+                                    list(subset), check.count - len(subset)
+                                )
                                 self.knowledge.append(newSubset)
-
 
     def make_safe_move(self):
         """
@@ -259,9 +266,12 @@ class MinesweeperAI():
         """
         cellList = []
         for index in range(self.height):
-           for count in range(self.width):
-               if (index, count) not in self.moves_made and (index, count) not in self.mines:
-                cellList.append((index, count))
+            for count in range(self.width):
+                if (index, count) not in self.moves_made and (
+                    index,
+                    count,
+                ) not in self.mines:
+                    cellList.append((index, count))
         if len(cellList) != 0:
             return random.choice(cellList)
         else:
